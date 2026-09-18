@@ -1,0 +1,156 @@
+{
+  "audit_metadata": {
+    "project": "NER Safe (SIH 2026)",
+    "step": "STEP 8.5 \u2014 ML Readiness & Ground-Truth Audit",
+    "audit_timestamp_utc": "2026-09-16T20:16:05.669978+00:00",
+    "target_dataset": "feature_dataset.csv",
+    "readiness_classification": "NOT_READY"
+  },
+  "dataset_summary": {
+    "total_rows": 16961,
+    "total_columns": 54,
+    "unique_cells": 16961,
+    "unique_observation_dates": 11,
+    "duplicate_records": 0,
+    "district_distribution": {
+      "Kohima": 6055,
+      "Aizawl": 10906,
+      "Other": 0
+    }
+  },
+  "ground_truth_labels": {
+    "confirmed_positive": 11,
+    "confirmed_negative": 0,
+    "unknown_unlabeled": 16950,
+    "positive_rate_percent": 0.0649,
+    "label_quality_assessment": "Insufficient verified negative samples for conventional supervised binary classification."
+  },
+  "feature_group_readiness": {
+    "Spatial Index": {
+      "total_columns": 6,
+      "columns_with_data": 6,
+      "status": "AVAILABLE"
+    },
+    "Terrain (DEM 30m)": {
+      "total_columns": 8,
+      "columns_with_data": 8,
+      "status": "AVAILABLE"
+    },
+    "Meteorological Rain": {
+      "total_columns": 9,
+      "columns_with_data": 0,
+      "status": "UNAVAILABLE"
+    },
+    "Hydrological Soil Moisture": {
+      "total_columns": 4,
+      "columns_with_data": 0,
+      "status": "UNAVAILABLE"
+    },
+    "Satellite SAR": {
+      "total_columns": 4,
+      "columns_with_data": 0,
+      "status": "UNAVAILABLE"
+    },
+    "Context (NDVI/Flood)": {
+      "total_columns": 2,
+      "columns_with_data": 0,
+      "status": "UNAVAILABLE"
+    },
+    "Exposure & Consequence": {
+      "total_columns": 5,
+      "columns_with_data": 0,
+      "status": "UNAVAILABLE"
+    },
+    "Human Verification": {
+      "total_columns": 4,
+      "columns_with_data": 1,
+      "status": "PARTIALLY_AVAILABLE"
+    },
+    "Ground Truth & Metadata": {
+      "total_columns": 4,
+      "columns_with_data": 4,
+      "status": "AVAILABLE"
+    },
+    "Data Status Flags": {
+      "total_columns": 8,
+      "columns_with_data": 8,
+      "status": "AVAILABLE"
+    }
+  },
+  "missingness_percentages": {
+    "cell_id": 0.0,
+    "district": 0.0,
+    "state": 0.0,
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "observation_date": 0.0,
+    "elevation_mean": 16.66,
+    "elevation_min": 16.66,
+    "elevation_max": 16.66,
+    "slope_mean": 17.07,
+    "slope_max": 17.07,
+    "aspect_mean": 17.07,
+    "curvature_mean": 16.96,
+    "twi_mean": 17.07,
+    "rainfall_rate": 100.0,
+    "rainfall_30min": 100.0,
+    "rainfall_3h": 100.0,
+    "rainfall_6h": 100.0,
+    "rainfall_24h": 100.0,
+    "rainfall_72h": 100.0,
+    "rainfall_intensity": 100.0,
+    "rainfall_duration_h": 100.0,
+    "antecedent_rainfall_7d": 100.0,
+    "soil_moisture_current": 100.0,
+    "soil_moisture_previous": 100.0,
+    "soil_moisture_change": 100.0,
+    "soil_moisture_change_percent": 100.0,
+    "vv_change_db": 100.0,
+    "vh_change_db": 100.0,
+    "vv_vh_change": 100.0,
+    "change_confidence": 100.0,
+    "vegetation_ndvi": 100.0,
+    "flood_indicator": 100.0,
+    "road_proximity_m": 100.0,
+    "road_exposure_level": 100.0,
+    "population_density_est": 100.0,
+    "critical_infrastructure_count": 100.0,
+    "impact_priority_score": 100.0,
+    "citizen_report_count": 100.0,
+    "officer_verification_status": 0.0,
+    "verification_timestamp": 100.0,
+    "verification_confidence": 100.0,
+    "landslide_label": 99.94,
+    "historical_event_id": 99.94,
+    "event_location_name": 99.94,
+    "label_quality": 0.0,
+    "terrain_status": 0.0,
+    "rainfall_status": 0.0,
+    "soil_moisture_status": 0.0,
+    "satellite_status": 0.0,
+    "flood_status": 0.0,
+    "vegetation_status": 0.0,
+    "exposure_status": 0.0,
+    "verification_status": 0.0
+  },
+  "target_leakage_safeguards": {
+    "leakage_risk_columns": [
+      "historical_event_id",
+      "event_location_name",
+      "label_quality"
+    ],
+    "safeguard_action": "Strictly drop from feature matrix X before any train/test split in Step 9."
+  },
+  "critical_blockers": [
+    "Severe Sample Size Deficiency: Only 11 confirmed positive landslide events exist. Supervised classification (XGBoost/Random Forest) requires at least 50\u2013100 events per district.",
+    "Complete Absence of Verified Negative Samples: 0 confirmed negative landslide observations exist. Conventional supervised binary classification cannot be trained without either confirmed non-landslide sites or an authoritative Positive-Unlabeled (PU) learning formulation.",
+    "Zero Dynamic Environmental Data: All dynamic precipitation, soil moisture, and SAR change features are currently unpopulated awaiting NASA Earthdata authentication and scene download."
+  ],
+  "recommended_next_actions": [
+    "Incorporate official GSI Bhukosh / NLSM GIS inventory export to expand verified positive samples.",
+    "Establish a scientifically defensible absence strategy (PU Learning / confirmed stable slope baselines) rather than fabricating fake negative points.",
+    "Supply NASA Earthdata credentials to download GPM IMERG and SMAP dynamic layers for real-time risk integration.",
+    "Utilize Spatial Block Cross-Validation in Step 9 to eliminate spatial autocorrelation leakage.",
+    "For Step 9, implement a Static Susceptibility Baseline (heuristic/analytical weight-of-evidence) alongside initial ML feasibility testing, rather than an ungrounded black-box model."
+  ]
+}

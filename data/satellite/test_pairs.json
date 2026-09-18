@@ -1,0 +1,102 @@
+{
+  "Kohima": {
+    "geometry": {
+      "platform": "Sentinel-1A",
+      "relative_orbit": 143,
+      "flight_direction": "ASCENDING",
+      "frame_number": 81,
+      "polarization": "VV+VH",
+      "repeat_interval_days": 12
+    },
+    "pre_event_scene": {
+      "scene_name": "S1A_IW_GRDH_1SDV_20250701T114900_20250701T114925_059890_077066_962D",
+      "platform": "Sentinel-1A",
+      "sensor": "C-SAR",
+      "beam_mode": "IW",
+      "processing_level": "GRD_HD",
+      "acquisition_date": "2025-07-01",
+      "start_time": "2025-07-01T11:49:00Z",
+      "stop_time": "2025-07-01T11:49:25Z",
+      "absolute_orbit": 59890,
+      "relative_orbit": 143,
+      "flight_direction": "ASCENDING",
+      "polarization": "VV+VH",
+      "file_name": "S1A_IW_GRDH_1SDV_20250701T114900_20250701T114925_059890_077066_962D.zip",
+      "file_size_mb": 1016.15,
+      "download_url": "https://datapool.asf.alaska.edu/GRD_HD/SA/S1A_IW_GRDH_1SDV_20250701T114900_20250701T114925_059890_077066_962D.zip",
+      "browse_url": "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_IW_GRDH_1SDV_20250701T114900_20250701T114925_059890_077066_962D.jpg",
+      "frame_number": 81,
+      "processing_date": "2025-07-01T11:49:00Z"
+    },
+    "post_event_scene": {
+      "scene_name": "S1A_IW_GRDH_1SDV_20250713T114859_20250713T114924_060065_077667_602A",
+      "platform": "Sentinel-1A",
+      "sensor": "C-SAR",
+      "beam_mode": "IW",
+      "processing_level": "GRD_HD",
+      "acquisition_date": "2025-07-13",
+      "start_time": "2025-07-13T11:48:59Z",
+      "stop_time": "2025-07-13T11:49:24Z",
+      "absolute_orbit": 60065,
+      "relative_orbit": 143,
+      "flight_direction": "ASCENDING",
+      "polarization": "VV+VH",
+      "file_name": "S1A_IW_GRDH_1SDV_20250713T114859_20250713T114924_060065_077667_602A.zip",
+      "file_size_mb": 1014.38,
+      "download_url": "https://datapool.asf.alaska.edu/GRD_HD/SA/S1A_IW_GRDH_1SDV_20250713T114859_20250713T114924_060065_077667_602A.zip",
+      "browse_url": "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_IW_GRDH_1SDV_20250713T114859_20250713T114924_060065_077667_602A.jpg",
+      "frame_number": 81,
+      "processing_date": "2025-07-13T11:48:59Z"
+    }
+  },
+  "Aizawl": {
+    "geometry": {
+      "platform": "Sentinel-1A",
+      "relative_orbit": 77,
+      "flight_direction": "DESCENDING",
+      "frame_number": 513,
+      "polarization": "VV+VH",
+      "repeat_interval_days": 12
+    },
+    "pre_event_scene": {
+      "scene_name": "S1A_IW_GRDH_1SDV_20250918T234755_20250918T234820_061049_079BA3_84D4",
+      "platform": "Sentinel-1A",
+      "sensor": "C-SAR",
+      "beam_mode": "IW",
+      "processing_level": "GRD_HD",
+      "acquisition_date": "2025-09-18",
+      "start_time": "2025-09-18T23:47:55Z",
+      "stop_time": "2025-09-18T23:48:20Z",
+      "absolute_orbit": 61049,
+      "relative_orbit": 77,
+      "flight_direction": "DESCENDING",
+      "polarization": "VV+VH",
+      "file_name": "S1A_IW_GRDH_1SDV_20250918T234755_20250918T234820_061049_079BA3_84D4.zip",
+      "file_size_mb": 1026.72,
+      "download_url": "https://datapool.asf.alaska.edu/GRD_HD/SA/S1A_IW_GRDH_1SDV_20250918T234755_20250918T234820_061049_079BA3_84D4.zip",
+      "browse_url": "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_IW_GRDH_1SDV_20250918T234755_20250918T234820_061049_079BA3_84D4.jpg",
+      "frame_number": 513,
+      "processing_date": "2025-09-18T23:47:55Z"
+    },
+    "post_event_scene": {
+      "scene_name": "S1A_IW_GRDH_1SDV_20250930T234755_20250930T234820_061224_07A2B5_60D9",
+      "platform": "Sentinel-1A",
+      "sensor": "C-SAR",
+      "beam_mode": "IW",
+      "processing_level": "GRD_HD",
+      "acquisition_date": "2025-09-30",
+      "start_time": "2025-09-30T23:47:55Z",
+      "stop_time": "2025-09-30T23:48:20Z",
+      "absolute_orbit": 61224,
+      "relative_orbit": 77,
+      "flight_direction": "DESCENDING",
+      "polarization": "VV+VH",
+      "file_name": "S1A_IW_GRDH_1SDV_20250930T234755_20250930T234820_061224_07A2B5_60D9.zip",
+      "file_size_mb": 1027.45,
+      "download_url": "https://datapool.asf.alaska.edu/GRD_HD/SA/S1A_IW_GRDH_1SDV_20250930T234755_20250930T234820_061224_07A2B5_60D9.zip",
+      "browse_url": "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_IW_GRDH_1SDV_20250930T234755_20250930T234820_061224_07A2B5_60D9.jpg",
+      "frame_number": 513,
+      "processing_date": "2025-09-30T23:47:55Z"
+    }
+  }
+}

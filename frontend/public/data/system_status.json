@@ -1,0 +1,84 @@
+{
+  "network_mode": "ONLINE_WITH_OFFLINE_CACHE",
+  "last_sync_utc": "2026-09-17T07:45:00Z",
+  "pilot_districts": {
+    "Kohima": {
+      "state": "Nagaland",
+      "cells": 6055,
+      "center": [
+        94.1,
+        25.67
+      ],
+      "zoom": 10.5
+    },
+    "Aizawl": {
+      "state": "Mizoram",
+      "cells": 10906,
+      "center": [
+        92.73,
+        23.73
+      ],
+      "zoom": 10.2
+    }
+  },
+  "total_regional_cells": 16961,
+  "layers": {
+    "terrain_morphometry": {
+      "name": "SRTM DEM 30m Morphometry",
+      "status": "AVAILABLE",
+      "features": [
+        "elevation",
+        "slope",
+        "aspect",
+        "curvature",
+        "twi"
+      ],
+      "notice": "Populated across 14,066 cells (2,895 border nodata)"
+    },
+    "baseline_susceptibility": {
+      "name": "Heuristic Terrain Susceptibility (TSI)",
+      "status": "AVAILABLE",
+      "features": [
+        "terrain_susceptibility_score",
+        "pu_similarity"
+      ],
+      "notice": "Prototype terrain-based baseline only \u2014 dynamic data pending"
+    },
+    "historical_landslides": {
+      "name": "GSI / NSDMA / MSDMA Landslide Events",
+      "status": "AVAILABLE",
+      "features": [
+        "11 confirmed positive events",
+        "0 fake negatives",
+        "16,950 unknown"
+      ],
+      "notice": "Officially verified post-disaster records"
+    },
+    "gpm_rainfall": {
+      "name": "NASA GPM IMERG Precipitation (Early Run)",
+      "status": "AVAILABLE",
+      "notice": "Real NASA GPM IMERG Early Run data ingested (16,961 cells, native resolution ~10 km mapped to 500m analysis grid)."
+    },
+    "smap_soil_moisture": {
+      "name": "NASA SMAP L3 Radiometer Soil Moisture (9 km)",
+      "status": "STALE",
+      "notice": "Real NASA SMAP SPL3SMP_E V006 soil moisture observations available (16,961 cells, native resolution ~9 km, latency exceeded freshness threshold)."
+    },
+    "sentinel1_sar": {
+      "name": "Copernicus Sentinel-1 SAR C-Band (10 m)",
+      "status": "REQUIRES_EXTERNAL_AUTH",
+      "notice": "External authentication required (ASF DAAC). 500 scenes catalogued; downloads pending login."
+    },
+    "flood_hazard": {
+      "name": "Hydrological Inundation Layer",
+      "status": "NOT_YET_IMPLEMENTED",
+      "notice": "Hydrological modeling planned in subsequent phase."
+    },
+    "exposure_vulnerability": {
+      "name": "Infrastructure, Road Corridors & Population",
+      "status": "NOT_YET_IMPLEMENTED",
+      "notice": "Exposure layers planned in subsequent phase."
+    }
+  },
+  "scientific_disclaimer": "Dynamic risk evaluation combines static terrain baseline (TSI) with real NASA GPM precipitation and SMAP soil moisture observations. SAR change is corroborating anomaly evidence only."
+}

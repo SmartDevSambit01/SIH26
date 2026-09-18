@@ -1,0 +1,46 @@
+area_id,area_name,place_type,latitude,longitude,source,source_url,source_date,state,district
+AIZ_LOC_001,Aibawk,village,23.552446,92.698997,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_002,Aizawl,city,23.727763,92.717995,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_003,Lengpui,town,23.831415,92.628772,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_004,Twakzawl,village,23.953634,92.776628,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_005,Thingsat,village,24.22935,92.955161,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_006,Sairang,town,23.810344,92.652259,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_007,Baktawng,village,23.536131,92.846307,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_008,Lallen,village,23.654638,92.606556,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_009,Vaitin,village,24.224508,92.976832,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_010,Tinghmun,hamlet,24.316313,92.989417,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_011,Seling,village,23.722873,92.855424,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_012,Darlawn,village,24.017343,92.928702,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_013,Phaileng,village,23.913163,92.924462,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_014,Sesawng,village,23.750199,92.853592,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_015,Ratn,village,24.10942,92.922235,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_016,New Vervek,hamlet,24.185378,92.945523,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_017,Sipuikawn,village,24.214394,93.036355,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_018,Sachal,village,23.692999,92.965428,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_019,Buhban,village,23.815372,92.96076,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_020,Tuirial Airfield Peng,locality,23.73667,92.796878,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_021,Durtlang,village,23.781624,92.727597,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_022,Maite,village,23.52126,92.993817,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_023,Hmuntha,village,23.492581,92.940731,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_024,Hualtu,village,23.528737,92.915969,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_025,Lenchim,village,23.598953,92.93129,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_026,Tawizo,village,23.561733,92.957822,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_027,Mualpheng,village,23.609767,92.975428,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_028,Tipaimukh,village,24.236039,93.025139,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_029,Reiek,village,23.699295,92.606936,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_030,Tlangnuam,suburb,23.708077,92.716906,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_031,Thingsulthliah,village,23.690571,92.860351,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_032,Muallungthu,village,23.613375,92.718623,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_033,Tuirial,hamlet,23.721741,92.798719,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_034,Tuirial,hamlet,23.735406,92.800277,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_035,Tuirini,hamlet,23.848221,92.829977,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_036,Saipum,hamlet,24.355649,92.881148,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_037,Mauchar,hamlet,24.353797,92.920765,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_038,Sakawrdai,village,24.227692,92.953928,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_039,Thingsat,hamlet,24.197782,92.940307,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_040,Darlawn,hamlet,24.284526,92.947022,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_041,Palsang,hamlet,24.284951,92.914217,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_042,Rovakot,village,24.172387,93.036032,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_043,Sartuinek,village,24.298837,93.041901,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_044,New Serchhip,village,23.333337,92.855204,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl
+AIZ_LOC_045,Thingpuikuol,village,24.394839,93.027864,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Mizoram,Aizawl

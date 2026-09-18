@@ -1,0 +1,54 @@
+{
+  "audit_timestamp": "2026-09-17 19:31:44",
+  "overall_model_readiness": "LIMITED_DATA",
+  "supervised_ml_feasibility": "NOT_FEASIBLE_INSUFFICIENT_LABELS",
+  "readiness_reason": "Only 11 verified positive landslide cells exist across 16,961 analysis cells (0.065% positive rate), with zero verified negative cells. Conventional binary classification is scientifically invalid. System uses static TSI susceptibility + Positive-Unlabeled (PU) distance metric + dynamic trigger engine.",
+  "dataset_summary": {
+    "total_cells": 16961,
+    "kohima_cells": 6055,
+    "aizawl_cells": 10906,
+    "verified_positives": 11,
+    "verified_negatives": 0,
+    "unlabeled_cells": 16950,
+    "positive_label_ratio_percent": 0.0649,
+    "spatial_5km_blocks_count": 243
+  },
+  "dynamic_sensors_availability": {
+    "gpm_rainfall": {
+      "status": "REQUIRES_EXTERNAL_AUTH",
+      "populated_percent": 0.0,
+      "notes": "NASA Earthdata authentication required for live GPM IMERG ingestion."
+    },
+    "smap_soil_moisture": {
+      "status": "REQUIRES_EXTERNAL_AUTH",
+      "populated_percent": 0.0,
+      "notes": "NASA Earthdata authentication required for live SMAP L3 ingestion."
+    },
+    "sentinel1_sar": {
+      "status": "REQUIRES_EXTERNAL_AUTH",
+      "populated_percent": 0.0,
+      "notes": "ESA / ASF authentication required for live SAR backscatter amplitude download."
+    },
+    "flood_inundation": {
+      "status": "UNAVAILABLE",
+      "populated_percent": 0.0,
+      "notes": "External surface water model pending."
+    },
+    "human_verification": {
+      "status": "UNVERIFIED_BASELINE",
+      "populated_percent": 100.0,
+      "notes": "All cells initialized to UNVERIFIED baseline state."
+    }
+  },
+  "calibration_readiness": {
+    "status": "NOT_CALIBRATED_REQUIRES_VERIFIED_EVENTS",
+    "minimum_positives_required_for_isotonic": 100,
+    "current_positives": 11
+  },
+  "validation_readiness": {
+    "spatial_block_validation": "CONFIGURED_5KM_GRID",
+    "temporal_holdout": "NOT_FEASIBLE_SINGLE_SNAPSHOT",
+    "brier_score_computable": false,
+    "reason": "Insufficient verified positive/negative ground truth labels across time."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "evaluation_timestamp": "2026-09-17 19:32:47",
+  "evaluation_strategy": "Spatial 5km x 5km Block Cross-Validation & Positive Historical Cell Analysis",
+  "verified_positives_count": 11,
+  "verified_negatives_count": 0,
+  "unlabeled_cells_count": 16950,
+  "metrics_summary": {
+    "spatial_hit_rate_percent": 100.0,
+    "historical_cells_high_susceptibility_hits": 11,
+    "precision": "NOT_COMPUTABLE_INSUFFICIENT_VERIFIED_LABELS",
+    "recall": "NOT_COMPUTABLE_INSUFFICIENT_VERIFIED_LABELS",
+    "f1_score": "NOT_COMPUTABLE_INSUFFICIENT_VERIFIED_LABELS",
+    "roc_auc": "NOT_COMPUTABLE_INSUFFICIENT_VERIFIED_LABELS",
+    "pr_auc": "NOT_COMPUTABLE_INSUFFICIENT_VERIFIED_LABELS",
+    "brier_score": "NOT_COMPUTABLE_INSUFFICIENT_VERIFIED_LABELS",
+    "false_alarm_rate": "NOT_COMPUTABLE_INSUFFICIENT_VERIFIED_LABELS"
+  },
+  "model_readiness": "LIMITED_DATA",
+  "calibration_status": "NOT_CALIBRATED_REQUIRES_VERIFIED_EVENTS",
+  "notice": "Because only 11 verified positive historical landslide cells and zero verified negative cells exist, conventional supervised classification metrics (Precision, Recall, F1, ROC-AUC) cannot be scientifically computed. Metric values are returned as NOT_COMPUTABLE_INSUFFICIENT_VERIFIED_LABELS per Phase 7 rules."
+}

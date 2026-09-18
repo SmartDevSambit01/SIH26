@@ -1,0 +1,16 @@
+# Environment & secrets
+.env
+*.env
+.netrc
+
+# Python cache & build
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Data & downloads
+data/rainfall/raw/*.tmp
+data/soil_moisture/raw/*
+data/rainfall/raw/*
+data/terrain/raw/*

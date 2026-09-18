@@ -1,0 +1,14 @@
+# NASA SMAP SPL3SMP_E Version 6 Granule Download Targets for NER Safe Verified Events
+# Total Target Dates: 10
+# Download with Earthdata Login: curl -n -L -O <URL> or wget --load-cookies ~/.urs_cookies
+
+https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL3SMP_E/006/2020/09/22/SMAP_L3_SM_P_E_20200922_R19240_002.h5
+https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL3SMP_E/006/2021/08/27/SMAP_L3_SM_P_E_20210827_R19240_002.h5
+https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL3SMP_E/006/2021/09/04/SMAP_L3_SM_P_E_20210904_R19240_002.h5
+https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL3SMP_E/006/2022/06/18/SMAP_L3_SM_P_E_20220618_R19240_002.h5
+https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL3SMP_E/006/2022/07/09/SMAP_L3_SM_P_E_20220709_R19240_002.h5
+https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL3SMP_E/006/2023/07/02/SMAP_L3_SM_P_E_20230702_R19240_002.h5
+https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL3SMP_E/006/2023/07/21/SMAP_L3_SM_P_E_20230721_R19240_002.h5
+https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL3SMP_E/006/2024/05/28/SMAP_L3_SM_P_E_20240528_R19240_002.h5
+https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL3SMP_E/006/2024/06/29/SMAP_L3_SM_P_E_20240629_R19240_002.h5
+https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL3SMP_E/006/2024/08/18/SMAP_L3_SM_P_E_20240818_R19240_002.h5

@@ -1,0 +1,87 @@
+area_id,area_name,place_type,latitude,longitude,source,source_url,source_date,state,district
+KOH_LOC_001,Khonoma,village,25.65429,94.022013,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_002,Merima,suburb,25.713488,94.090521,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_003,Tseminyu,village,25.923015,94.222351,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_004,Kohima,city,25.661876,94.101916,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_005,Mezoma,village,25.672995,94.017968,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_006,Mezo Basa,village,25.681508,94.033053,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_007,Sechuma,village,25.694731,94.033583,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_008,Kiruphema Bawe,village,25.723373,94.01945,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_009,Jotsoma,village,25.674192,94.062384,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_010,Peducha,village,25.739231,94.007431,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_011,Phezhu,village,25.666536,94.07567,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_012,Lerie,suburb,25.652262,94.108608,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_013,Kigwema,village,25.604552,94.126787,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_014,Kezo Town,village,25.642793,94.199803,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_015,Chedema,village,25.681524,94.145343,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_016,High School Colony,suburb,25.694751,94.09687,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_017,Bayavü,suburb,25.686639,94.105689,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_018,Porter Lane,suburb,25.655227,94.099787,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_019,Hospital Colony,suburb,25.67048,94.095432,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_020,PWD Colony,suburb,25.663422,94.103737,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_021,Daklane,suburb,25.671739,94.10599,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_022,Naga Bazar,locality,25.675684,94.107342,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_023,Midland Colony,suburb,25.666188,94.104252,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_024,AG Colony,suburb,25.656498,94.108028,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_025,Chandmari,suburb,25.661372,94.104788,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_026,Minister Hill,suburb,25.650463,94.099231,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_027,Wozhuro,village,26.009873,94.181564,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_028,Ralan,village,26.012361,94.012349,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_029,Botsa,village,25.856269,94.158347,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_030,Sechu Zubza,village,25.711846,94.040765,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_031,Kikruma,village,25.580518,94.219544,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_032,Kedima,village,25.559516,94.178495,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_033,Kezocha,village,25.60136,94.194245,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_034,Jakhama HQ,village,25.580699,94.125652,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_035,Chiephobozou,village,25.814824,94.139571,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_036,Chunlika,village,25.981425,94.236903,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_037,Chedema Model,village,25.688512,94.153533,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_038,Chakhabama,village,25.670559,94.196404,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_039,Rusoma Village,village,25.72447,94.138093,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_040,Gariphema,village,25.813956,94.227488,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_041,Ighanumi,village,25.760301,94.311756,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_042,Piphema,village,25.750956,93.959403,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_043,Rebwak,village,25.580729,93.909753,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_044,Poilwa,village,25.584368,93.926982,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_045,Viswema,village,25.563971,94.146585,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_046,Mao Gate,village,25.513614,94.137415,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_047,Kitami,village,25.980207,94.308234,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_048,Tsaphimi,village,25.981418,94.298445,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_049,Ehenu,village,25.977587,94.270325,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_050,Kandinu,village,25.99915,94.255034,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_051,Nsunyu,village,25.980068,94.235221,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_052,Tesophenyu Old,village,25.971364,94.211352,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_053,Ziphenyu,village,25.963128,94.20853,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_054,Khuzama,village,25.535404,94.135246,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_055,Sweba,village,25.568694,94.134999,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_056,Jakhama,village,25.584539,94.135016,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_057,Kigwema Town,village,25.60196,94.119041,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_058,Mima,village,25.609784,94.143471,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_059,Mitelephe,village,25.625439,94.18287,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_060,Chakhabama,village,25.647309,94.207047,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_061,Pfuchama,village,25.643518,94.129706,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_062,Phesama,village,25.629931,94.115341,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_063,Gukhanyu,village,25.929391,94.260981,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_064,Zunpha,village,25.913882,94.203672,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_065,Sendenyu,village,25.906124,94.121148,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_066,Tsonsunyu,village,25.899059,94.128436,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_067,Tsiemekhuma,village,25.884797,94.133575,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_068,Tsiemekhuma Basa,village,25.869866,94.138954,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_069,Seiyhama,village,25.863591,94.108938,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_070,Phekerkrie Bawe,village,25.861794,94.056223,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_071,Phekerkrie Basa,village,25.8838,94.040424,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_072,Viphoma,village,25.841127,94.007779,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_073,Zhadima,village,25.791176,94.064445,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_074,Nerhema,village,25.779894,94.119603,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_075,Chiephobozou,village,25.797661,94.130404,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_076,Ciechama,village,25.809368,94.139931,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_077,Gariphema,village,25.777876,94.209918,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_078,Kijumetouma,village,25.764858,94.230754,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_079,Dihoma,village,25.73393,94.197069,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_080,Thizama,village,25.744256,94.109061,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_081,Kiruphe Basa,village,25.726325,94.021926,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_082,Mengujuma,village,25.769564,94.004188,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_083,Tsiese Basa,village,25.755077,94.079773,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_084,Tsiesema Bawe,village,25.742777,94.088666,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_085,Dzuleke,village,25.620576,93.955699,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima
+KOH_LOC_086,T-Khel,neighbourhood,25.68012,94.116087,OpenStreetMap Overpass API,https://overpass-api.de/api/interpreter,2026-09-17,Nagaland,Kohima

@@ -1,0 +1,499 @@
+{
+  "metadata": {
+    "audit_name": "STEP 9B Dynamic Risk Readiness Audit",
+    "project": "NER Safe (SIH 2026)",
+    "timestamp_utc": "2026-09-17T06:24:08.193844+00:00",
+    "target_dataset": "feature_dataset.csv",
+    "total_cells": 16961,
+    "districts": [
+      "Kohima (Nagaland)",
+      "Aizawl (Mizoram)"
+    ]
+  },
+  "categories": {
+    "1. RAINFALL": {
+      "source_instrument": "NASA GPM IMERG V07B (GPM_3IMERGHH)",
+      "native_resolution": "0.1\u00b0 \u00d7 0.1\u00b0 (~10 km \u00d7 10 km)",
+      "update_frequency": "30-minute observations, ~4h latency (Early Run)",
+      "temporal_nature": "DYNAMIC",
+      "metadata_fields": {
+        "source": "NASA GPM IMERG V07B (GPM_3IMERGHH)",
+        "observation_timestamp": "UNAVAILABLE (Requires NASA Earthdata auth & live GPM feed)",
+        "status": "UNAVAILABLE_EARTHDATA_AUTH_REQUIRED"
+      },
+      "features": [
+        {
+          "feature_name": "rainfall_rate",
+          "dataset_column": "rainfall_rate",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "REQUIRES_EXTERNAL_AUTH",
+          "description": "Instantaneous precipitation rate at observation window",
+          "unit": "mm/h"
+        },
+        {
+          "feature_name": "rainfall_30min",
+          "dataset_column": "rainfall_30min",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "REQUIRES_EXTERNAL_AUTH",
+          "description": "Half-hourly calibrated precipitation accumulation",
+          "unit": "mm"
+        },
+        {
+          "feature_name": "rainfall_3h",
+          "dataset_column": "rainfall_3h",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "REQUIRES_EXTERNAL_AUTH",
+          "description": "3-hour rolling cumulative precipitation burst",
+          "unit": "mm"
+        },
+        {
+          "feature_name": "rainfall_6h",
+          "dataset_column": "rainfall_6h",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "REQUIRES_EXTERNAL_AUTH",
+          "description": "6-hour rolling cumulative storm accumulation",
+          "unit": "mm"
+        },
+        {
+          "feature_name": "rainfall_24h",
+          "dataset_column": "rainfall_24h",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "REQUIRES_EXTERNAL_AUTH",
+          "description": "24-hour total daily precipitation (standard IMD threshold)",
+          "unit": "mm"
+        },
+        {
+          "feature_name": "rainfall_72h",
+          "dataset_column": "rainfall_72h",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "REQUIRES_EXTERNAL_AUTH",
+          "description": "72-hour antecedent storm accumulation",
+          "unit": "mm"
+        },
+        {
+          "feature_name": "rainfall_duration_h",
+          "dataset_column": "rainfall_duration_h",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "REQUIRES_EXTERNAL_AUTH",
+          "description": "Continuous precipitation duration with rate > 1.0 mm/h",
+          "unit": "hours"
+        },
+        {
+          "feature_name": "antecedent_rainfall_7d",
+          "dataset_column": "antecedent_rainfall_7d",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "REQUIRES_EXTERNAL_AUTH",
+          "description": "7-day cumulative antecedent precipitation driving soil pore pressure",
+          "unit": "mm"
+        }
+      ]
+    },
+    "2. SOIL MOISTURE": {
+      "source_instrument": "NASA SMAP Enhanced L3 Radiometer (SPL3SMP_E V006)",
+      "native_resolution": "9 km \u00d7 9 km (EASE-Grid 2.0 Global Cylindrical)",
+      "update_frequency": "Daily composite (~06:00 local descending AM pass preferred)",
+      "temporal_nature": "DYNAMIC",
+      "metadata_fields": {
+        "source": "NASA SMAP Enhanced L3 Radiometer (SPL3SMP_E V006)",
+        "observation_timestamp": "UNAVAILABLE (Requires NASA Earthdata auth & live SMAP feed)",
+        "status": "UNAVAILABLE_EARTHDATA_AUTH_REQUIRED"
+      },
+      "features": [
+        {
+          "feature_name": "soil_moisture_current",
+          "dataset_column": "soil_moisture_current",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "REQUIRES_EXTERNAL_AUTH",
+          "description": "Current volumetric soil moisture in top 5 cm soil layer",
+          "unit": "m\u00b3/m\u00b3"
+        },
+        {
+          "feature_name": "soil_moisture_previous",
+          "dataset_column": "soil_moisture_previous",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "REQUIRES_EXTERNAL_AUTH",
+          "description": "Prior day volumetric soil moisture (24-48h antecedent)",
+          "unit": "m\u00b3/m\u00b3"
+        },
+        {
+          "feature_name": "soil_moisture_change",
+          "dataset_column": "soil_moisture_change",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "REQUIRES_EXTERNAL_AUTH",
+          "description": "Absolute moisture change: SM_t - SM_{t-1}",
+          "unit": "m\u00b3/m\u00b3"
+        },
+        {
+          "feature_name": "soil_moisture_change_percent",
+          "dataset_column": "soil_moisture_change_percent",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "REQUIRES_EXTERNAL_AUTH",
+          "description": "Relative percentage moisture increase towards saturation",
+          "unit": "%"
+        }
+      ]
+    },
+    "3. SATELLITE CHANGE": {
+      "source_instrument": "Copernicus Sentinel-1 C-SAR IW GRD (ESA / ASF DAAC)",
+      "native_resolution": "20 m \u00d7 22 m (~10 m pixel spacing)",
+      "update_frequency": "12-day orbital repeat cycle (NOT continuous live streaming)",
+      "temporal_nature": "DYNAMIC",
+      "metadata_fields": {
+        "source": "Copernicus Sentinel-1 (C-SAR IW GRD)",
+        "acquisition_date": "UNAVAILABLE (0 processed real scenes in cache)",
+        "status": "PENDING_REAL_SCENE_INGESTION"
+      },
+      "features": [
+        {
+          "feature_name": "vv_change_db",
+          "dataset_column": "vv_change_db",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "REQUIRES_EXTERNAL_AUTH",
+          "description": "Zonal mean co-polarization (VV) backscatter change between repeat passes",
+          "unit": "dB"
+        },
+        {
+          "feature_name": "vh_change_db",
+          "dataset_column": "vh_change_db",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "REQUIRES_EXTERNAL_AUTH",
+          "description": "Zonal mean cross-polarization (VH) backscatter change (vegetation disturbance proxy)",
+          "unit": "dB"
+        },
+        {
+          "feature_name": "vv_vh_change",
+          "dataset_column": "vv_vh_change",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "REQUIRES_EXTERNAL_AUTH",
+          "description": "Euclidean magnitude of dual-polarization change: sqrt(\u0394VV\u00b2 + \u0394VH\u00b2)",
+          "unit": "dB"
+        },
+        {
+          "feature_name": "change_confidence",
+          "dataset_column": "change_confidence",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "REQUIRES_EXTERNAL_AUTH",
+          "description": "Normalized surface disturbance confidence score",
+          "unit": "0.0 - 1.0"
+        }
+      ]
+    },
+    "4. TERRAIN": {
+      "source_instrument": "Copernicus DEM GLO-30 (ESA, 30m resolution)",
+      "native_resolution": "30 m \u00d7 30 m (1.0 arc-sec)",
+      "update_frequency": "Time-invariant static baseline",
+      "temporal_nature": "STATIC",
+      "metadata_fields": {
+        "source": "Copernicus DEM GLO-30 / Step 9A Baseline",
+        "observation_timestamp": "STATIC_BASELINE",
+        "status": "AVAILABLE"
+      },
+      "features": [
+        {
+          "feature_name": "elevation",
+          "dataset_column": "elevation_mean",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 14136,
+          "populated_percent": 83.34,
+          "temporal_nature": "STATIC",
+          "status_classification": "AVAILABLE",
+          "description": "Mean, min, and max elevation above sea level across 500m cell",
+          "unit": "meters"
+        },
+        {
+          "feature_name": "slope",
+          "dataset_column": "slope_mean",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 14066,
+          "populated_percent": 82.93,
+          "temporal_nature": "STATIC",
+          "status_classification": "AVAILABLE",
+          "description": "Mean and max slope inclination angle within 500m cell",
+          "unit": "degrees"
+        },
+        {
+          "feature_name": "aspect",
+          "dataset_column": "aspect_mean",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 14066,
+          "populated_percent": 82.93,
+          "temporal_nature": "STATIC",
+          "status_classification": "AVAILABLE",
+          "description": "Circular mean aspect / slope azimuth within cell",
+          "unit": "degrees (0-360)"
+        },
+        {
+          "feature_name": "curvature",
+          "dataset_column": "curvature_mean",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 14084,
+          "populated_percent": 83.04,
+          "temporal_nature": "STATIC",
+          "status_classification": "AVAILABLE",
+          "description": "Surface profile / planform curvature (concave negative, convex positive)",
+          "unit": "100 * m\u207b\u00b9"
+        },
+        {
+          "feature_name": "TWI",
+          "dataset_column": "twi_mean",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 14066,
+          "populated_percent": 82.93,
+          "temporal_nature": "STATIC",
+          "status_classification": "AVAILABLE",
+          "description": "Topographic Wetness Index: ln(a / tan \u03b2) hydrological convergence",
+          "unit": "dimensionless"
+        },
+        {
+          "feature_name": "terrain susceptibility baseline",
+          "dataset_column": "terrain_susceptibility_score",
+          "source_file": "baseline_susceptibility.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 14066,
+          "populated_percent": 82.93,
+          "temporal_nature": "STATIC",
+          "status_classification": "AVAILABLE",
+          "description": "STEP 9A multi-criteria Terrain Susceptibility Index (TSI) & PU similarity",
+          "unit": "Score (0-100), Class, PU Similarity"
+        }
+      ]
+    },
+    "5. FLOOD": {
+      "source_instrument": "Surface Water & Inundation Model / Sentinel-2 / Drainage Basins",
+      "native_resolution": "Catchment / stream buffer polygon",
+      "update_frequency": "Event-driven dynamic / seasonal",
+      "temporal_nature": "DYNAMIC",
+      "metadata_fields": {
+        "source": "Surface Water & Inundation Model",
+        "observation_timestamp": "UNAVAILABLE",
+        "status": "UNAVAILABLE_PENDING_INGESTION"
+      },
+      "features": [
+        {
+          "feature_name": "flood_indicator",
+          "dataset_column": "flood_indicator",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "UNAVAILABLE",
+          "description": "Lowland / valley drainage flood inundation susceptibility flag",
+          "unit": "0.0 - 1.0"
+        }
+      ]
+    },
+    "6. HUMAN VERIFICATION": {
+      "source_instrument": "Mobile Field App (Crowdsourced Citizen + Verified Disaster Officer)",
+      "native_resolution": "GPS point matched to 500m grid cell",
+      "update_frequency": "Asynchronous event-driven updates",
+      "temporal_nature": "DYNAMIC",
+      "metadata_fields": {
+        "source": "Mobile Crowdsource & Disaster Officer App",
+        "observation_timestamp": "UNVERIFIED (Default baseline state)",
+        "status": "PARTIALLY_AVAILABLE (officer_verification_status initialized to UNVERIFIED; dynamic reports pending)"
+      },
+      "features": [
+        {
+          "feature_name": "citizen_report_count",
+          "dataset_column": "citizen_report_count",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "UNAVAILABLE",
+          "description": "Number of mobile crowdsourced citizen hazard reports logged for cell",
+          "unit": "integer count"
+        },
+        {
+          "feature_name": "verification_timestamp",
+          "dataset_column": "verification_timestamp",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "UNAVAILABLE",
+          "description": "Timestamp of physical on-site or remote verification by disaster officer",
+          "unit": "ISO 8601 UTC"
+        },
+        {
+          "feature_name": "verification_confidence",
+          "dataset_column": "verification_confidence",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "UNAVAILABLE",
+          "description": "Expert rating of field ground inspection credibility",
+          "unit": "0.0 - 1.0"
+        },
+        {
+          "feature_name": "officer_verification_status",
+          "dataset_column": "officer_verification_status",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 16961,
+          "populated_percent": 100.0,
+          "temporal_nature": "DYNAMIC",
+          "status_classification": "AVAILABLE",
+          "description": "Official inspection verdict: VERIFIED / REJECTED / UNVERIFIED",
+          "unit": "Categorical"
+        }
+      ]
+    },
+    "7. EXPOSURE / IMPACT": {
+      "source_instrument": "OpenStreetMap / State PWD GIS / Census / WorldPop",
+      "native_resolution": "Vector lines, point features, and census polygons",
+      "update_frequency": "Semi-static / annual updates",
+      "temporal_nature": "STATIC",
+      "metadata_fields": {
+        "source": "Highway GIS / OpenStreetMap / WorldPop / Census",
+        "observation_timestamp": "STATIC_PENDING_INGESTION",
+        "status": "UNAVAILABLE_PENDING_INGESTION"
+      },
+      "features": [
+        {
+          "feature_name": "road proximity",
+          "dataset_column": "road_proximity_m",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "STATIC",
+          "status_classification": "UNAVAILABLE",
+          "description": "Distance from cell centroid to nearest highway (NH-29, NH-54, state arterial)",
+          "unit": "meters"
+        },
+        {
+          "feature_name": "roads",
+          "dataset_column": "road_exposure_level",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "STATIC",
+          "status_classification": "UNAVAILABLE",
+          "description": "Road exposure category: HIGHWAY_NH29 / ARTERIAL / RURAL / NONE",
+          "unit": "Categorical hierarchy"
+        },
+        {
+          "feature_name": "villages",
+          "dataset_column": "villages",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": false,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "STATIC",
+          "status_classification": "NOT_YET_IMPLEMENTED",
+          "description": "Vulnerable village settlements and urban wards intersecting cell",
+          "unit": "Settlement count / name"
+        },
+        {
+          "feature_name": "population",
+          "dataset_column": "population_density_est",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "STATIC",
+          "status_classification": "UNAVAILABLE",
+          "description": "Estimated local human population density within cell",
+          "unit": "persons / km\u00b2"
+        },
+        {
+          "feature_name": "critical infrastructure",
+          "dataset_column": "critical_infrastructure_count",
+          "source_file": "feature_dataset.csv",
+          "field_exists_in_schema": true,
+          "populated_count": 0,
+          "populated_percent": 0.0,
+          "temporal_nature": "STATIC",
+          "status_classification": "UNAVAILABLE",
+          "description": "Count of hospitals, bridges, telecom towers, power substations",
+          "unit": "integer count"
+        }
+      ]
+    }
+  },
+  "overall_summary": {
+    "total_features_audited": 32,
+    "available_features": 7,
+    "unavailable_features": 25,
+    "static_features": 11,
+    "dynamic_features": 21,
+    "requires_external_auth": 16,
+    "not_yet_implemented": 1
+  }
+}

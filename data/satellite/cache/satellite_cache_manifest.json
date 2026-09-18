@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "project": "NER Safe (SIH 2026)",
+    "pipeline_step": "STEP 7 \u2014 Satellite Data Pipeline (Phase D Finalized)",
+    "last_sync_utc": "2026-09-17T07:06:42.650056+00:00",
+    "network_state": "OFFLINE",
+    "status": "PENDING_REAL_SCENES",
+    "offline_mode_ready": true
+  },
+  "data_summary": {
+    "total_observations_recorded": 0,
+    "satellite_source": "Copernicus Sentinel-1 (C-SAR IW GRD)",
+    "latest_scene_id": null,
+    "latest_observation_date": null,
+    "latest_processing_date": null,
+    "data_age_days": null,
+    "cache_status_label": "PENDING_REAL_SCENE_INGESTION",
+    "user_facing_banner": "SYSTEM READY \u2014 Awaiting real Sentinel-1 scene ingestion",
+    "offline_notice": "When operating offline, the interface displays previously cached SAR snapshots accompanied by explicit observation timestamps and age. The system never fabricates or pretends that new radar passes have arrived."
+  },
+  "districts": {
+    "Kohima": {
+      "state": "Nagaland",
+      "total_grid_cells": 6055,
+      "cached_cells_count": 0
+    },
+    "Aizawl": {
+      "state": "Mizoram",
+      "total_grid_cells": 10906,
+      "cached_cells_count": 0
+    }
+  }
+}

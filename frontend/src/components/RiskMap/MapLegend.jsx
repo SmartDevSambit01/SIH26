@@ -1,0 +1,59 @@
+import React, { useState } from 'react';
+import { ChevronDown, ChevronUp, Layers } from 'lucide-react';
+
+export default function MapLegend() {
+  const [collapsed, setCollapsed] = useState(false);
+
+  const legendItems = [
+    { label: 'Critical', color: '#9333EA', desc: 'Very High Susceptibility (Slope >35°, High Curvature)' },
+    { label: 'High', color: '#EF4444', desc: 'High Susceptibility (Steep relief, low drainage capacity)' },
+    { label: 'Warning', color: '#F97316', desc: 'Moderate Susceptibility (Moderate slope stability)' },
+    { label: 'Watch', color: '#EAB308', desc: 'Low Susceptibility (Gentle slope, stable geology)' },
+    { label: 'Low', color: '#10B981', desc: 'Very Low Susceptibility (Valley/plateau floor)' },
+    { label: 'Risk Unavailable', color: '#4B5563', desc: 'Dynamic data stale / Unsurveyed cell' },
+  ];
+
+  return (
+    <div className="map-legend-card">
+      <div className="legend-title" onClick={() => setCollapsed(!collapsed)} style={{ cursor: 'pointer' }}>
+        <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <Layers size={14} color="#00E599" />
+          RISK STATUS & 500m GRID
+        </span>
+        {collapsed ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+      </div>
+
+      {!collapsed && (
+        <>
+          <div className="legend-items">
+            {legendItems.map((item) => (
+              <div key={item.label} className="legend-item" title={item.desc}>
+                <div className="legend-color-box" style={{ backgroundColor: item.color }} />
+                <span>{item.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="data-status-section" style={{ marginTop: '10px', paddingTop: '8px', borderTop: '1px solid rgba(255,255,255,0.08)', fontSize: '11px', color: '#94A3B8', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span>GPM Rainfall: <strong style={{ color: '#34D399' }}>ACTIVE</strong></span>
+              <span style={{ color: '#64748B' }}>Native ~10 km</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span>SMAP Soil Moisture: <strong style={{ color: '#FBBF24' }}>STALE</strong></span>
+              <span style={{ color: '#64748B' }}>Native ~9 km</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span>Analysis Grid: <strong style={{ color: '#38BDF8' }}>500m</strong></span>
+              <span style={{ color: '#64748B' }}>16,961 cells</span>
+            </div>
+          </div>
+
+          <div className="legend-notice" style={{ marginTop: '8px', fontSize: '10px', color: '#64748B', lineHeight: '1.4' }}>
+            Dynamic risk uses available satellite observations when fresh data is available. Current feeds: GPM rainfall available; SMAP soil moisture available with freshness monitoring. Risk remains unavailable when required dynamic evidence is stale or missing.
+          </div>
+        </>
+      )}
+    </div>
+  );
+}

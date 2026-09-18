@@ -1,0 +1,977 @@
+/* ==========================================================================
+   NER Safe — Landing Page Design System & Stylesheet
+   Follows DESIGN.md specifications & Reference Composition Exactly
+   ========================================================================== */
+
+:root {
+  --ner-primary-navy: #123e57;
+  --ner-dark-green: #0c1f1b;
+  --ner-safe-green: #0a7d4c;
+  --ner-bright-green: #22c55e;
+  --ner-warning-orange: #e58925;
+  --ner-critical-red: #d02127;
+  --ner-purple: #7139af;
+  --ner-blue: #0a72d0;
+  --ner-white: #ffffff;
+  --ner-offwhite: #f8f8f8;
+  --ner-gray-light: #c6c7c4;
+  --ner-gray-muted: #53676c;
+  --ner-font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ner-font-heading: 'Poppins', 'Inter', sans-serif;
+}
+
+/* Reset and Global Setup */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--ner-font-main);
+  background-color: #0b151a;
+  color: var(--ner-white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --------------------------------------------------------------------------
+   Page Shell & Full-Screen Mountain Background
+   -------------------------------------------------------------------------- */
+.ner-landing-root {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #0b171c;
+  overflow: hidden;
+}
+
+/* Mountain Image filling entire viewport */
+.ner-bg-mountain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/ner-mountain-background.png');
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* Subtle Vignette / Contrast Overlay to ensure 100% crisp typography */
+.ner-bg-vignette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 50% 40%,
+    rgba(10, 25, 35, 0.15) 0%,
+    rgba(8, 20, 28, 0.45) 80%,
+    rgba(4, 12, 18, 0.7) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Foreground Content Wrapper */
+.ner-page-content {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* --------------------------------------------------------------------------
+   Header / Navigation Bar
+   -------------------------------------------------------------------------- */
+.ner-header {
+  width: 100%;
+  height: 88px;
+  background: rgba(12, 38, 54, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.ner-header-container {
+  width: 100%;
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Brand / Logo */
+.ner-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ner-logo-icon {
+  width: 44px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ner-logo-icon svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 6px rgba(0, 229, 153, 0.4));
+}
+
+.ner-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.ner-brand-title {
+  font-family: var(--ner-font-heading);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--ner-white);
+  line-height: 1.1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.ner-brand-tagline {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.2px;
+}
+
+/* Nav links */
+.ner-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.ner-nav-link {
+  position: relative;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  padding: 8px 4px;
+  transition: color 0.2s ease;
+}
+
+.ner-nav-link:hover {
+  color: #ffffff;
+}
+
+.ner-nav-link.active {
+  color: #ffffff;
+}
+
+.ner-active-indicator {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 3.5px;
+  background: #2cd3b5;
+  border-radius: 9999px;
+  box-shadow: 0 0 10px rgba(44, 211, 181, 0.7);
+}
+
+/* Auth Buttons */
+.ner-auth-desktop {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ner-btn-login {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 9px 24px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ner-btn-login:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+.ner-btn-signup {
+  background: #a6f4c5;
+  color: #0c3322;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  padding: 9px 26px;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(166, 244, 197, 0.35);
+  transition: all 0.2s ease;
+}
+
+.ner-btn-signup:hover {
+  background: #86efac;
+  box-shadow: 0 4px 16px rgba(134, 239, 172, 0.5);
+  transform: translateY(-1px);
+}
+
+.ner-auth-mobile {
+  display: none;
+}
+
+.ner-menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   Main Content Layout (Hero Left + Emergency Right)
+   -------------------------------------------------------------------------- */
+.ner-main-viewport {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 24px 0 16px;
+}
+
+.ner-main-container {
+  width: 100%;
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: 1.4fr 0.95fr;
+  gap: 42px;
+  align-items: start;
+}
+
+/* --------------------------------------------------------------------------
+   Left Hero Section
+   -------------------------------------------------------------------------- */
+.ner-hero-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.ner-hero-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Main Heading */
+.ner-hero-heading {
+  font-family: var(--ner-font-heading);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.18;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.7), 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.ner-heading-break {
+  display: block;
+}
+
+/* Motto Pill */
+.ner-motto-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.ner-motto-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 6px 22px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.3px;
+}
+
+.ner-motto-dot {
+  color: #2cd3b5;
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Three Phase Cards (Pre, During, Post)
+   -------------------------------------------------------------------------- */
+.ner-phase-cards-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.ner-phase-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.ner-phase-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.38);
+}
+
+/* Pre-Landslide: Deep Emerald Green */
+.ner-phase-pre {
+  background: linear-gradient(135deg, rgba(10, 125, 76, 0.92) 0%, rgba(6, 92, 55, 0.92) 100%);
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+/* During-Landslide: Warm Amber/Orange */
+.ner-phase-during {
+  background: linear-gradient(135deg, rgba(229, 137, 37, 0.92) 0%, rgba(194, 107, 13, 0.92) 100%);
+  border-color: rgba(251, 191, 36, 0.4);
+}
+
+/* Post-Landslide: Rich Royal Purple */
+.ner-phase-post {
+  background: linear-gradient(135deg, rgba(113, 57, 175, 0.92) 0%, rgba(88, 38, 143, 0.92) 100%);
+  border-color: rgba(192, 132, 252, 0.4);
+}
+
+.ner-phase-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.ner-phase-icon {
+  color: #ffffff;
+}
+
+.ner-phase-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ner-phase-title {
+  font-family: var(--ner-font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.ner-phase-subtext {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.2;
+}
+
+/* --------------------------------------------------------------------------
+   Search Risk Card
+   -------------------------------------------------------------------------- */
+.ner-search-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px 24px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+  margin-top: 6px;
+}
+
+.ner-search-title {
+  font-family: var(--ner-font-heading);
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.ner-search-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ner-search-input-wrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ner-search-input-icon {
+  position: absolute;
+  left: 14px;
+  color: #6b7280;
+  pointer-events: none;
+}
+
+.ner-search-input {
+  width: 100%;
+  height: 46px;
+  padding: 0 16px 0 44px;
+  border-radius: 10px;
+  border: 1.5px solid #d1d5db;
+  background-color: #f9fafb;
+  font-size: 14px;
+  font-family: var(--ner-font-main);
+  color: #111827;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.ner-search-input::placeholder {
+  color: #6b7280;
+}
+
+.ner-search-input:focus {
+  border-color: #0a7d4c;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(10, 125, 76, 0.15);
+}
+
+.ner-btn-get-details {
+  height: 46px;
+  padding: 0 24px;
+  background: #09683f;
+  color: #ffffff;
+  font-family: var(--ner-font-main);
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(9, 104, 63, 0.35);
+  transition: all 0.2s ease;
+}
+
+.ner-btn-get-details:hover {
+  background: #075231;
+  box-shadow: 0 6px 16px rgba(9, 104, 63, 0.45);
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   Incident Reporting & Feature Tags
+   -------------------------------------------------------------------------- */
+.ner-hero-actions-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.ner-report-incident-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(14, 30, 42, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 8px 18px;
+  border-radius: 9999px;
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+}
+
+.ner-report-incident-btn:hover {
+  background: rgba(20, 45, 62, 0.9);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+.ner-report-icon {
+  color: #38bdf8;
+}
+
+.ner-feature-tags {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(8, 22, 18, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 6px 18px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.ner-feature-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.ner-tag-badge {
+  background: #10b981;
+  color: #ffffff;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ner-tag-icon {
+  color: #34d399;
+}
+
+.ner-feature-divider {
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   Right Emergency Help Panel
+   -------------------------------------------------------------------------- */
+.ner-emergency-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.ner-emergency-panel-glass {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Red Emergency Header */
+.ner-emergency-header-box {
+  background: linear-gradient(135deg, #d02127 0%, #b3161c 100%);
+  border-radius: 16px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 6px 18px rgba(208, 33, 39, 0.35);
+}
+
+.ner-emergency-header-icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.ner-emergency-header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.ner-emergency-header-title {
+  font-family: var(--ner-font-heading);
+  font-size: 19px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.ner-emergency-header-subtitle {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.2;
+}
+
+/* 112 Main Section */
+.ner-emergency-112-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 8px 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.ner-emergency-112-container:hover {
+  transform: scale(1.02);
+}
+
+.ner-phone-icon-circle {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #fee2e2;
+  border: 2px solid #fca5a5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.2);
+}
+
+.ner-112-text-group {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.ner-112-number {
+  font-family: var(--ner-font-heading);
+  font-size: 54px;
+  font-weight: 900;
+  color: #d02127;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.ner-112-labels {
+  display: flex;
+  flex-direction: column;
+}
+
+.ner-112-label-primary {
+  font-family: var(--ner-font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1.2;
+}
+
+.ner-112-label-secondary {
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  line-height: 1.2;
+}
+
+/* 3 Emergency Service Buttons */
+.ner-emergency-services-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.ner-emergency-service-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 6px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ner-emergency-service-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.ner-service-police {
+  background: #0a72d0;
+}
+
+.ner-service-ambulance {
+  background: #0a7d4c;
+}
+
+.ner-service-disaster {
+  background: #e58925;
+}
+
+.ner-service-icon-wrap {
+  margin-bottom: 4px;
+}
+
+.ner-service-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.15;
+}
+
+.ner-service-num {
+  font-size: 13.5px;
+  font-weight: 800;
+  margin-top: 2px;
+}
+
+/* Divider inside panel */
+.ner-panel-divider {
+  width: 100%;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+/* Quick Access Section */
+.ner-quick-access-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ner-quick-access-title {
+  font-family: var(--ner-font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.ner-quick-access-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.ner-quick-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.ner-quick-card:hover {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.ner-quick-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ner-quick-icon-green {
+  background: #dcfce7;
+}
+
+.ner-quick-icon-blue {
+  background: #e0f2fe;
+}
+
+.ner-quick-icon-teal {
+  background: #ccfbf1;
+}
+
+.ner-quick-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1.2;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ner-quick-link {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #0284c7;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ner-quick-link:hover {
+  text-decoration: underline;
+}
+
+/* Safety Strip */
+.ner-safety-strip {
+  text-align: center;
+  padding: 4px 0 0;
+}
+
+.ner-safety-text {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #065f46;
+  letter-spacing: 0.2px;
+}
+
+/* --------------------------------------------------------------------------
+   Bottom NER States Strip
+   -------------------------------------------------------------------------- */
+.ner-states-bar {
+  width: 100%;
+  padding: 16px 24px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 15;
+}
+
+.ner-states-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.ner-state-item {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8), 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+.ner-state-separator {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 1200px) {
+  .ner-main-container {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .ner-hero-heading {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 860px) {
+  .ner-header-container {
+    padding: 0 20px;
+  }
+  .ner-nav {
+    display: none;
+    position: absolute;
+    top: 88px;
+    left: 0;
+    width: 100%;
+    background: rgba(12, 38, 54, 0.96);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    padding: 24px;
+    gap: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .ner-nav-open {
+    display: flex;
+  }
+  .ner-auth-desktop {
+    display: none;
+  }
+  .ner-auth-mobile {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+  }
+  .ner-menu-toggle {
+    display: block;
+  }
+  .ner-hero-heading {
+    font-size: 28px;
+  }
+  .ner-phase-cards-row {
+    grid-template-columns: 1fr;
+  }
+  .ner-search-form {
+    flex-direction: column;
+  }
+  .ner-btn-get-details {
+    width: 100%;
+  }
+  .ner-hero-actions-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ner-states-container {
+    gap: 12px;
+  }
+  .ner-state-separator {
+    display: none;
+  }
+}
