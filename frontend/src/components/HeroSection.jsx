@@ -2,7 +2,6 @@ import React from 'react';
 import MottoPill from './MottoPill';
 import PhaseCards from './PhaseCards';
 import RiskSearchCard from './RiskSearchCard';
-import ReportIncidentAction from './ReportIncidentAction';
 
 export default function HeroSection({ onNavigate }) {
   return (
@@ -25,9 +24,6 @@ export default function HeroSection({ onNavigate }) {
 
         {/* Risk Search Box */}
         <RiskSearchCard onNavigate={onNavigate} />
-
-        {/* Report an incident & tags */}
-        <ReportIncidentAction />
       </div>
     </section>
   );

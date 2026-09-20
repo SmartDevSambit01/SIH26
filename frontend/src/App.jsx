@@ -5,9 +5,18 @@ import RiskMapPage from './components/RiskMap/RiskMapPage';
 function App() {
   const [currentPage, setCurrentPage] = useState('HOME');
   const [selectedDistrict, setSelectedDistrict] = useState('Kohima');
+  const [openAlertsOnLoad, setOpenAlertsOnLoad] = useState(false);
 
   const handleNavigate = (page, district = null) => {
-    setCurrentPage(page);
+    if (page === 'ALERTS') {
+      // The Alerts nav item opens the real, working alert dashboard that
+      // otherwise only lived inside the Risk Map's toolbar toggle.
+      setOpenAlertsOnLoad(true);
+      setCurrentPage('RISK_MAP');
+    } else {
+      setOpenAlertsOnLoad(false);
+      setCurrentPage(page);
+    }
     if (district) {
       setSelectedDistrict(district);
     }
@@ -18,6 +27,7 @@ function App() {
     return (
       <RiskMapPage
         initialDistrict={selectedDistrict}
+        initialShowAlerts={openAlertsOnLoad}
         onNavigate={handleNavigate}
       />
     );

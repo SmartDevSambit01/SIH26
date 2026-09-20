@@ -44,6 +44,19 @@ def test_soil_moisture_latest():
             assert obs["soil_moisture_current"] is None
 
 
+def test_soil_moisture_top_level_status_matches_observations():
+    """Regression test: get_latest_soil_moisture() used to hardcode the
+    top-level data_status to REQUIRES_EXTERNAL_AUTH regardless of what the
+    actual observations said, producing an internally-inconsistent response
+    (e.g. top-level REQUIRES_EXTERNAL_AUTH next to a real STALE observation
+    with real values and a real timestamp)."""
+    response = client.get("/api/soil-moisture/latest?limit=1")
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data["observations"]) == 1
+    assert data["data_status"] == data["observations"][0]["data_status"]
+
+
 def test_satellite_latest():
     response = client.get("/api/satellite/latest?limit=10")
     assert response.status_code == 200

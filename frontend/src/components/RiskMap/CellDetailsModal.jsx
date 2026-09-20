@@ -1,39 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { X, MapPin, Mountain, CloudRain, Droplets, Radio, ShieldAlert, Users, Compass, AlertCircle, Cpu, BookOpen, CheckCircle, HelpCircle } from 'lucide-react';
+import { X, Mountain, CloudRain, Droplets, Radio, ShieldAlert, Users, AlertCircle, Cpu, BookOpen, CheckCircle } from 'lucide-react';
+import FieldReportSection from './FieldReportSection';
 
 export default function CellDetailsModal({ cell, onClose }) {
-  if (!cell) return null;
-
-  const {
-    cell_id,
-    district,
-    centroid_lat,
-    centroid_lon,
-    risk_class,
-    risk_badge,
-    risk_color,
-    tsi_score,
-    tsi_class,
-    elevation_m,
-    elevation_min,
-    elevation_max,
-    slope_deg,
-    slope_max_deg,
-    aspect_deg,
-    curvature,
-    twi,
-    pu_similarity,
-    primary_contributors,
-    has_verified_event,
-    event_id,
-    event_location,
-    event_date,
-    event_description,
-  } = cell;
+  // cell_id pulled out unconditionally so the hooks below always run in the
+  // same order regardless of whether `cell` is null (React rules-of-hooks).
+  const cell_id = cell?.cell_id;
 
   const [aiPrediction, setAiPrediction] = useState(null);
   const [cellParameters, setCellParameters] = useState(null);
   const [cellRisk, setCellRisk] = useState(null);
+  const [aiExplanation, setAiExplanation] = useState(null);
 
   useEffect(() => {
     if (!cell_id) return;
@@ -53,7 +30,38 @@ export default function CellDetailsModal({ cell, onClose }) {
       .then(res => res.ok ? res.json() : null)
       .then(data => setCellRisk(data))
       .catch(() => setCellRisk(null));
+
+    fetch(`${baseUrl}/api/cells/${cell_id}/ai-explanation`)
+      .then(res => res.ok ? res.json() : null)
+      .then(data => setAiExplanation(data))
+      .catch(() => setAiExplanation(null));
   }, [cell_id]);
+
+  if (!cell) return null;
+
+  const {
+    district,
+    centroid_lat,
+    centroid_lon,
+    risk_class,
+    risk_badge,
+    risk_color,
+    tsi_score,
+    elevation_m,
+    elevation_min,
+    elevation_max,
+    slope_deg,
+    slope_max_deg,
+    aspect_deg,
+    curvature,
+    twi,
+    primary_contributors,
+    has_verified_event,
+    event_id,
+    event_location,
+    event_date,
+    event_description,
+  } = cell;
 
   const unavailableNotice = "Unavailable — external data/authentication required";
   const smapData = cellParameters?.soil_moisture;
@@ -109,6 +117,39 @@ export default function CellDetailsModal({ cell, onClose }) {
           </h3>
 
           <div className="metrics-grid">
+            {/* LLM-generated narrative explanation (NVIDIA NIM), grounded only in the real data below */}
+            <div className="metric-box full-width-metric" style={{ background: 'rgba(56, 189, 248, 0.06)', padding: 10, borderRadius: 6, border: '1px solid rgba(56, 189, 248, 0.2)' }}>
+              <div className="metric-label" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span>AI Narrative Summary</span>
+                {aiExplanation?.recommended_action && (
+                  <span
+                    className="section-status-tag"
+                    style={{ background: 'rgba(56, 189, 248, 0.2)', color: '#38BDF8', border: '1px solid rgba(56, 189, 248, 0.4)' }}
+                  >
+                    {aiExplanation.recommended_action.replace(/_/g, ' ')}
+                  </span>
+                )}
+              </div>
+              {aiExplanation === null ? (
+                <div className="metric-value" style={{ fontSize: 11, color: '#94A3B8', marginTop: 6 }}>Loading AI summary…</div>
+              ) : aiExplanation.status === 'AVAILABLE' ? (
+                <>
+                  <div style={{ fontSize: 12, color: '#E2E8F0', lineHeight: 1.5, marginTop: 6 }}>
+                    {aiExplanation.explanation}
+                  </div>
+                  {aiExplanation.action_reason && (
+                    <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 6, fontStyle: 'italic' }}>
+                      {aiExplanation.action_reason}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="metric-value unavailable-text" style={{ fontSize: 11, marginTop: 6 }}>
+                  {aiExplanation.notice || 'Unavailable — AI narrative service not reachable.'}
+                </div>
+              )}
+            </div>
+
             <div className="metric-box">
               <div className="metric-label">Model Strategy</div>
               <div className="metric-value" style={{ fontSize: 11, color: '#38BDF8' }}>
@@ -493,67 +534,157 @@ export default function CellDetailsModal({ cell, onClose }) {
           </div>
         </div>
 
-        {/* Section 5: Hydrological Flood Inundation */}
+        {/* Section 5: Hydrological Flood Susceptibility (static, DEM-derived) */}
         <div className="section-card">
           <h3 className="section-card-title">
             <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <AlertCircle size={15} color="#F59E0B" />
-              Hydrological Flood Hazard
+              Flash-Flood Susceptibility (Static)
             </span>
-            <span className="section-status-tag unavailable">Not Connected</span>
+            {cellParameters?.flood?.static_susceptibility_status === 'AVAILABLE' ? (
+              <span className="section-status-tag available">Available</span>
+            ) : (
+              <span className="section-status-tag unavailable">Insufficient Data</span>
+            )}
           </h3>
-          <div className="metric-box">
-            <div className="metric-label">Status</div>
-            <div className="metric-value unavailable-text">{unavailableNotice}</div>
-          </div>
-        </div>
 
-        {/* Section 6: Verification & Ground Truth */}
-        <div className="section-card">
-          <h3 className="section-card-title">
-            <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <ShieldAlert size={15} color="#34D399" />
-              Field Inspection & Reports
-            </span>
-            <span className="section-status-tag available">Active</span>
-          </h3>
-          <div className="metrics-grid">
-            <div className="metric-box">
-              <div className="metric-label">Officer Verification</div>
-              <div className="metric-value" style={{ fontSize: 12.5 }}>
-                {has_verified_event ? 'VERIFIED INCIDENT' : 'Pending Field Report'}
+          {cellParameters?.flood?.static_susceptibility_status === 'AVAILABLE' ? (
+            <div className="metrics-grid">
+              <div className="metric-box">
+                <div className="metric-label">FFSI Score</div>
+                <div className="metric-value highlight" style={{ color: '#2563EB' }}>
+                  {cellParameters.flood.ffsi_score} / 100
+                </div>
+              </div>
+              <div className="metric-box">
+                <div className="metric-label">Class</div>
+                <div className="metric-value">{cellParameters.flood.ffsi_class}</div>
+              </div>
+              <div className="metric-box">
+                <div className="metric-label">HAND (Height Above Nearest Drainage)</div>
+                <div className="metric-value">
+                  {cellParameters.flood.hand_m !== null ? `${Math.round(cellParameters.flood.hand_m)} m` : 'N/A'}
+                </div>
+              </div>
+              <div className="metric-box">
+                <div className="metric-label">Flow Accumulation</div>
+                <div className="metric-value">
+                  {cellParameters.flood.flow_accumulation_cells !== null
+                    ? `${Math.round(cellParameters.flood.flow_accumulation_cells).toLocaleString()} cells`
+                    : 'N/A'}
+                </div>
+              </div>
+              <div className="metric-box">
+                <div className="metric-label">Distance to Drainage</div>
+                <div className="metric-value">
+                  {cellParameters.flood.distance_to_drainage_m !== null
+                    ? `${Math.round(cellParameters.flood.distance_to_drainage_m)} m`
+                    : 'N/A'}
+                </div>
+              </div>
+              <div className="metric-box">
+                <div className="metric-label">Drainage Density</div>
+                <div className="metric-value">
+                  {cellParameters.flood.drainage_density !== null
+                    ? cellParameters.flood.drainage_density.toFixed(2)
+                    : 'N/A'}
+                </div>
+              </div>
+              {cellParameters.flood.primary_contributor && (
+                <div className="metric-box full-width-metric">
+                  <div className="metric-label">Primary Contributor</div>
+                  <div className="metric-value" style={{ fontSize: 12 }}>{cellParameters.flood.primary_contributor}</div>
+                </div>
+              )}
+              <div className="metric-box full-width-metric" style={{ background: 'rgba(245, 158, 11, 0.08)', padding: 8, borderRadius: 4, border: '1px solid rgba(245, 158, 11, 0.2)' }}>
+                <div style={{ fontSize: 10.5, color: '#FDBA74', lineHeight: 1.35 }}>
+                  <strong>Notice:</strong> {cellParameters.flood.notice}
+                </div>
               </div>
             </div>
+          ) : (
             <div className="metric-box">
-              <div className="metric-label">Citizen Reports</div>
-              <div className="metric-value">0 filed</div>
+              <div className="metric-label">Status</div>
+              <div className="metric-value unavailable-text">
+                Insufficient DEM coverage at this cell (district-boundary edge)
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
-        {/* Section 7: Exposure & Critical Infrastructure */}
+        {/* Section 6: Verification & Ground Truth (real citizen/officer reports) */}
+        <FieldReportSection cellId={cell_id} />
+
+        {/* Section 7: Exposure & Critical Infrastructure (real OpenStreetMap data) */}
         <div className="section-card">
           <h3 className="section-card-title">
             <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <Users size={15} color="#EC4899" />
               Exposure & Infrastructure
             </span>
-            <span className="section-status-tag unavailable">Pending Layer</span>
+            {cellParameters?.exposure?.status === 'AVAILABLE' ? (
+              <span className="section-status-tag available">Available (OSM)</span>
+            ) : (
+              <span className="section-status-tag unavailable">Unavailable</span>
+            )}
           </h3>
-          <div className="metrics-grid">
+
+          {cellParameters?.exposure?.status === 'AVAILABLE' ? (
+            <div className="metrics-grid">
+              <div className="metric-box">
+                <div className="metric-label">Nearest Road</div>
+                <div className="metric-value highlight" style={{ color: '#EC4899' }}>
+                  {cellParameters.exposure.road_proximity_m !== null
+                    ? `${Math.round(cellParameters.exposure.road_proximity_m)} m`
+                    : <span className="unavailable-text">N/A</span>}
+                </div>
+              </div>
+              <div className="metric-box">
+                <div className="metric-label">Road Class</div>
+                <div className="metric-value">{cellParameters.exposure.road_class || 'N/A'}</div>
+              </div>
+              <div className="metric-box">
+                <div className="metric-label">Road Length in Cell</div>
+                <div className="metric-value">
+                  {cellParameters.exposure.road_length_in_cell_m !== null
+                    ? `${Math.round(cellParameters.exposure.road_length_in_cell_m)} m`
+                    : '0 m'}
+                </div>
+              </div>
+              <div className="metric-box full-width-metric">
+                <div className="metric-label">Nearest Hospital</div>
+                <div className="metric-value" style={{ fontSize: 12 }}>
+                  {cellParameters.exposure.nearest_hospital_name
+                    ? `${cellParameters.exposure.nearest_hospital_name} (${Math.round(cellParameters.exposure.nearest_hospital_distance_m).toLocaleString()} m)`
+                    : <span className="unavailable-text">None in OSM data</span>}
+                </div>
+              </div>
+              <div className="metric-box full-width-metric">
+                <div className="metric-label">Nearest School</div>
+                <div className="metric-value" style={{ fontSize: 12 }}>
+                  {cellParameters.exposure.nearest_school_name
+                    ? `${cellParameters.exposure.nearest_school_name} (${Math.round(cellParameters.exposure.nearest_school_distance_m).toLocaleString()} m)`
+                    : <span className="unavailable-text">None in OSM data</span>}
+                </div>
+              </div>
+              <div className="metric-box full-width-metric">
+                <div className="metric-label">Population / Critical Infrastructure Count</div>
+                <div className="metric-value unavailable-text">
+                  Unavailable — requires authoritative census/GIS data, not yet integrated
+                </div>
+              </div>
+              <div className="metric-box full-width-metric" style={{ background: 'rgba(236, 72, 153, 0.08)', padding: 8, borderRadius: 4, border: '1px solid rgba(236, 72, 153, 0.2)' }}>
+                <div style={{ fontSize: 10.5, color: '#F9A8D4', lineHeight: 1.35 }}>
+                  <strong>Notice:</strong> {cellParameters.exposure.notice}
+                </div>
+              </div>
+            </div>
+          ) : (
             <div className="metric-box">
-              <div className="metric-label">Road Proximity</div>
-              <div className="metric-value unavailable-text">Unavailable</div>
+              <div className="metric-label">Status</div>
+              <div className="metric-value unavailable-text">{unavailableNotice}</div>
             </div>
-            <div className="metric-box">
-              <div className="metric-label">Settlement Exposure</div>
-              <div className="metric-value unavailable-text">Unavailable</div>
-            </div>
-            <div className="metric-box full-width-metric">
-              <div className="metric-label">Critical Assets</div>
-              <div className="metric-value unavailable-text">Unavailable — GIS layer pending integration</div>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </aside>

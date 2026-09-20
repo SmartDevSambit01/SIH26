@@ -13,6 +13,8 @@ export default function DistrictSelector({
   onToggleBoundary,
   showHistorical,
   onToggleHistorical,
+  showFlood,
+  onToggleFlood,
   basemapType,
   onChangeBasemap,
 }) {
@@ -52,6 +54,15 @@ export default function DistrictSelector({
             type="checkbox"
             checked={showHistorical}
             onChange={(e) => onToggleHistorical(e.target.checked)}
+          />
+        </label>
+
+        <label className="layer-toggle-row">
+          <span>Flash-Flood Susceptibility (Static)</span>
+          <input
+            type="checkbox"
+            checked={showFlood}
+            onChange={(e) => onToggleFlood(e.target.checked)}
           />
         </label>
       </div>

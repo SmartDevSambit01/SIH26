@@ -46,6 +46,14 @@ class CellSummary(BaseModel):
     terrain: TerrainData
     historical: HistoricalData
     baseline_susceptibility: BaselineSusceptibilityData
+    flood_susceptibility: Dict[str, Any] = Field(
+        default_factory=dict,
+        description="Static DEM-derived flash-flood susceptibility (FFSI); NOT a dynamic flood observation",
+    )
+    exposure: Dict[str, Any] = Field(
+        default_factory=dict,
+        description="Real OSM-derived exposure (roads/hospitals/schools); population/infrastructure counts require authoritative data not yet integrated",
+    )
     dynamic_risk_status: str = Field("NOT_AVAILABLE", description="Dynamic ML risk model status")
     data_availability: Dict[str, str] = Field(..., description="Availability flag per sensor/layer")
 

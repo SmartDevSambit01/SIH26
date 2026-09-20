@@ -14,3 +14,6 @@ data/rainfall/raw/*.tmp
 data/soil_moisture/raw/*
 data/rainfall/raw/*
 data/terrain/raw/*
+
+# Python virtualenv (scripts/)
+.venv/

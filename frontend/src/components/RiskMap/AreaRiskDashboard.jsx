@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ShieldAlert, AlertTriangle, Layers, Info, CheckCircle2, XCircle, Database } from 'lucide-react';
+import { X, ShieldAlert, AlertTriangle, Layers, Info, CheckCircle2, XCircle, Database, Cpu } from 'lucide-react';
 
 export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
   const [areaDetail, setAreaDetail] = useState(null);
@@ -7,10 +7,30 @@ export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
   const [cellsData, setCellsData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [aiExplanation, setAiExplanation] = useState(null);
 
   useEffect(() => {
     if (!areaId) return;
     loadAreaData(areaId);
+
+    setAiExplanation(null);
+    const hosts = [
+      import.meta.env.VITE_API_URL || '',
+      'http://127.0.0.1:8000',
+      'http://localhost:8000'
+    ];
+    (async () => {
+      for (const host of hosts) {
+        try {
+          const res = await fetch(`${host}/api/areas/${areaId}/ai-explanation`);
+          if (res.ok) {
+            setAiExplanation(await res.json());
+            return;
+          }
+        } catch (err) { /* try next host */ }
+      }
+      setAiExplanation({ status: 'AI_UNAVAILABLE', notice: 'Unable to reach AI narrative service.' });
+    })();
   }, [areaId]);
 
   const loadAreaData = async (aid) => {
@@ -217,6 +237,46 @@ export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
           )}
         </div>
 
+        {/* AI Narrative Summary (LLM-generated, grounded only in the real data above) */}
+        <div style={{
+          background: 'rgba(56, 189, 248, 0.06)', borderRadius: '12px', padding: '16px',
+          border: '1px solid rgba(56, 189, 248, 0.2)'
+        }}>
+          <div style={{ fontSize: '12px', fontWeight: 600, color: '#94A3B8', textTransform: 'uppercase', marginBottom: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <Cpu size={14} style={{ color: '#38BDF8' }} />
+              <span>AI Risk Narrative</span>
+            </span>
+            {aiExplanation?.recommended_action && (
+              <span style={{
+                fontSize: '10px', padding: '3px 8px', borderRadius: '4px',
+                background: 'rgba(56, 189, 248, 0.2)', color: '#38BDF8', border: '1px solid rgba(56, 189, 248, 0.4)'
+              }}>
+                {aiExplanation.recommended_action.replace(/_/g, ' ')}
+              </span>
+            )}
+          </div>
+
+          {aiExplanation === null ? (
+            <div style={{ fontSize: '12px', color: '#94A3B8' }}>Loading AI summary…</div>
+          ) : aiExplanation.status === 'AVAILABLE' ? (
+            <>
+              <div style={{ fontSize: '13px', color: '#F1F5F9', lineHeight: 1.5 }}>
+                {aiExplanation.explanation}
+              </div>
+              {aiExplanation.action_reason && (
+                <div style={{ fontSize: '11px', color: '#94A3B8', marginTop: '8px', fontStyle: 'italic' }}>
+                  {aiExplanation.action_reason}
+                </div>
+              )}
+            </>
+          ) : (
+            <div style={{ fontSize: '12px', color: '#F59E0B' }}>
+              {aiExplanation.notice || 'Unavailable — AI narrative service not reachable.'}
+            </div>
+          )}
+        </div>
+
         {/* Historical Evidence Card */}
         <div style={{
           background: 'rgba(30, 41, 59, 0.6)', borderRadius: '12px', padding: '16px',
@@ -297,22 +357,17 @@ export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-              <span style={{ color: '#CBD5E1' }}>GPM Rainfall:</span>
-              <span style={{ color: '#34D399', fontSize: '11px' }}>AVAILABLE — Real NASA GPM data (2026-09-18, ~10 km resolution)</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-              <span style={{ color: '#CBD5E1' }}>SMAP Soil Moisture:</span>
-              <span style={{ color: '#FDE047', fontSize: '11px' }}>STALE — Real observations available (2026-09-15), latency exceeded threshold</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-              <span style={{ color: '#CBD5E1' }}>Sentinel-1 SAR:</span>
-              <span style={{ color: '#F59E0B', fontSize: '11px' }}>Unavailable — external authentication/download pending</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0' }}>
-              <span style={{ color: '#CBD5E1' }}>Flood Hydrodynamics:</span>
-              <span style={{ color: '#F59E0B', fontSize: '11px' }}>Unavailable</span>
-            </div>
+            {['rainfall', 'soil_moisture', 'sentinel1', 'flood'].map((key) => {
+              const labels = { rainfall: 'GPM Rainfall', soil_moisture: 'SMAP Soil Moisture', sentinel1: 'Sentinel-1 SAR', flood: 'Flood Hydrodynamics' };
+              const text = riskSummary.dynamic_status?.[key] || 'Status unavailable';
+              const color = text.toUpperCase().startsWith('AVAILABLE') ? '#34D399' : text.toUpperCase().startsWith('STALE') ? '#FDE047' : '#F59E0B';
+              return (
+                <div key={key} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                  <span style={{ color: '#CBD5E1' }}>{labels[key]}:</span>
+                  <span style={{ color, fontSize: '11px', textAlign: 'right', maxWidth: '60%' }}>{text}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
 

@@ -4,12 +4,29 @@ Uses pathlib for safe dynamic project-relative paths.
 No credentials or secrets are stored here.
 """
 
+import os
 from pathlib import Path
 from typing import List
 
 # Locate project root dynamically (backend/app/config.py -> backend/app -> backend -> project_root)
 BACKEND_DIR = Path(__file__).resolve().parent.parent
 PROJECT_ROOT = BACKEND_DIR.parent
+
+
+def _load_dotenv(path: Path) -> None:
+    """Loads KEY=VALUE pairs from a .env file into os.environ without a new dependency.
+    Never overwrites a variable already set in the real environment."""
+    if not path.exists():
+        return
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+
+
+_load_dotenv(BACKEND_DIR / ".env")
 
 # Data directories
 DATA_DIR = PROJECT_ROOT / "data"
@@ -30,6 +47,9 @@ AIZAWL_BOUNDARY_GEOJSON = BOUNDARIES_DIR / "aizawl_district.geojson"
 
 BASELINE_SUSCEPTIBILITY_CSV = ML_DIR / "baseline_susceptibility.csv"
 FEATURE_DATASET_CSV = ML_DIR / "feature_dataset.csv"
+FLOOD_SUSCEPTIBILITY_CSV = ML_DIR / "flood_susceptibility.csv"
+GRID_HYDROLOGY_CSV = ML_DIR / "grid_hydrology_features.csv"
+GRID_EXPOSURE_CSV = ML_DIR / "grid_exposure_features.csv"
 
 GPM_OBSERVATIONS_CSV = RAINFALL_DIR / "gpm_latest_observations.csv"
 SMAP_OBSERVATIONS_CSV = SOIL_MOISTURE_DIR / "smap_latest_observations.csv"

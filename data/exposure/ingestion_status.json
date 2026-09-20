@@ -1,0 +1,47 @@
+{
+  "status": "AVAILABLE",
+  "reason": null,
+  "attempted_at": "2026-09-20T10:54:58.930344+00:00",
+  "mirrors_tried": [
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter",
+    "https://lz4.overpass-api.de/api/interpreter",
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter",
+    "https://lz4.overpass-api.de/api/interpreter",
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass-api.de/api/interpreter"
+  ],
+  "districts": {
+    "kohima": {
+      "roads": {
+        "status": "AVAILABLE",
+        "feature_count": 985
+      },
+      "hospitals": {
+        "status": "AVAILABLE",
+        "feature_count": 10
+      },
+      "schools": {
+        "status": "AVAILABLE",
+        "feature_count": 7
+      }
+    },
+    "aizawl": {
+      "roads": {
+        "status": "AVAILABLE",
+        "feature_count": 4166
+      },
+      "hospitals": {
+        "status": "AVAILABLE",
+        "feature_count": 25
+      },
+      "schools": {
+        "status": "AVAILABLE",
+        "feature_count": 5
+      }
+    }
+  }
+}

@@ -37,9 +37,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
-  background: rgba(11, 19, 30, 0.92);
-  backdrop-filter: blur(12px);
+  padding: 13px 24px;
+  background: rgba(11, 19, 30, 0.94);
+  backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   z-index: 20;
   gap: 16px;
@@ -70,14 +70,6 @@
   -webkit-text-fill-color: transparent;
 }
 
-.district-switch-group {
-  display: flex;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
-  padding: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
 .district-btn {
   background: transparent;
   border: none;
@@ -104,6 +96,96 @@
   box-shadow: 0 0 12px rgba(0, 229, 153, 0.35);
 }
 
+/* District Dropdown — single pill replacing the two always-visible buttons */
+.district-dropdown-wrap {
+  position: relative;
+}
+
+.district-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9px;
+  padding: 7px 12px;
+  color: #F1F5F9;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.district-dropdown-trigger:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 229, 153, 0.4);
+}
+
+.district-dropdown-trigger svg:first-child {
+  color: #00E599;
+}
+
+.district-dropdown-trigger svg.chevron-open {
+  transform: rotate(180deg);
+}
+
+.district-dropdown-trigger svg:last-child {
+  transition: transform 0.2s ease;
+  color: #64748B;
+}
+
+.district-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 220px;
+  background: rgba(13, 21, 33, 0.98);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  padding: 6px;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.district-dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  padding: 9px 10px;
+  color: #E2E8F0;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-align: left;
+}
+
+.district-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.district-dropdown-item.active {
+  background: rgba(0, 229, 153, 0.14);
+  color: #00E599;
+}
+
+.district-dropdown-count {
+  font-size: 11px;
+  font-weight: 500;
+  color: #64748B;
+}
+
+.search-input-wrap-container {
+  position: relative;
+}
+
 .search-input-wrap {
   position: relative;
   display: flex;
@@ -120,11 +202,11 @@
 .cell-search-input {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 8px;
-  padding: 6px 12px 6px 32px;
+  border-radius: 9px;
+  padding: 8px 12px 8px 32px;
   color: #FFFFFF;
   font-size: 13px;
-  width: 210px;
+  width: 260px;
   outline: none;
   transition: all 0.2s;
 }
@@ -133,6 +215,111 @@
   border-color: #00E599;
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 0 2px rgba(0, 229, 153, 0.2);
+}
+
+/* Consolidated search live-results dropdown (single search entry point) */
+.area-search-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 340px;
+  max-height: 380px;
+  overflow-y: auto;
+  background: rgba(13, 21, 33, 0.98);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  padding: 6px;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.area-search-dropdown-empty {
+  padding: 14px 10px;
+  font-size: 12px;
+  color: #64748B;
+  text-align: center;
+}
+
+.area-search-dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.area-search-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.area-search-dropdown-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #F1F5F9;
+}
+
+.area-search-dropdown-meta {
+  font-size: 11px;
+  color: #94A3B8;
+  margin-top: 2px;
+  margin-left: 19px;
+}
+
+.area-search-dropdown-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 5px;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+/* Click-to-select cell popup bubble (MapLibre Popup override) */
+.sarvas-cell-popup .maplibregl-popup-content {
+  background: rgba(13, 21, 33, 0.97);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 10px 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.sarvas-cell-popup .maplibregl-popup-tip {
+  border-top-color: rgba(13, 21, 33, 0.97);
+}
+
+.sarvas-cell-popup .maplibregl-popup-close-button {
+  color: #94A3B8;
+  font-size: 16px;
+  padding: 2px 6px;
+}
+
+.sarvas-cell-popup-content {
+  font-family: inherit;
+}
+
+.sarvas-cell-popup-id {
+  font-size: 13px;
+  font-weight: 700;
+  color: #F8FAFC;
+  white-space: nowrap;
+}
+
+.sarvas-cell-popup-risk {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 2px;
+  white-space: nowrap;
 }
 
 .toolbar-right {

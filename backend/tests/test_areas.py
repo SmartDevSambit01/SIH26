@@ -142,7 +142,32 @@ def test_api_get_area_risk():
     assert "max_tsi" in data
     assert "class_distribution" in data
     assert "dynamic_status" in data
-    assert data["dynamic_status"]["rainfall"] == "Unavailable — NASA Earthdata authentication required"
+    # dynamic_status must reflect the area's actual per-cell data (previously
+    # hardcoded to always claim rainfall was unavailable regardless of reality).
+    for key in ("rainfall", "soil_moisture", "sentinel1", "flood"):
+        assert key in data["dynamic_status"]
+        assert isinstance(data["dynamic_status"][key], str) and data["dynamic_status"][key]
+
+def test_area_dynamic_status_reflects_real_cell_data_not_hardcoded():
+    """Regression test: get_area_risk() used to return a hardcoded
+    dynamic_status dict (rainfall/soil_moisture/sentinel1/flood all always
+    "Unavailable") regardless of what the area's actual cells reported.
+    It must now match the first associated cell's real per-source status."""
+    area_resp = client.get("/api/areas/AIZ_LOC_021/risk")
+    area_status = area_resp.json()["dynamic_status"]
+
+    cells_resp = client.get("/api/areas/AIZ_LOC_021/cells")
+    first_cell_id = cells_resp.json()["cells"][0]["cell_id"]
+    cell_params = client.get(f"/api/cells/{first_cell_id}/parameters").json()
+
+    def status_matches(area_text: str, cell_status: str) -> bool:
+        if cell_status in ("AVAILABLE", "STALE"):
+            return cell_status in area_text.upper()
+        return "UNAVAILABLE" in area_text.upper()
+
+    assert status_matches(area_status["rainfall"], cell_params["rainfall"]["status"])
+    assert status_matches(area_status["soil_moisture"], cell_params["soil_moisture"]["status"])
+
 
 def test_api_get_area_cells():
     """Test GET /api/areas/{area_id}/cells endpoint."""

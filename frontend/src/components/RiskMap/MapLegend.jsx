@@ -1,8 +1,25 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, Layers } from 'lucide-react';
+import { timeAgo } from './SystemStatusPill';
 
-export default function MapLegend() {
+const STATUS_COLOR = {
+  AVAILABLE: '#34D399',
+  STALE: '#FBBF24',
+};
+
+function statusLine(entry) {
+  if (!entry || !entry.status) return { text: 'Loading…', color: '#94A3B8' };
+  const age = timeAgo(entry.timestamp);
+  return {
+    text: `${entry.status}${age ? ` · ${age}` : ''}`,
+    color: STATUS_COLOR[entry.status] || '#F87171',
+  };
+}
+
+export default function MapLegend({ dataStatus }) {
   const [collapsed, setCollapsed] = useState(false);
+  const rain = statusLine(dataStatus?.rainfall);
+  const soil = statusLine(dataStatus?.soil_moisture);
 
   const legendItems = [
     { label: 'Critical', color: '#9333EA', desc: 'Very High Susceptibility (Slope >35°, High Curvature)' },
@@ -36,11 +53,11 @@ export default function MapLegend() {
 
           <div className="data-status-section" style={{ marginTop: '10px', paddingTop: '8px', borderTop: '1px solid rgba(255,255,255,0.08)', fontSize: '11px', color: '#94A3B8', display: 'flex', flexDirection: 'column', gap: '4px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span>GPM Rainfall: <strong style={{ color: '#34D399' }}>ACTIVE</strong></span>
+              <span>GPM Rainfall: <strong style={{ color: rain.color }}>{rain.text}</strong></span>
               <span style={{ color: '#64748B' }}>Native ~10 km</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span>SMAP Soil Moisture: <strong style={{ color: '#FBBF24' }}>STALE</strong></span>
+              <span>SMAP Soil Moisture: <strong style={{ color: soil.color }}>{soil.text}</strong></span>
               <span style={{ color: '#64748B' }}>Native ~9 km</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -50,7 +67,7 @@ export default function MapLegend() {
           </div>
 
           <div className="legend-notice" style={{ marginTop: '8px', fontSize: '10px', color: '#64748B', lineHeight: '1.4' }}>
-            Dynamic risk uses available satellite observations when fresh data is available. Current feeds: GPM rainfall available; SMAP soil moisture available with freshness monitoring. Risk remains unavailable when required dynamic evidence is stale or missing.
+            Dynamic risk uses available satellite observations when fresh data is available. Risk remains unavailable when required dynamic evidence is stale or missing.
           </div>
         </>
       )}

@@ -9,8 +9,6 @@ export default function Header({ onNavigate, activeNav: propActiveNav = 'HOME' }
     { label: 'HOME', id: 'home' },
     { label: 'ALERTS', id: 'alerts' },
     { label: 'RISK MAP', id: 'risk-map' },
-    { label: 'REPORTS', id: 'reports' },
-    { label: 'ABOUT', id: 'about' },
   ];
 
   const handleNavClick = (e, label) => {
@@ -19,6 +17,7 @@ export default function Header({ onNavigate, activeNav: propActiveNav = 'HOME' }
     if (onNavigate) {
       if (label === 'RISK MAP') onNavigate('RISK_MAP');
       else if (label === 'HOME') onNavigate('HOME');
+      else if (label === 'ALERTS') onNavigate('ALERTS');
     }
   };
 
@@ -88,18 +87,7 @@ export default function Header({ onNavigate, activeNav: propActiveNav = 'HOME' }
               {activeNav === item.label && <span className="ner-active-indicator" />}
             </a>
           ))}
-          {/* Mobile auth buttons inside dropdown */}
-          <div className="ner-auth-mobile">
-            <button type="button" className="ner-btn-login">Login</button>
-            <button type="button" className="ner-btn-signup">Sign Up</button>
-          </div>
         </nav>
-
-        {/* Desktop Auth Buttons */}
-        <div className="ner-auth-desktop">
-          <button type="button" className="ner-btn-login">Login</button>
-          <button type="button" className="ner-btn-signup">Sign Up</button>
-        </div>
 
         {/* Mobile Hamburger Toggle */}
         <button

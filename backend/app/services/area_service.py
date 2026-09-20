@@ -270,12 +270,41 @@ class AreaService:
             "historical_event_ids": historical_event_ids,
             "associated_cell_ids": cell_ids,
             "notice": "Baseline susceptibility is not a live landslide prediction.",
-            "dynamic_status": {
-                "rainfall": "Unavailable — NASA Earthdata authentication required",
-                "soil_moisture": "Unavailable — NASA Earthdata authentication required",
-                "sentinel1": "Unavailable — external authentication/download pending",
-                "flood": "Unavailable"
-            }
+            "dynamic_status": self._describe_area_dynamic_status(cell_ids),
+        }
+
+    def _describe_area_dynamic_status(self, cell_ids: List[str]) -> dict:
+        """Real per-source status for the area, sampled from its first associated
+        cell (GPM/SMAP resolution is coarser than a single locality, so cells in
+        the same area share the same macro-pixel — see PRD.md Section 6.9).
+        Previously this was a hardcoded dict that never reflected actual data."""
+        unavailable = {
+            "rainfall": "Unavailable — no associated cells",
+            "soil_moisture": "Unavailable — no associated cells",
+            "sentinel1": "Unavailable — no associated cells",
+            "flood": "Unavailable — no associated cells",
+        }
+        if not cell_ids:
+            return unavailable
+
+        params = self.data_service.get_cell_parameters(cell_ids[0])
+        if not params:
+            return unavailable
+
+        def describe(status: Optional[str], label: str) -> str:
+            if status == "AVAILABLE":
+                return f"AVAILABLE — Real {label} data"
+            if status == "STALE":
+                return f"STALE — Real {label} observations, latency exceeded threshold"
+            if status == "REQUIRES_EXTERNAL_AUTH":
+                return "Unavailable — NASA Earthdata authentication required"
+            return f"Unavailable — {label} not yet implemented"
+
+        return {
+            "rainfall": describe(params["rainfall"].get("status"), "GPM rainfall"),
+            "soil_moisture": describe(params["soil_moisture"].get("status"), "SMAP soil moisture"),
+            "sentinel1": describe(params["satellite"].get("status"), "Sentinel-1 SAR"),
+            "flood": describe(params["flood"].get("dynamic_status"), "dynamic flood indicator"),
         }
 
     def get_area_cells(self, area_id: str) -> Optional[dict]:
