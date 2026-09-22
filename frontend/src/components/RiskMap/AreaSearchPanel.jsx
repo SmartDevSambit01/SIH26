@@ -86,7 +86,7 @@ export default function AreaSearchPanel({ searchTerm, district, onSelectArea }) 
         <div key={area.area_id} onClick={() => onSelectArea(area.area_id)} className="area-search-dropdown-item">
           <div>
             <div className="area-search-dropdown-name">
-              <MapPin size={13} style={{ color: '#38BDF8', flexShrink: 0 }} />
+              <MapPin size={13} style={{ color: 'var(--c-blue)', flexShrink: 0 }} />
               {area.area_name}
             </div>
             <div className="area-search-dropdown-meta">

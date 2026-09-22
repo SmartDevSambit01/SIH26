@@ -14,6 +14,7 @@ export default function NERStates() {
 
   return (
     <div className="ner-states-bar" aria-label="North Eastern Region States Covered">
+      <span className="ner-states-eyebrow">Coverage</span>
       <div className="ner-states-container">
         {states.map((state, idx) => (
           <React.Fragment key={state}>

@@ -272,7 +272,7 @@ export default function CellDetailsModal({ cell, onClose }) {
         <div className="section-card">
           <h3 className="section-card-title">
             <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <Mountain size={15} color="#00E599" />
+              <Mountain size={15} color="var(--c-coral)" />
               Terrain Morphometry (SRTM 30m)
             </span>
             <span className="section-status-tag available">Available</span>

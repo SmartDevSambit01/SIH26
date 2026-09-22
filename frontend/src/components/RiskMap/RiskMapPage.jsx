@@ -419,7 +419,7 @@ export default function RiskMapPage({
         type: "fill",
         source: "area-highlight-source",
         paint: {
-          "fill-color": "#38BDF8",
+          "fill-color": "#1863dc",
           "fill-opacity": 0.25,
         },
       });
@@ -429,7 +429,7 @@ export default function RiskMapPage({
         type: "line",
         source: "area-highlight-source",
         paint: {
-          "line-color": "#38BDF8",
+          "line-color": "#1863dc",
           "line-width": 2.8,
           "line-opacity": 0.95,
         },
@@ -494,7 +494,7 @@ export default function RiskMapPage({
         type: "line",
         source: "district-boundary",
         paint: {
-          "line-color": "#00E599",
+          "line-color": "#ff7759",
           "line-width": 3.0,
           "line-opacity": 0.95,
         },
@@ -713,7 +713,7 @@ export default function RiskMapPage({
     el.className = "sarvas-cell-popup-content";
     el.innerHTML = `
       <div class="sarvas-cell-popup-id">Cell: ${props.cell_id}</div>
-      <div class="sarvas-cell-popup-risk" style="color:${props.risk_color || "#94A3B8"}">
+      <div class="sarvas-cell-popup-risk" style="color:${props.risk_color || "var(--c-muted)"}">
         Risk: ${props.risk_badge || props.risk_class || "Unavailable"}
       </div>
     `;
@@ -1024,7 +1024,8 @@ export default function RiskMapPage({
             <span
               style={{
                 fontSize: 12,
-                color: "#38BDF8",
+                fontFamily: "var(--font-body)",
+                color: "var(--c-blue)",
                 display: "flex",
                 alignItems: "center",
                 gap: 6,
@@ -1048,13 +1049,14 @@ export default function RiskMapPage({
               gap: 6,
               padding: "5px 12px",
               background: showAlertPanel
-                ? "rgba(239,68,68,0.18)"
+                ? "rgba(208,33,39,0.18)"
                 : "rgba(255,255,255,0.06)",
               border: showAlertPanel
-                ? "1px solid rgba(239,68,68,0.45)"
-                : "1px solid rgba(255,255,255,0.10)",
-              borderRadius: 7,
-              color: showAlertPanel ? "#EF4444" : "#94A3B8",
+                ? "1px solid rgba(208,33,39,0.45)"
+                : "1px solid var(--c-hairline)",
+              borderRadius: "var(--r-sm)",
+              color: showAlertPanel ? "#f87171" : "var(--c-muted)",
+              fontFamily: "var(--font-body)",
               fontSize: 12,
               fontWeight: 600,
               cursor: "pointer",
@@ -1159,13 +1161,13 @@ export default function RiskMapPage({
               right: 0,
               width: 390,
               height: "100%",
-              background: "rgba(10, 15, 28, 0.97)",
+              background: "var(--c-canvas)",
               backdropFilter: "blur(20px)",
-              borderLeft: "1px solid rgba(239,68,68,0.20)",
+              borderLeft: "1px solid rgba(208,33,39,0.25)",
               zIndex: 900,
               display: "flex",
               flexDirection: "column",
-              boxShadow: "-6px 0 40px rgba(0,0,0,0.5)",
+              boxShadow: "-6px 0 32px rgba(0,0,0,0.4)",
               animation: "slideInRight 0.25s ease",
             }}
           >

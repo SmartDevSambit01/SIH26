@@ -152,7 +152,7 @@ function AlertCard({ alert, onRefresh }) {
       style={{
         background: level.bg,
         border: `1px solid ${level.border}`,
-        borderRadius: 12,
+        borderRadius: 'var(--r-md)',
         marginBottom: 14,
         overflow: 'hidden',
         transition: 'all 0.25s ease',
@@ -177,7 +177,7 @@ function AlertCard({ alert, onRefresh }) {
             gap: 5,
             background: level.color + '22',
             border: `1px solid ${level.color}55`,
-            borderRadius: 6,
+            borderRadius: 'var(--r-sm)',
             padding: '3px 8px',
             color: level.color,
             fontSize: 11,
@@ -221,7 +221,7 @@ function AlertCard({ alert, onRefresh }) {
 
       {/* Expanded Detail */}
       {expanded && (
-        <div style={{ padding: '0 16px 16px', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ padding: '0 16px 16px', borderTop: '1px solid var(--c-hairline-soft)' }}>
           {/* Recipient Templates */}
           <div style={{ marginTop: 12, marginBottom: 12 }}>
             <div style={{ color: '#64748B', fontSize: 10, fontWeight: 700, marginBottom: 8, letterSpacing: '0.08em' }}>
@@ -232,7 +232,7 @@ function AlertCard({ alert, onRefresh }) {
                 key={group}
                 style={{
                   background: 'rgba(255,255,255,0.04)',
-                  borderRadius: 8,
+                  borderRadius: 'var(--r-sm)',
                   padding: '8px 12px',
                   marginBottom: 6,
                 }}
@@ -290,7 +290,7 @@ function AlertCard({ alert, onRefresh }) {
             <div style={{
               background: 'rgba(167, 139, 250, 0.06)',
               border: '1px solid rgba(167, 139, 250, 0.18)',
-              borderRadius: 8,
+              borderRadius: 'var(--r-sm)',
               padding: '8px 12px',
               marginBottom: 12,
             }}>
@@ -314,7 +314,7 @@ function AlertCard({ alert, onRefresh }) {
             <div style={{
               background: 'rgba(250, 204, 21, 0.06)',
               border: '1px solid rgba(250, 204, 21, 0.25)',
-              borderRadius: 10,
+              borderRadius: 'var(--r-md)',
               padding: '12px',
             }}>
               <div style={{ color: '#FACC15', fontSize: 11, fontWeight: 700, marginBottom: 8 }}>
@@ -327,7 +327,7 @@ function AlertCard({ alert, onRefresh }) {
                   style={{
                     background: 'rgba(250,204,21,0.15)',
                     border: '1px solid rgba(250,204,21,0.35)',
-                    borderRadius: 7,
+                    borderRadius: 'var(--r-sm)',
                     color: '#FACC15',
                     fontSize: 11,
                     fontWeight: 600,
@@ -395,7 +395,7 @@ function AlertCard({ alert, onRefresh }) {
             <div style={{
               background: 'rgba(52, 211, 153, 0.06)',
               border: '1px solid rgba(52, 211, 153, 0.25)',
-              borderRadius: 10,
+              borderRadius: 'var(--r-md)',
               padding: '12px',
             }}>
               <div style={{ color: '#34D399', fontSize: 11, fontWeight: 700, marginBottom: 8 }}>
@@ -408,7 +408,7 @@ function AlertCard({ alert, onRefresh }) {
                 style={{
                   background: 'rgba(52,211,153,0.15)',
                   border: '1px solid rgba(52,211,153,0.35)',
-                  borderRadius: 7,
+                  borderRadius: 'var(--r-sm)',
                   color: '#34D399',
                   fontSize: 11,
                   fontWeight: 600,
@@ -427,7 +427,7 @@ function AlertCard({ alert, onRefresh }) {
             marginTop: 10,
             padding: '6px 10px',
             background: 'rgba(255,255,255,0.03)',
-            borderRadius: 6,
+            borderRadius: 'var(--r-sm)',
             fontSize: 10,
             color: '#475569',
             lineHeight: 1.5,
@@ -449,7 +449,7 @@ function ActionButton({ id, label, color, loading, onClick }) {
       style={{
         background: color + '18',
         border: `1px solid ${color}45`,
-        borderRadius: 7,
+        borderRadius: 'var(--r-sm)',
         color,
         fontSize: 11,
         fontWeight: 700,
@@ -466,8 +466,8 @@ function ActionButton({ id, label, color, loading, onClick }) {
 const inputStyle = {
   width: '100%',
   background: 'rgba(255,255,255,0.06)',
-  border: '1px solid rgba(255,255,255,0.12)',
-  borderRadius: 7,
+  border: '1px solid var(--c-hairline)',
+  borderRadius: 'var(--r-sm)',
   color: '#E2E8F0',
   fontSize: 11,
   padding: '6px 10px',
@@ -574,12 +574,12 @@ export default function AlertPanel({ district }) {
       {/* Panel Header */}
       <div style={{
         padding: '14px 18px 12px',
-        borderBottom: '1px solid rgba(255,255,255,0.06)',
+        borderBottom: '1px solid var(--c-hairline-soft)',
         flexShrink: 0,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
           <Bell size={16} color="#EF4444" />
-          <span style={{ color: '#F1F5F9', fontWeight: 700, fontSize: 14, letterSpacing: '0.02em' }}>
+          <span style={{ color: '#F1F5F9', fontWeight: 700, fontSize: 14, letterSpacing: '0.02em', fontFamily: 'var(--font-display)' }}>
             Early Warning Alerts
           </span>
           <div style={{ flex: 1 }} />
@@ -620,15 +620,15 @@ export default function AlertPanel({ district }) {
 
         {/* Scenario Test Generator */}
         <div style={{
-          background: 'rgba(56, 189, 248, 0.06)',
-          border: '1px solid rgba(56, 189, 248, 0.20)',
-          borderRadius: 10,
+          background: 'rgba(255, 119, 89, 0.06)',
+          border: '1px solid rgba(255, 119, 89, 0.20)',
+          borderRadius: 'var(--r-md)',
           padding: '12px 14px',
           marginBottom: 16,
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-            <Zap size={13} color="#38BDF8" />
-            <span style={{ color: '#38BDF8', fontSize: 11, fontWeight: 700, letterSpacing: '0.06em' }}>
+            <Zap size={13} color="var(--c-coral)" />
+            <span style={{ color: 'var(--c-coral)', fontSize: 11, fontWeight: 700, letterSpacing: '0.06em' }}>
               SCENARIO TEST — GENERATE CANDIDATE ALERT
             </span>
           </div>
@@ -650,10 +650,10 @@ export default function AlertPanel({ district }) {
               onClick={handleGenerateScenario}
               disabled={generating}
               style={{
-                background: 'rgba(56,189,248,0.15)',
-                border: '1px solid rgba(56,189,248,0.35)',
-                borderRadius: 7,
-                color: '#38BDF8',
+                background: 'rgba(255,119,89,0.15)',
+                border: '1px solid rgba(255,119,89,0.35)',
+                borderRadius: 'var(--r-sm)',
+                color: 'var(--c-coral)',
                 fontSize: 11,
                 fontWeight: 700,
                 padding: '6px 14px',
@@ -680,10 +680,10 @@ export default function AlertPanel({ district }) {
               id={`filter-state-${s || 'all'}`}
               onClick={() => setFilterState(s)}
               style={{
-                background: filterState === s ? 'rgba(56,189,248,0.15)' : 'rgba(255,255,255,0.04)',
-                border: filterState === s ? '1px solid rgba(56,189,248,0.40)' : '1px solid rgba(255,255,255,0.08)',
-                borderRadius: 6,
-                color: filterState === s ? '#38BDF8' : '#64748B',
+                background: filterState === s ? 'rgba(255,119,89,0.15)' : 'rgba(255,255,255,0.04)',
+                border: filterState === s ? '1px solid rgba(255,119,89,0.40)' : '1px solid var(--c-hairline-soft)',
+                borderRadius: 'var(--r-sm)',
+                color: filterState === s ? 'var(--c-coral)' : '#64748B',
                 fontSize: 10,
                 fontWeight: 600,
                 padding: '4px 10px',
@@ -700,7 +700,7 @@ export default function AlertPanel({ district }) {
           <div style={{
             background: 'rgba(239,68,68,0.08)',
             border: '1px solid rgba(239,68,68,0.25)',
-            borderRadius: 8,
+            borderRadius: 'var(--r-sm)',
             padding: '10px 14px',
             marginBottom: 12,
             color: '#FCA5A5',
@@ -736,7 +736,7 @@ export default function AlertPanel({ district }) {
             marginTop: 8,
             background: 'rgba(167, 139, 250, 0.05)',
             border: '1px solid rgba(167, 139, 250, 0.15)',
-            borderRadius: 10,
+            borderRadius: 'var(--r-md)',
             padding: '12px 14px',
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
@@ -753,7 +753,7 @@ export default function AlertPanel({ district }) {
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   padding: '5px 0',
-                  borderBottom: '1px solid rgba(255,255,255,0.04)',
+                  borderBottom: '1px solid var(--c-hairline-soft)',
                   fontSize: 10,
                 }}
               >
@@ -787,7 +787,7 @@ function StatusChip({ label, color, pulsing }) {
       gap: 5,
       background: color + '15',
       border: `1px solid ${color}35`,
-      borderRadius: 20,
+      borderRadius: 'var(--r-full)',
       padding: '2px 9px',
       fontSize: 10,
       color,

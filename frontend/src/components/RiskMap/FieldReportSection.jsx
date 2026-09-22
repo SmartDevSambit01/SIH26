@@ -149,7 +149,7 @@ export default function FieldReportSection({ cellId }) {
           style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
             fontSize: 11, fontWeight: 600, padding: '6px', borderRadius: 4, border: 'none',
-            background: submitting ? 'rgba(52,211,153,0.3)' : '#10B981', color: '#052e1a', cursor: submitting ? 'default' : 'pointer',
+            background: submitting ? 'rgba(10,125,76,0.35)' : 'var(--ner-safe-green)', color: '#ffffff', cursor: submitting ? 'default' : 'pointer',
           }}
         >
           <Send size={12} />

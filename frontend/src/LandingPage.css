@@ -1,24 +1,13 @@
 /* ==========================================================================
-   NER Safe — Landing Page Design System & Stylesheet
-   Follows DESIGN.md specifications & Reference Composition Exactly
+   NER Safe — Landing Page
+   Design system: Cohere-inspired flat/editorial system from DESIGN.md.
+   Structure: flat dark canvas, centered hero copy, a two-card hero-media
+   row (photo card + agent-console-style emergency card), then
+   rule-separated flat sections below. Mountain photo is now the
+   hero-photo-card's image rather than a full-viewport background.
    ========================================================================== */
 
-:root {
-  --ner-primary-navy: #123e57;
-  --ner-dark-green: #0c1f1b;
-  --ner-safe-green: #0a7d4c;
-  --ner-bright-green: #22c55e;
-  --ner-warning-orange: #e58925;
-  --ner-critical-red: #d02127;
-  --ner-purple: #7139af;
-  --ner-blue: #0a72d0;
-  --ner-white: #ffffff;
-  --ner-offwhite: #f8f8f8;
-  --ner-gray-light: #c6c7c4;
-  --ner-gray-muted: #53676c;
-  --ner-font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --ner-font-heading: 'Poppins', 'Inter', sans-serif;
-}
+/* Design tokens now live in index.css (global, shared with RiskMap page). */
 
 /* Reset and Global Setup */
 * {
@@ -28,78 +17,28 @@
 }
 
 body {
-  font-family: var(--ner-font-main);
-  background-color: #0b151a;
-  color: var(--ner-white);
-  overflow-x: hidden;
+  font-family: var(--font-body);
+  background-color: var(--c-canvas);
+  color: var(--c-white);
   -webkit-font-smoothing: antialiased;
 }
 
-/* --------------------------------------------------------------------------
-   Page Shell & Full-Screen Mountain Background
-   -------------------------------------------------------------------------- */
 .ner-landing-root {
-  position: relative;
   min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #0b171c;
-  overflow: hidden;
-}
-
-/* Mountain Image filling entire viewport */
-.ner-bg-mountain {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('/assets/ner-mountain-background.png');
-  background-size: cover;
-  background-position: center 30%;
-  background-repeat: no-repeat;
-  z-index: 1;
-}
-
-/* Subtle Vignette / Contrast Overlay to ensure 100% crisp typography */
-.ner-bg-vignette {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(
-    circle at 50% 40%,
-    rgba(10, 25, 35, 0.15) 0%,
-    rgba(8, 20, 28, 0.45) 80%,
-    rgba(4, 12, 18, 0.7) 100%
-  );
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* Foreground Content Wrapper */
-.ner-page-content {
-  position: relative;
-  z-index: 10;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  background-color: var(--c-canvas);
 }
 
 /* --------------------------------------------------------------------------
-   Header / Navigation Bar
+   Header / Navigation — flat, hairline-bordered three-zone bar
    -------------------------------------------------------------------------- */
 .ner-header {
   width: 100%;
-  height: 88px;
-  background: rgba(12, 38, 54, 0.78);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  height: 76px;
+  background: var(--c-canvas);
+  border-bottom: 1px solid var(--c-hairline);
   display: flex;
   align-items: center;
   position: sticky;
@@ -109,7 +48,7 @@ body {
 
 .ner-header-container {
   width: 100%;
-  max-width: 1480px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 32px;
   display: flex;
@@ -117,19 +56,18 @@ body {
   justify-content: space-between;
 }
 
-/* Brand / Logo */
 .ner-brand {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   text-decoration: none;
   cursor: pointer;
   user-select: none;
 }
 
 .ner-logo-icon {
-  width: 44px;
-  height: 36px;
+  width: 36px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,7 +76,6 @@ body {
 .ner-logo-icon svg {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 2px 6px rgba(0, 229, 153, 0.4));
 }
 
 .ner-brand-text {
@@ -147,19 +84,18 @@ body {
 }
 
 .ner-brand-title {
-  font-family: var(--ner-font-heading);
-  font-size: 22px;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
   letter-spacing: -0.3px;
-  color: var(--ner-white);
+  color: var(--c-white);
   line-height: 1.1;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .ner-brand-tagline {
   font-size: 11px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.85);
+  font-weight: 400;
+  color: var(--c-slate);
   letter-spacing: 0.2px;
 }
 
@@ -167,27 +103,28 @@ body {
 .ner-nav {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 36px;
 }
 
 .ner-nav-link {
   position: relative;
-  font-size: 14px;
+  font-family: var(--font-body);
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--c-muted);
   text-decoration: none;
-  padding: 8px 4px;
+  padding: 8px 2px;
   transition: color 0.2s ease;
 }
 
 .ner-nav-link:hover {
-  color: #ffffff;
+  color: var(--c-white);
 }
 
 .ner-nav-link.active {
-  color: #ffffff;
+  color: var(--c-white);
 }
 
 .ner-active-indicator {
@@ -195,59 +132,9 @@ body {
   bottom: -2px;
   left: 0;
   width: 100%;
-  height: 3.5px;
-  background: #2cd3b5;
-  border-radius: 9999px;
-  box-shadow: 0 0 10px rgba(44, 211, 181, 0.7);
-}
-
-/* Auth Buttons */
-.ner-auth-desktop {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.ner-btn-login {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(6px);
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 9px 24px;
-  border-radius: 9999px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.ner-btn-login:hover {
-  background: rgba(255, 255, 255, 0.22);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-1px);
-}
-
-.ner-btn-signup {
-  background: #a6f4c5;
-  color: #0c3322;
-  font-size: 14px;
-  font-weight: 700;
-  border: none;
-  padding: 9px 26px;
-  border-radius: 9999px;
-  cursor: pointer;
-  box-shadow: 0 3px 12px rgba(166, 244, 197, 0.35);
-  transition: all 0.2s ease;
-}
-
-.ner-btn-signup:hover {
-  background: #86efac;
-  box-shadow: 0 4px 16px rgba(134, 239, 172, 0.5);
-  transform: translateY(-1px);
-}
-
-.ner-auth-mobile {
-  display: none;
+  height: 2px;
+  background: var(--c-coral);
+  border-radius: var(--r-full);
 }
 
 .ner-menu-toggle {
@@ -259,56 +146,28 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   Main Content Layout (Hero Left + Emergency Right)
+   Main content
    -------------------------------------------------------------------------- */
-.ner-main-viewport {
+.ner-main {
   flex: 1;
   display: flex;
-  align-items: center;
-  padding: 24px 0 16px;
-}
-
-.ner-main-container {
-  width: 100%;
-  max-width: 1480px;
-  margin: 0 auto;
-  padding: 0 32px;
-  display: grid;
-  grid-template-columns: 1.4fr 0.95fr;
-  gap: 42px;
-  align-items: start;
+  flex-direction: column;
 }
 
 /* --------------------------------------------------------------------------
-   Left Hero Section
+   Hero copy — centered, monumental, flat canvas
    -------------------------------------------------------------------------- */
-.ner-hero-section {
+.ner-hero-copy {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 88px 32px 40px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 22px;
 }
 
-.ner-hero-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-/* Main Heading */
-.ner-hero-heading {
-  font-family: var(--ner-font-heading);
-  font-size: 40px;
-  font-weight: 800;
-  line-height: 1.18;
-  color: #ffffff;
-  letter-spacing: -0.5px;
-  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.7), 0 1px 3px rgba(0, 0, 0, 0.8);
-}
-
-.ner-heading-break {
-  display: block;
-}
-
-/* Motto Pill */
 .ner-motto-wrapper {
   display: flex;
   align-items: center;
@@ -317,133 +176,56 @@ body {
 .ner-motto-pill {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  background: rgba(255, 255, 255, 0.16);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 6px 22px;
-  border-radius: 9999px;
-  font-size: 14px;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 13px;
   font-weight: 600;
-  color: #ffffff;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
-  letter-spacing: 0.3px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--c-coral);
 }
 
 .ner-motto-dot {
-  color: #2cd3b5;
-  font-size: 16px;
+  color: var(--c-hairline);
+  font-size: 12px;
   line-height: 1;
 }
 
-/* --------------------------------------------------------------------------
-   Three Phase Cards (Pre, During, Post)
-   -------------------------------------------------------------------------- */
-.ner-phase-cards-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-top: 4px;
-}
-
-.ner-phase-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px 18px;
-  border-radius: 16px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
-}
-
-.ner-phase-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.38);
-}
-
-/* Pre-Landslide: Deep Emerald Green */
-.ner-phase-pre {
-  background: linear-gradient(135deg, rgba(10, 125, 76, 0.92) 0%, rgba(6, 92, 55, 0.92) 100%);
-  border-color: rgba(74, 222, 128, 0.4);
-}
-
-/* During-Landslide: Warm Amber/Orange */
-.ner-phase-during {
-  background: linear-gradient(135deg, rgba(229, 137, 37, 0.92) 0%, rgba(194, 107, 13, 0.92) 100%);
-  border-color: rgba(251, 191, 36, 0.4);
-}
-
-/* Post-Landslide: Rich Royal Purple */
-.ner-phase-post {
-  background: linear-gradient(135deg, rgba(113, 57, 175, 0.92) 0%, rgba(88, 38, 143, 0.92) 100%);
-  border-color: rgba(192, 132, 252, 0.4);
-}
-
-.ner-phase-icon-box {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-}
-
-.ner-phase-icon {
-  color: #ffffff;
-}
-
-.ner-phase-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.ner-phase-title {
-  font-family: var(--ner-font-heading);
-  font-size: 15px;
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1.2;
-}
-
-.ner-phase-subtext {
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.88);
-  line-height: 1.2;
+.ner-hero-heading {
+  font-family: var(--font-display);
+  font-size: 52px;
+  font-weight: 500;
+  line-height: 1.08;
+  color: var(--c-white);
+  letter-spacing: -1.2px;
 }
 
 /* --------------------------------------------------------------------------
-   Search Risk Card
+   Risk search — rounded white form card (contact-form-card pattern)
    -------------------------------------------------------------------------- */
 .ner-search-card {
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 20px 24px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
-  margin-top: 6px;
+  width: 100%;
+  max-width: 560px;
+  background: var(--c-white);
+  border-radius: var(--r-md);
+  border: 1px solid var(--c-card-border);
+  padding: 20px 22px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
 }
 
 .ner-search-title {
-  font-family: var(--ner-font-heading);
-  font-size: 17px;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
   color: #111827;
   margin-bottom: 12px;
+  text-align: left;
 }
 
 .ner-search-form {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .ner-search-input-wrapper {
@@ -464,11 +246,11 @@ body {
   width: 100%;
   height: 46px;
   padding: 0 16px 0 44px;
-  border-radius: 10px;
-  border: 1.5px solid #d1d5db;
+  border-radius: var(--r-xs);
+  border: 1px solid #d1d5db;
   background-color: #f9fafb;
   font-size: 14px;
-  font-family: var(--ner-font-main);
+  font-family: var(--font-body);
   color: #111827;
   outline: none;
   transition: all 0.2s ease;
@@ -479,160 +261,192 @@ body {
 }
 
 .ner-search-input:focus {
-  border-color: #0a7d4c;
+  border-color: var(--c-ink);
   background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(10, 125, 76, 0.15);
+  box-shadow: 0 0 0 3px rgba(23, 23, 28, 0.1);
 }
 
 .ner-btn-get-details {
   height: 46px;
   padding: 0 24px;
-  background: #09683f;
+  background: var(--c-ink);
   color: #ffffff;
-  font-family: var(--ner-font-main);
+  font-family: var(--font-body);
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   border: none;
-  border-radius: 10px;
+  border-radius: var(--r-pill);
   cursor: pointer;
   white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(9, 104, 63, 0.35);
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .ner-btn-get-details:hover {
-  background: #075231;
-  box-shadow: 0 6px 16px rgba(9, 104, 63, 0.45);
+  background: #2a2a33;
   transform: translateY(-1px);
 }
 
 /* --------------------------------------------------------------------------
-   Incident Reporting & Feature Tags
+   Hero media — two-card composition (photo card + emergency console card)
    -------------------------------------------------------------------------- */
-.ner-hero-actions-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-top: 4px;
-  flex-wrap: wrap;
+.ner-hero-media {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 8px 32px 72px;
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 24px;
+  align-items: stretch;
 }
 
-.ner-report-incident-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  background: rgba(14, 30, 42, 0.78);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  padding: 8px 18px;
-  border-radius: 9999px;
-  color: #ffffff;
-  font-size: 13.5px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  transition: all 0.2s ease;
+.ner-hero-photo-card {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  min-height: 480px;
+  background-image: url('/assets/ner-mountain-background.png');
+  background-size: cover;
+  background-position: center 32%;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
-.ner-report-incident-btn:hover {
-  background: rgba(20, 45, 62, 0.9);
-  border-color: rgba(255, 255, 255, 0.45);
-  transform: translateY(-1px);
-}
-
-.ner-report-icon {
-  color: #38bdf8;
-}
-
-.ner-feature-tags {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(8, 22, 18, 0.78);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  padding: 6px 18px;
-  border-radius: 9999px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-}
-
-.ner-feature-tag {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #e2e8f0;
-}
-
-.ner-tag-badge {
-  background: #10b981;
-  color: #ffffff;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  font-size: 11px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.ner-tag-icon {
-  color: #34d399;
-}
-
-.ner-feature-divider {
-  width: 1px;
-  height: 14px;
-  background: rgba(255, 255, 255, 0.25);
+.ner-hero-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(4, 10, 8, 0.55) 100%);
+  pointer-events: none;
 }
 
 /* --------------------------------------------------------------------------
-   Right Emergency Help Panel
+   Phase strip — Pre / During / Post, flat bordered row
    -------------------------------------------------------------------------- */
-.ner-emergency-panel {
-  display: flex;
-  flex-direction: column;
+.ner-phase-section {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px 72px;
 }
 
-.ner-emergency-panel-glass {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1.5px solid rgba(255, 255, 255, 0.85);
-  border-radius: 24px;
-  padding: 20px;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
-  display: flex;
-  flex-direction: column;
+.ner-phase-cards-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 
-/* Red Emergency Header */
-.ner-emergency-header-box {
-  background: linear-gradient(135deg, #d02127 0%, #b3161c 100%);
-  border-radius: 16px;
-  padding: 12px 18px;
+.ner-phase-card {
   display: flex;
   align-items: center;
   gap: 14px;
-  box-shadow: 0 6px 18px rgba(208, 33, 39, 0.35);
+  padding: 18px 20px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--c-hairline);
+  background: var(--c-canvas-alt);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
 }
 
-.ner-emergency-header-icon-circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.22);
+.ner-phase-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.ner-phase-icon-box {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r-full);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.ner-phase-pre .ner-phase-icon-box {
+  background: rgba(10, 125, 76, 0.18);
+}
+
+.ner-phase-during .ner-phase-icon-box {
+  background: rgba(229, 137, 37, 0.18);
+}
+
+.ner-phase-post .ner-phase-icon-box {
+  background: rgba(113, 57, 175, 0.22);
+}
+
+.ner-phase-pre .ner-phase-icon {
+  color: #4ade80;
+}
+
+.ner-phase-during .ner-phase-icon {
+  color: #fbbf24;
+}
+
+.ner-phase-post .ner-phase-icon {
+  color: #c084fc;
+}
+
+.ner-phase-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ner-phase-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--c-white);
+  line-height: 1.2;
+}
+
+.ner-phase-subtext {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--c-muted);
+  line-height: 1.2;
+}
+
+/* --------------------------------------------------------------------------
+   Right Emergency Card — agent-console-style, on white for legibility
+   -------------------------------------------------------------------------- */
+.ner-emergency-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ner-emergency-panel-glass {
+  background: var(--c-white);
+  border: 1px solid var(--c-card-border);
+  border-radius: var(--r-lg);
+  padding: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+/* Red Emergency Header */
+.ner-emergency-header-box {
+  background: var(--ner-critical-red);
+  border-radius: var(--r-md);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ner-emergency-header-icon-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--r-full);
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .ner-emergency-header-text {
@@ -641,17 +455,17 @@ body {
 }
 
 .ner-emergency-header-title {
-  font-family: var(--ner-font-heading);
-  font-size: 19px;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
   color: #ffffff;
   line-height: 1.2;
 }
 
 .ner-emergency-header-subtitle {
-  font-size: 11.5px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.92);
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
   line-height: 1.2;
 }
 
@@ -660,7 +474,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 18px;
   padding: 8px 12px;
   text-decoration: none;
   cursor: pointer;
@@ -672,15 +486,13 @@ body {
 }
 
 .ner-phone-icon-circle {
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+  border-radius: var(--r-full);
   background: #fee2e2;
-  border: 2px solid #fca5a5;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.2);
 }
 
 .ner-112-text-group {
@@ -690,10 +502,10 @@ body {
 }
 
 .ner-112-number {
-  font-family: var(--ner-font-heading);
-  font-size: 54px;
-  font-weight: 900;
-  color: #d02127;
+  font-family: var(--font-display);
+  font-size: 46px;
+  font-weight: 700;
+  color: var(--ner-critical-red);
   line-height: 1;
   letter-spacing: -1px;
 }
@@ -704,16 +516,16 @@ body {
 }
 
 .ner-112-label-primary {
-  font-family: var(--ner-font-heading);
-  font-size: 14px;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
   color: #1f2937;
   line-height: 1.2;
 }
 
 .ner-112-label-secondary {
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 400;
   color: #6b7280;
   line-height: 1.2;
 }
@@ -731,28 +543,27 @@ body {
   align-items: center;
   justify-content: center;
   padding: 12px 6px;
-  border-radius: 12px;
+  border-radius: var(--r-sm);
   text-decoration: none;
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .ner-emergency-service-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  opacity: 0.92;
 }
 
 .ner-service-police {
-  background: #0a72d0;
+  background: var(--c-blue);
 }
 
 .ner-service-ambulance {
-  background: #0a7d4c;
+  background: var(--ner-safe-green);
 }
 
 .ner-service-disaster {
-  background: #e58925;
+  background: var(--ner-warning-orange);
 }
 
 .ner-service-icon-wrap {
@@ -760,15 +571,15 @@ body {
 }
 
 .ner-service-name {
-  font-size: 12.5px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 600;
   text-align: center;
   line-height: 1.15;
 }
 
 .ner-service-num {
-  font-size: 13.5px;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 700;
   margin-top: 2px;
 }
 
@@ -787,9 +598,9 @@ body {
 }
 
 .ner-quick-access-title {
-  font-family: var(--ner-font-heading);
-  font-size: 14px;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
   color: #1f2937;
 }
 
@@ -802,7 +613,7 @@ body {
 .ner-quick-card {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
-  border-radius: 14px;
+  border-radius: var(--r-md);
   padding: 12px 8px;
   display: flex;
   flex-direction: column;
@@ -815,13 +626,12 @@ body {
 .ner-quick-card:hover {
   background: #ffffff;
   border-color: #cbd5e1;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .ner-quick-icon-box {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--r-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -840,51 +650,49 @@ body {
 }
 
 .ner-quick-title {
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11.5px;
+  font-weight: 600;
   color: #1f2937;
   line-height: 1.2;
-  min-height: 28px;
+  min-height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.ner-quick-link {
-  font-size: 11.5px;
-  font-weight: 600;
-  color: #0284c7;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.ner-quick-link:hover {
-  text-decoration: underline;
 }
 
 /* Safety Strip */
 .ner-safety-strip {
   text-align: center;
-  padding: 4px 0 0;
+  padding: 2px 0 0;
 }
 
 .ner-safety-text {
-  font-size: 12.5px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 600;
   color: #065f46;
   letter-spacing: 0.2px;
 }
 
 /* --------------------------------------------------------------------------
-   Bottom NER States Strip
+   NER States strip — trust-logo-strip pattern (footer)
    -------------------------------------------------------------------------- */
 .ner-states-bar {
   width: 100%;
-  padding: 16px 24px 20px;
+  border-top: 1px solid var(--c-hairline-soft);
+  padding: 32px 24px 40px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  z-index: 15;
+  gap: 14px;
+}
+
+.ner-states-eyebrow {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--c-slate);
 }
 
 .ner-states-container {
@@ -896,28 +704,26 @@ body {
 }
 
 .ner-state-item {
-  font-size: 14px;
-  font-weight: 600;
-  color: #ffffff;
-  letter-spacing: 0.5px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8), 0 1px 2px rgba(0, 0, 0, 0.9);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--c-muted);
+  letter-spacing: 0.3px;
 }
 
 .ner-state-separator {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--c-hairline);
   font-size: 12px;
 }
 
 /* --------------------------------------------------------------------------
    Responsive Breakpoints
    -------------------------------------------------------------------------- */
-@media (max-width: 1200px) {
-  .ner-main-container {
+@media (max-width: 1024px) {
+  .ner-hero-media {
     grid-template-columns: 1fr;
-    gap: 36px;
   }
-  .ner-hero-heading {
-    font-size: 34px;
+  .ner-hero-photo-card {
+    min-height: 320px;
   }
 }
 
@@ -928,32 +734,33 @@ body {
   .ner-nav {
     display: none;
     position: absolute;
-    top: 88px;
+    top: 76px;
     left: 0;
     width: 100%;
-    background: rgba(12, 38, 54, 0.96);
-    backdrop-filter: blur(20px);
+    background: var(--c-canvas);
     flex-direction: column;
     padding: 24px;
     gap: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid var(--c-hairline);
   }
   .ner-nav-open {
     display: flex;
   }
-  .ner-auth-desktop {
-    display: none;
-  }
-  .ner-auth-mobile {
-    display: flex;
-    gap: 12px;
-    margin-top: 10px;
-  }
   .ner-menu-toggle {
     display: block;
   }
+  .ner-hero-copy {
+    padding: 56px 20px 32px;
+  }
   .ner-hero-heading {
-    font-size: 28px;
+    font-size: 32px;
+    letter-spacing: -0.6px;
+  }
+  .ner-hero-media {
+    padding: 8px 20px 48px;
+  }
+  .ner-phase-section {
+    padding: 0 20px 48px;
   }
   .ner-phase-cards-row {
     grid-template-columns: 1fr;
@@ -963,10 +770,6 @@ body {
   }
   .ner-btn-get-details {
     width: 100%;
-  }
-  .ner-hero-actions-container {
-    flex-direction: column;
-    align-items: flex-start;
   }
   .ner-states-container {
     gap: 12px;
