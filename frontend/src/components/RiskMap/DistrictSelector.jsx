@@ -13,6 +13,8 @@ export default function DistrictSelector({
   onToggleBoundary,
   showHistorical,
   onToggleHistorical,
+  showFlood,
+  onToggleFlood,
   basemapType,
   onChangeBasemap,
 }) {
@@ -20,10 +22,10 @@ export default function DistrictSelector({
     <div className="map-floating-panel">
       <div className="panel-header">
         <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <Layers size={14} color="#00E599" />
+          <Layers size={14} color="var(--c-coral)" />
           Map Controls
         </span>
-        <span style={{ fontSize: 11, color: '#64748B' }}>500m Grid</span>
+        <span style={{ fontSize: 11, color: 'var(--c-slate)' }}>500m Grid</span>
       </div>
 
       {/* Layer Visibility Toggles */}
@@ -52,6 +54,15 @@ export default function DistrictSelector({
             type="checkbox"
             checked={showHistorical}
             onChange={(e) => onToggleHistorical(e.target.checked)}
+          />
+        </label>
+
+        <label className="layer-toggle-row">
+          <span>Flash-Flood Susceptibility (Static)</span>
+          <input
+            type="checkbox"
+            checked={showFlood}
+            onChange={(e) => onToggleFlood(e.target.checked)}
           />
         </label>
       </div>

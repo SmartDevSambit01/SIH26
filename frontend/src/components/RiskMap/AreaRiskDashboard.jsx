@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ShieldAlert, AlertTriangle, Layers, Info, CheckCircle2, XCircle, Database } from 'lucide-react';
+import { X, ShieldAlert, AlertTriangle, Layers, Info, CheckCircle2, XCircle, Database, Cpu } from 'lucide-react';
 
 export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
   const [areaDetail, setAreaDetail] = useState(null);
@@ -7,10 +7,30 @@ export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
   const [cellsData, setCellsData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [aiExplanation, setAiExplanation] = useState(null);
 
   useEffect(() => {
     if (!areaId) return;
     loadAreaData(areaId);
+
+    setAiExplanation(null);
+    const hosts = [
+      import.meta.env.VITE_API_URL || '',
+      'http://127.0.0.1:8000',
+      'http://localhost:8000'
+    ];
+    (async () => {
+      for (const host of hosts) {
+        try {
+          const res = await fetch(`${host}/api/areas/${areaId}/ai-explanation`);
+          if (res.ok) {
+            setAiExplanation(await res.json());
+            return;
+          }
+        } catch (err) { /* try next host */ }
+      }
+      setAiExplanation({ status: 'AI_UNAVAILABLE', notice: 'Unable to reach AI narrative service.' });
+    })();
   }, [areaId]);
 
   const loadAreaData = async (aid) => {
@@ -73,11 +93,11 @@ export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
     return (
       <div className="area-risk-dashboard-drawer" style={{
         position: 'absolute', top: 0, right: 0, width: '420px', height: '100%',
-        background: 'rgba(15, 23, 42, 0.98)', backdropFilter: 'blur(16px)',
-        borderLeft: '1px solid rgba(255, 255, 255, 0.12)', zIndex: 950, padding: '24px',
+        background: 'rgba(10, 21, 18, 0.98)', backdropFilter: 'blur(10px)',
+        borderLeft: '1px solid var(--c-hairline)', zIndex: 950, padding: '24px',
         color: '#F8FAFC', display: 'flex', alignItems: 'center', justifyContent: 'center'
       }}>
-        <div style={{ textAlign: 'center', color: '#38BDF8' }}>
+        <div style={{ textAlign: 'center', color: 'var(--c-blue)' }}>
           <Layers className="animate-spin" size={32} style={{ margin: '0 auto 12px' }} />
           <div>Loading Area Risk Dashboard...</div>
         </div>
@@ -89,8 +109,8 @@ export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
     return (
       <div className="area-risk-dashboard-drawer" style={{
         position: 'absolute', top: 0, right: 0, width: '420px', height: '100%',
-        background: 'rgba(15, 23, 42, 0.98)', backdropFilter: 'blur(16px)',
-        borderLeft: '1px solid rgba(255, 255, 255, 0.12)', zIndex: 950, padding: '24px',
+        background: 'rgba(10, 21, 18, 0.98)', backdropFilter: 'blur(10px)',
+        borderLeft: '1px solid var(--c-hairline)', zIndex: 950, padding: '24px',
         color: '#F8FAFC'
       }}>
         <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#94A3B8', cursor: 'pointer', float: 'right' }}>
@@ -108,29 +128,29 @@ export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
   return (
     <div className="area-risk-dashboard-drawer" style={{
       position: 'absolute', top: 0, right: 0, width: '440px', height: '100%',
-      background: 'rgba(11, 17, 32, 0.97)', backdropFilter: 'blur(20px)',
-      borderLeft: '1px solid rgba(56, 189, 248, 0.25)', zIndex: 950,
+      background: 'rgba(10, 21, 18, 0.97)', backdropFilter: 'blur(12px)',
+      borderLeft: '1px solid rgba(255, 119, 89, 0.25)', zIndex: 950,
       display: 'flex', flexDirection: 'column', color: '#F8FAFC',
-      boxShadow: '-8px 0 32px rgba(0,0,0,0.5)', overflowY: 'auto'
+      boxShadow: '-4px 0 20px rgba(0,0,0,0.35)', overflowY: 'auto'
     }}>
       {/* Header */}
       <div style={{
-        padding: '20px 24px', borderBottom: '1px solid rgba(255,255,255,0.08)',
-        background: 'rgba(30, 41, 59, 0.5)', position: 'sticky', top: 0, zIndex: 10
+        padding: '20px 24px', borderBottom: '1px solid var(--c-hairline-soft)',
+        background: 'rgba(14, 31, 25, 0.5)', position: 'sticky', top: 0, zIndex: 10
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <div>
-            <div style={{ fontSize: '11px', fontWeight: 600, color: '#38BDF8', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+            <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--c-blue)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
               Area / Locality Risk Intelligence
             </div>
-            <h2 style={{ margin: '4px 0 0', fontSize: '20px', fontWeight: 700, color: '#FFFFFF' }}>
+            <h2 style={{ margin: '4px 0 0', fontSize: '20px', fontWeight: 700, color: '#FFFFFF', fontFamily: 'var(--font-display)' }}>
               📍 {riskSummary.area_name}
             </h2>
           </div>
           <button
             onClick={onClose}
             style={{
-              background: 'rgba(255,255,255,0.08)', border: 'none', borderRadius: '6px',
+              background: 'rgba(255,255,255,0.08)', border: 'none', borderRadius: 'var(--r-sm)',
               color: '#94A3B8', cursor: 'pointer', padding: '6px'
             }}
             title="Return to District View"
@@ -152,7 +172,7 @@ export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
 
         {/* Warning Disclaimer */}
         <div style={{
-          padding: '12px 14px', borderRadius: '8px', background: 'rgba(245, 158, 11, 0.10)',
+          padding: '12px 14px', borderRadius: 'var(--r-sm)', background: 'rgba(245, 158, 11, 0.10)',
           border: '1px solid rgba(245, 158, 11, 0.30)', color: '#FCD34D', fontSize: '12px',
           display: 'flex', alignItems: 'center', gap: '10px'
         }}>
@@ -162,35 +182,35 @@ export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
 
         {/* Baseline Susceptibility Card */}
         <div style={{
-          background: 'rgba(30, 41, 59, 0.6)', borderRadius: '12px', padding: '16px',
-          border: '1px solid rgba(255, 255, 255, 0.10)'
+          background: 'rgba(14, 31, 25, 0.6)', borderRadius: 'var(--r-md)', padding: '16px',
+          border: '1px solid var(--c-hairline-soft)'
         }}>
           <div style={{ fontSize: '12px', fontWeight: 600, color: '#94A3B8', textTransform: 'uppercase', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <ShieldAlert size={14} style={{ color: '#38BDF8' }} />
+            <ShieldAlert size={14} style={{ color: 'var(--c-blue)' }} />
             <span>Baseline Susceptibility</span>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px', marginBottom: '16px' }}>
-            <div style={{ background: 'rgba(15, 23, 42, 0.7)', padding: '10px', borderRadius: '8px', textAlign: 'center' }}>
+            <div style={{ background: 'rgba(10, 21, 18, 0.7)', padding: '10px', borderRadius: 'var(--r-sm)', textAlign: 'center' }}>
               <div style={{ fontSize: '11px', color: '#94A3B8' }}>Dominant Class</div>
               <div style={{
-                fontSize: '13px', fontWeight: 700, marginTop: '4px',
+                fontSize: '13px', fontWeight: 700, marginTop: '4px', fontFamily: 'var(--font-display)',
                 color: getRiskBadgeColor(riskSummary.dominant_class)
               }}>
                 {riskSummary.dominant_class || 'N/A'}
               </div>
             </div>
 
-            <div style={{ background: 'rgba(15, 23, 42, 0.7)', padding: '10px', borderRadius: '8px', textAlign: 'center' }}>
+            <div style={{ background: 'rgba(10, 21, 18, 0.7)', padding: '10px', borderRadius: 'var(--r-sm)', textAlign: 'center' }}>
               <div style={{ fontSize: '11px', color: '#94A3B8' }}>Maximum TSI</div>
-              <div style={{ fontSize: '16px', fontWeight: 700, color: '#F8FAFC', marginTop: '2px' }}>
+              <div style={{ fontSize: '16px', fontWeight: 700, color: '#F8FAFC', marginTop: '2px', fontFamily: 'var(--font-display)' }}>
                 {riskSummary.max_tsi !== null ? riskSummary.max_tsi : 'N/A'}
               </div>
             </div>
 
-            <div style={{ background: 'rgba(15, 23, 42, 0.7)', padding: '10px', borderRadius: '8px', textAlign: 'center' }}>
+            <div style={{ background: 'rgba(10, 21, 18, 0.7)', padding: '10px', borderRadius: 'var(--r-sm)', textAlign: 'center' }}>
               <div style={{ fontSize: '11px', color: '#94A3B8' }}>Total Cells</div>
-              <div style={{ fontSize: '16px', fontWeight: 700, color: '#38BDF8', marginTop: '2px' }}>
+              <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--c-blue)', marginTop: '2px', fontFamily: 'var(--font-display)' }}>
                 {riskSummary.cell_count}
               </div>
             </div>
@@ -206,8 +226,8 @@ export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
                 {Object.entries(riskSummary.class_distribution).map(([cls, pct]) => (
                   <div key={cls} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px' }}>
                     <span style={{ width: '75px', color: getRiskBadgeColor(cls), fontWeight: 600 }}>{cls}</span>
-                    <div style={{ flex: 1, height: '6px', background: 'rgba(255,255,255,0.1)', borderRadius: '3px', overflow: 'hidden' }}>
-                      <div style={{ width: `${pct}%`, height: '100%', background: getRiskBadgeColor(cls), borderRadius: '3px' }} />
+                    <div style={{ flex: 1, height: '6px', background: 'rgba(255,255,255,0.1)', borderRadius: 'var(--r-xs)', overflow: 'hidden' }}>
+                      <div style={{ width: `${pct}%`, height: '100%', background: getRiskBadgeColor(cls), borderRadius: 'var(--r-xs)' }} />
                     </div>
                     <span style={{ width: '40px', textAlign: 'right', color: '#94A3B8' }}>{pct}%</span>
                   </div>
@@ -217,10 +237,50 @@ export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
           )}
         </div>
 
+        {/* AI Narrative Summary (LLM-generated, grounded only in the real data above) */}
+        <div style={{
+          background: 'rgba(24, 99, 220, 0.06)', borderRadius: 'var(--r-md)', padding: '16px',
+          border: '1px solid rgba(24, 99, 220, 0.2)'
+        }}>
+          <div style={{ fontSize: '12px', fontWeight: 600, color: '#94A3B8', textTransform: 'uppercase', marginBottom: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <Cpu size={14} style={{ color: 'var(--c-blue)' }} />
+              <span>AI Risk Narrative</span>
+            </span>
+            {aiExplanation?.recommended_action && (
+              <span style={{
+                fontSize: '10px', padding: '3px 8px', borderRadius: 'var(--r-xs)',
+                background: 'rgba(24, 99, 220, 0.2)', color: 'var(--c-blue)', border: '1px solid rgba(24, 99, 220, 0.4)'
+              }}>
+                {aiExplanation.recommended_action.replace(/_/g, ' ')}
+              </span>
+            )}
+          </div>
+
+          {aiExplanation === null ? (
+            <div style={{ fontSize: '12px', color: '#94A3B8' }}>Loading AI summary…</div>
+          ) : aiExplanation.status === 'AVAILABLE' ? (
+            <>
+              <div style={{ fontSize: '13px', color: '#F1F5F9', lineHeight: 1.5 }}>
+                {aiExplanation.explanation}
+              </div>
+              {aiExplanation.action_reason && (
+                <div style={{ fontSize: '11px', color: '#94A3B8', marginTop: '8px', fontStyle: 'italic' }}>
+                  {aiExplanation.action_reason}
+                </div>
+              )}
+            </>
+          ) : (
+            <div style={{ fontSize: '12px', color: '#F59E0B' }}>
+              {aiExplanation.notice || 'Unavailable — AI narrative service not reachable.'}
+            </div>
+          )}
+        </div>
+
         {/* Historical Evidence Card */}
         <div style={{
-          background: 'rgba(30, 41, 59, 0.6)', borderRadius: '12px', padding: '16px',
-          border: '1px solid rgba(255, 255, 255, 0.10)'
+          background: 'rgba(14, 31, 25, 0.6)', borderRadius: 'var(--r-md)', padding: '16px',
+          border: '1px solid var(--c-hairline-soft)'
         }}>
           <div style={{ fontSize: '12px', fontWeight: 600, color: '#94A3B8', textTransform: 'uppercase', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '6px' }}>
             <Database size={14} style={{ color: '#F59E0B' }} />
@@ -250,7 +310,7 @@ export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
               Verified Event IDs: {riskSummary.historical_event_ids.map(id => (
                 <span key={id} style={{
                   padding: '2px 6px', background: 'rgba(239, 68, 68, 0.2)', border: '1px solid rgba(239, 68, 68, 0.4)',
-                  borderRadius: '4px', color: '#FCA5A5', marginRight: '6px', fontSize: '11px', fontFamily: 'monospace'
+                  borderRadius: 'var(--r-xs)', color: '#FCA5A5', marginRight: '6px', fontSize: '11px', fontFamily: 'monospace'
                 }}>
                   {id}
                 </span>
@@ -261,12 +321,12 @@ export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
 
         {/* Associated 500m Analysis Cells */}
         <div style={{
-          background: 'rgba(30, 41, 59, 0.6)', borderRadius: '12px', padding: '16px',
-          border: '1px solid rgba(255, 255, 255, 0.10)'
+          background: 'rgba(14, 31, 25, 0.6)', borderRadius: 'var(--r-md)', padding: '16px',
+          border: '1px solid var(--c-hairline-soft)'
         }}>
           <div style={{ fontSize: '12px', fontWeight: 600, color: '#94A3B8', textTransform: 'uppercase', marginBottom: '10px', display: 'flex', justifyContent: 'space-between' }}>
             <span>Associated 500m Grid Cells</span>
-            <span style={{ color: '#38BDF8' }}>{cellsData?.total_cells || 0} Cells</span>
+            <span style={{ color: 'var(--c-blue)' }}>{cellsData?.total_cells || 0} Cells</span>
           </div>
 
           <div style={{ maxHeight: '160px', overflowY: 'auto', display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -275,7 +335,7 @@ export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
                 key={c.cell_id}
                 onClick={() => onSelectCell && onSelectCell(c.cell_id)}
                 style={{
-                  padding: '4px 8px', borderRadius: '4px', background: 'rgba(15, 23, 42, 0.8)',
+                  padding: '4px 8px', borderRadius: 'var(--r-xs)', background: 'rgba(10, 21, 18, 0.8)',
                   border: `1px solid ${getRiskBadgeColor(c.tsi_class)}40`, color: '#F1F5F9',
                   fontSize: '11px', cursor: 'pointer', fontFamily: 'monospace'
                 }}
@@ -289,30 +349,25 @@ export default function AreaRiskDashboard({ areaId, onClose, onSelectCell }) {
 
         {/* Dynamic Data Feeds Status (Truthful Non-Fabricated Status) */}
         <div style={{
-          background: 'rgba(30, 41, 59, 0.6)', borderRadius: '12px', padding: '16px',
-          border: '1px solid rgba(255, 255, 255, 0.10)'
+          background: 'rgba(14, 31, 25, 0.6)', borderRadius: 'var(--r-md)', padding: '16px',
+          border: '1px solid var(--c-hairline-soft)'
         }}>
           <div style={{ fontSize: '12px', fontWeight: 600, color: '#94A3B8', textTransform: 'uppercase', marginBottom: '10px' }}>
             Dynamic Real-Time Sensors
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-              <span style={{ color: '#CBD5E1' }}>GPM Rainfall:</span>
-              <span style={{ color: '#34D399', fontSize: '11px' }}>AVAILABLE — Real NASA GPM data (2026-09-18, ~10 km resolution)</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-              <span style={{ color: '#CBD5E1' }}>SMAP Soil Moisture:</span>
-              <span style={{ color: '#FDE047', fontSize: '11px' }}>STALE — Real observations available (2026-09-15), latency exceeded threshold</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-              <span style={{ color: '#CBD5E1' }}>Sentinel-1 SAR:</span>
-              <span style={{ color: '#F59E0B', fontSize: '11px' }}>Unavailable — external authentication/download pending</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0' }}>
-              <span style={{ color: '#CBD5E1' }}>Flood Hydrodynamics:</span>
-              <span style={{ color: '#F59E0B', fontSize: '11px' }}>Unavailable</span>
-            </div>
+            {['rainfall', 'soil_moisture', 'sentinel1', 'flood'].map((key) => {
+              const labels = { rainfall: 'GPM Rainfall', soil_moisture: 'SMAP Soil Moisture', sentinel1: 'Sentinel-1 SAR', flood: 'Flood Hydrodynamics' };
+              const text = riskSummary.dynamic_status?.[key] || 'Status unavailable';
+              const color = text.toUpperCase().startsWith('AVAILABLE') ? '#34D399' : text.toUpperCase().startsWith('STALE') ? '#FDE047' : '#F59E0B';
+              return (
+                <div key={key} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid var(--c-hairline-soft)' }}>
+                  <span style={{ color: '#CBD5E1' }}>{labels[key]}:</span>
+                  <span style={{ color, fontSize: '11px', textAlign: 'right', maxWidth: '60%' }}>{text}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
 

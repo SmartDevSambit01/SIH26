@@ -1,1144 +1,256 @@
-# NER Safe — Landing Page Design Specification
-
-## 0. Purpose
-
-Recreate the supplied reference screenshot as closely as possible.
-
-**IMPORTANT:**
-- This document is a visual reproduction specification.
-- Do NOT redesign, modernize, simplify, rearrange, or "improve" the layout.
-- Do NOT invent additional sections, cards, buttons, animations, statistics, or content.
-- Match the reference screenshot's composition, proportions, spacing, typography hierarchy, colors, transparency, and visual density.
-- The screenshot is the single source of truth for the landing-page appearance.
-- If an implementation decision is necessary, choose the option that makes the rendered page look closest to the reference screenshot.
-- The final website should be a real responsive React page, not an image pasted as the entire webpage.
-- Use real HTML/CSS/React elements for text, buttons, cards, navigation, and search.
-
----
-
-# 1. Reference
-
-Reference image:
-`Screenshot 2026-09-15 203418(1).png`
-
-Reference image dimensions:
-**1513 × 980 px**
-
-The screenshot shows a desktop/tablet-style viewport with a cinematic Northeast India mountain landscape filling the page.
-
-The outer black rounded device/browser frame and top notch visible in the screenshot should be treated as presentation/mockup framing rather than part of the actual web application's content, unless the developer explicitly wants the frame reproduced in a demo mockup.
-
-The actual landing page begins at the top navigation/header and extends over the mountain background.
-
----
-
-# 2. Overall Visual Direction
-
-Brand:
-**NER Safe**
-
-Tagline:
-**Smarter Alerts. Safer Tomorrow.**
-
-Product:
-**AI-Powered Early Warning & Landslide Risk Monitoring System For North Eastern Region**
+## Overview
 
-Visual style:
-- Government/public-safety application
-- Disaster-management dashboard
-- Trustworthy
-- Modern
-- Professional
-- High-contrast
-- Futuristic but practical
-- Strong use of a real cinematic Northeast mountain landscape
-- Glassmorphism/translucent panels over the image
-- White typography over dark/transparent areas
-- Green, orange, purple, blue, and red status/action colors
+Cohere's current web presence feels like a sober enterprise AI command center with editorial restraint. The home page opens on a huge typographic declaration over a white canvas, then uses photography, dark product mockups, trust logos, and generous empty space to make AI infrastructure feel controlled rather than speculative. Product pages invert the tone into deep green-black or dark navy bands, while blog and research pages move toward publishing-system clarity: large filters, thin rules, dense lists, and pale technical backgrounds.
 
-Do not turn this into a generic SaaS landing page.
+What makes the system distinctive is the mix of austere black-and-white UI with bursts of tactile brand imagery. The site avoids decorative chrome in the normal interface; color arrives through photography, abstract 3D media, coral blog taxonomy chips, blue research links, and dark product environments. Cards are rounded but not cute. Type is large, tight, and almost monospaced in spirit, creating a research-lab cadence across marketing, product, and editorial surfaces.
 
----
-
-# 3. Page Structure
+**Key Characteristics:**
 
-The page is one full-screen landing/hero view.
+- Monumental display headlines with very tight line height and negative tracking.
+- White editorial canvases interrupted by deep green, dark navy, and image-led CTA bands.
+- Rounded media cards and product cards, usually 8px to 22px.
+- Pill CTAs in near-black or white, with most secondary actions rendered as underlined text links.
+- Trust-logo strips with monochrome partner marks and very wide vertical spacing.
+- Agent-console mockups using dark panels, small status chips, and product integration badges.
+- Blog and research surfaces with prominent taxonomy chips, long rule-separated lists, and search fields.
 
-High-level structure:
+## Colors
 
-1. Full-screen mountain background
-2. Top navigation/header
-3. Left hero/content area
-4. Right emergency-help panel
-5. Three phase cards
-6. Risk search card
-7. Incident report action
-8. NER state names near the bottom
+### Brand & Accent
 
-Approximate visual composition:
+- **Cohere Black** (`#000000`): Announcement bar, highest-contrast text, and the global brand anchor.
+- **Near-Black Primary** (`#17171c`): Primary CTA buttons, dark footer, and deep UI cards.
+- **Deep Enterprise Green** (`#003c33`): Product hero bands for North and Command-style dark sections.
+- **Dark Navy** (`#071829`): Financial-services and security-oriented solution bands.
+- **Action Blue** (`#1863dc`): Editorial links, pagination, and secondary action emphasis.
+- **Coral** (`#ff7759`): Blog category chips, taxonomy outlines, and warm product markers.
+- **Soft Coral** (`#ffad9b`): Pale chip borders and segmented article-label details.
 
-```text
-┌───────────────────────────────────────────────────────────────┐
-│ LOGO     HOME  ALERTS  RISK MAP  REPORTS  ABOUT   Login SignUp│
-├───────────────────────────────────────────────────────────────┤
-│                                                               │
-│  ┌──────────────────────────────┐   ┌────────────────────────┐ │
-│  │ Predict · Monitor · Protect  │   │    Emergency Help      │ │
-│  │                              │   │                         │ │
-│  │ AI-Powered Early Warning &   │   │          112            │ │
-│  │ Landslide Risk Monitoring    │   │   Emergency Number      │ │
-│  │ System For North Eastern     │   │ Police / Ambulance /    │ │
-│  │ Region                       │   │ Disaster Mgmt.          │ │
-│  │                              │   │                         │ │
-│  │ [Pre] [During] [Post]        │   │ Quick Access             │ │
-│  │                              │   │ Hospitals / Police /     │ │
-│  │ [ Check Risk in Your Area ]  │   │ Emergency Shelters       │ │
-│  └──────────────────────────────┘   └────────────────────────┘ │
-│                                                               │
-│        Report an incident                                    │
-│                                                               │
-│ Arunachal Pradesh   Assam   Manipur   Meghalaya   Mizoram...  │
-└───────────────────────────────────────────────────────────────┘
-```
+### Surface & Background
 
----
+- **Canvas White** (`#ffffff`): Dominant page background and form/card surface.
+- **Soft Stone** (`#eeece7`): Product cards, testimonial placeholders, and warm neutral surface blocks.
+- **Pale Green Wash** (`#edfce9`): North page section backdrop behind stacked dark capability panels.
+- **Pale Blue Wash** (`#f1f5ff`): Blog CTA surface behind abstract 3D imagery.
+- **Card Border** (`#f2f2f2`): Softest card containment line.
 
-# 4. Background Image
+### Text & Rules
 
-Use a high-resolution cinematic Northeast India mountain landscape.
+- **Ink** (`#212121`): Default body text and most link text on light backgrounds.
+- **Muted Slate** (`#93939f`): Footer links, dates, metadata, and de-emphasized labels.
+- **Slate** (`#75758a`): Research separators and tertiary text.
+- **Hairline** (`#d9d9dd`): Standard list rules and section dividers.
+- **Border Light** (`#e5e7eb`): Secondary divider and utility rule.
 
-The reference contains:
-- Large green forested mountains
-- Snow-capped/high mountain peaks in the distance
-- White clouds and mist
-- Deep mountain valley
-- River/stream
-- Winding mountain road
-- Small settlement/buildings
-- Rich natural landscape
-- Dramatic sky
+### Semantic
 
-Background treatment:
-- Image fills the entire page viewport.
-- `background-size: cover`.
-- `background-position: center`.
-- No obvious tiling.
-- No white margins around the webpage.
-- Keep the image visible behind the translucent cards.
-- Add only enough dark overlay to maintain text readability.
-- Do not make the image so dark that the mountains disappear.
+- **Focus Blue** (`#4c6ee6`): Keyboard focus and ring color.
+- **Form Focus Violet** (`#9b60aa`): Focus border for text inputs.
+- **Error Red** (`#b30000`): Extracted ring/shadow color associated with validation-like states.
 
-The reference is visually image-dominant. The mountain landscape must remain clearly visible.
+### Gradient System
 
----
+Cohere does not use gradients as a generic UI fill. Gradients and color fields are media-led: abstract 3D hero imagery, deep blue open-science particle fields, red-orange product video posters, and dark green-to-black product environments. Keep UI surfaces flat; reserve gradient richness for large media panels and CTA image bands.
 
-# 5. Header / Navigation
+## Typography
 
-Position:
-Top of the page.
+### Font Family
 
-Approximate height:
-**88–90 px** in the reference.
+- **Display**: `CohereText`, falling back to `Space Grotesk`, `Inter`, `ui-sans-serif`, and `system-ui`.
+- **Body/UI**: `Unica77 Cohere Web`, falling back to `Inter`, `Arial`, `ui-sans-serif`, and `system-ui`.
+- **Technical labels**: `CohereMono`, falling back to `Arial`, `ui-sans-serif`, and `system-ui`.
+- **Icons**: Cohere uses custom icon fonts and thin-line geometric illustrations.
 
-The header spans the full content width.
+### Hierarchy
 
-Background:
-- Deep blue/navy translucent color.
-- Slight transparency so the mountain/sky can subtly show through.
-- Thin dark bottom border/shadow.
+| Role            | Font       | Size | Weight | Line Height | Letter Spacing | Notes                                   |
+| --------------- | ---------- | ---: | -----: | ----------: | -------------: | --------------------------------------- |
+| Hero Display    | CohereText | 96px |    400 |        1.00 |        -1.92px | Home page declaration scale.            |
+| Product Display | CohereText | 72px |    400 |        1.00 |        -1.44px | Product and research hero headlines.    |
+| Section Display | Unica77    | 60px |    400 |        1.00 |         -1.2px | Large product-page headings.            |
+| Section Heading | Unica77    | 48px |    400 |        1.20 |        -0.48px | Split hero and CTA headings.            |
+| Card Heading    | Unica77    | 32px |    400 |        1.20 |        -0.32px | Feature card and list section titles.   |
+| Feature Heading | Unica77    | 24px |    400 |        1.30 |              0 | Cards, filters, and article titles.     |
+| Body Large      | Unica77    | 18px |    400 |        1.40 |              0 | Lead text and larger paragraphs.        |
+| Body            | Unica77    | 16px |    400 |        1.50 |              0 | Default copy and link text.             |
+| Button          | Unica77    | 14px |    500 |        1.71 |              0 | Compact CTA labels.                     |
+| Caption         | Unica77    | 14px |    400 |        1.40 |              0 | Metadata and small explanatory text.    |
+| Mono Label      | CohereMono | 14px |    400 |        1.40 |         0.28px | Uppercase technical labels.             |
+| Micro           | Unica77    | 12px |    400 |        1.40 |              0 | Footer, nav microcopy, and small links. |
 
-Header layout:
+### Principles
 
-### Left brand block
+- Use massive type sparingly; Cohere pages often have one oversized headline and then settle into restrained 16px-24px UI copy.
+- Keep display type tight. Hero copy should feel compact and carved, not airy.
+- Avoid heavy bold weights. Size, spacing, and surface contrast do most of the hierarchy work.
+- Use uppercase mono labels for category and system markers, especially on product and research pages.
+- Editorial pages can use coral chips and blue links, but the base typography remains black and measured.
 
-Place the logo at the far left.
+## Layout
 
-Logo:
-- NER Safe mountain-style logo
-- Green/teal mountain symbol
-- White "NER Safe" text
-- Small white tagline below:
-  **Smarter Alerts. Safer Tomorrow.**
+### Spacing System
 
-The logo block occupies approximately the left 18–20% of the header.
+The system uses an 8px base with many one-off alignment values: `2px`, `6px`, `8px`, `10px`, `12px`, `16px`, `20px`, `22px`, `24px`, `28px`, `32px`, `36px`, `40px`, `56px`, `60px`, `64px`, and `80px`.
 
-### Navigation
+Large sections rely on dramatic vertical breathing room. The home page places a trust-logo strip far below the hero media. Product pages often hold dark panels inside fields of empty white space, then transition to dense forms or footers only near the end.
 
-Centered/right of logo:
+### Grid & Container
 
-- HOME
-- ALERTS
-- RISK MAP
-- REPORTS
-- ABOUT
+- Global nav uses a three-zone layout: logo left, menu centered, sign-in/CTA right.
+- Home hero is centered text above a two-card media composition: a wide product mockup card beside a narrower photography card.
+- Feature sections commonly use 3-column cards on desktop.
+- Product pages alternate centered hero blocks, trust-logo strips, large single-feature bands, and 2- or 3-column card grids.
+- Research pages use full-width lists with date and chip columns instead of decorative cards.
+- Forms use two-column input rows inside a rounded white card on dark or stone section backgrounds.
 
-Typography:
-- White
-- Bold/semi-bold
-- Uppercase
-- Large enough to be clearly readable
-- Consistent horizontal spacing
+### Whitespace Philosophy
 
-HOME is the active page:
-- White text
-- Underline beneath HOME
-- Underline is visually prominent
+Cohere uses whitespace as a trust signal. Large empty intervals separate the brand claim, customer proof, product proof, and CTA. Dense content appears only where it serves the information architecture: research paper rows, blog card grids, and contact form fields.
 
-### Authentication buttons
+## Elevation & Depth
 
-At the far right:
+Cohere is mostly flat. Depth comes from surface alternation, media contrast, rounded corners, and thin borders rather than drop shadows.
 
-**Login**
-- Rounded pill
-- Light gray/blue translucent background
-- Dark/black text
-- Large horizontal padding
+| Level              | Treatment                                             | Use                                                   |
+| ------------------ | ----------------------------------------------------- | ----------------------------------------------------- |
+| Flat               | No shadow, white or dark field                        | Hero copy, research lists, editorial surfaces         |
+| Bordered           | 1px `#d9d9dd`, `#e5e7eb`, or dark translucent rules   | Research rows, forms, pale cards, footer inputs       |
+| Media Lift         | Rounded image or video over contrasting section color | Hero photo cards, product videos, CTA imagery         |
+| Dark Product Field | Deep green or navy full-width band                    | Command, North, financial services, security sections |
 
-**Sign Up**
-- Rounded pill
-- Green background
-- White text
-- Large horizontal padding
+## Shapes
 
-Do not change the order:
-`Login` then `Sign Up`.
+### Radius Scale
 
----
+| Token  |  Value | Role                                                              |
+| ------ | -----: | ----------------------------------------------------------------- |
+| `xs`   |    4px | Small images, search fields, article thumbnails, utility elements |
+| `sm`   |    8px | Blog chips, cards, small media, dialogs                           |
+| `md`   |   16px | Medium product cards and grouped blocks                           |
+| `lg`   |   22px | Signature media-card and soft placeholder radius                  |
+| `xl`   |   30px | Research/topic filter pills                                       |
+| `pill` |   32px | Primary CTA buttons                                               |
+| `full` | 9999px | Round status elements and fully pill-shaped controls              |
 
-# 6. Hero Left Panel
+### Image Treatment
 
-Position:
-Upper-left/center-left of the page below the header.
+Images are not decorative backdrops for text except in CTA bands. Most imagery sits as rounded cards with visible corners: product videos, enterprise photography, article thumbnails, and abstract 3D renders. The dominant radii are 8px and 22px.
 
-The reference uses a large rounded translucent dark blue/gray panel.
+## Components
 
-Approximate:
-- Width: about 53–55% of the viewport
-- Large rounded corners
-- Semi-transparent
-- Background allows mountains to remain visible
-- Subtle glass effect
-- No heavy solid border
+### **`button-primary`**
 
-Inside the panel:
+Near-black or white pill CTA, depending on surface contrast. Uses 14px-16px Unica77, 12px 24px padding, and a 32px pill radius. This is the primary action style for "Request a demo", "Submit", and hero CTAs.
 
-## 6.1 Top pill
+### **`button-secondary`**
 
-At the top center of the panel:
+Text-only action link, usually underlined or rule-aligned, with no filled background. Used for "Explore products", "Try the Playground", newsletter signup, and secondary hero actions.
 
-**Predict . Monitor . Protect**
+### **`button-pill-outline`**
 
-Reference appearance:
-- Wide rounded capsule/pill
-- Light gray/white translucent fill
-- White/light text
-- Centered
-- Approximately 50% panel width
+Outlined pill control with transparent fill, 1px dark border, and 30px radius. Used for research filters, topic tags, and lightweight taxonomy controls.
 
-Keep the exact wording:
-`Predict . Monitor . Protect`
+### **`announcement-bar`**
 
-Do not replace periods with arrows.
+Full-width black strip above the nav, 36px tall, centered microcopy with an underlined "Learn more" link and a close control at the far right.
 
-## 6.2 Main heading
+### **`hero-photo-card`**
 
-Large white bold heading:
+Rounded media card used in the home hero and solution pages. It combines photography or abstract imagery with an overlaid dark agent-console module. Radius is usually 22px on large cards and 8px on smaller thumbnails.
 
-**AI-Powered Early Warning &  
-Landslide Risk Monitoring System  
-For North Eastern Region**
+### **`agent-console-card`**
 
-The reference wraps this into approximately 3 lines.
+Dark product mockup panel showing agent names, status chips, integration badges, prompt fields, and generated response cards. Background is near-black, text is white or muted, and small accent chips use product colors.
 
-Typography:
-- White
-- Very bold
-- Large desktop heading
-- Tight/medium line height
-- Left aligned
+### **`trust-logo-strip`**
 
-The heading should be one semantic H1, but visually match the screenshot.
+Centered copy above a row of monochrome customer logos. It is intentionally quiet: no cards, no borders, just large horizontal spacing and black or white logos depending on the background.
 
-Important:
-Use exactly:
+### **`capability-card`**
 
-`AI-Powered Early Warning & Landslide Risk Monitoring System For North Eastern Region`
+Content block with thin-line geometric illustration, 24px heading, body copy, and a text link. On light backgrounds, cards often have only a top rule or a subtle image/card relationship rather than full boxing.
 
-Do not change:
-- North Eastern Region
-- Early Warning
-- Landslide Risk Monitoring System
+### **`dark-feature-band`**
 
----
+Deep green or navy full-width section used for product capabilities, security claims, and feature breakdowns. Text turns white; cards use darker translucent surfaces, pale borders, and abstract line illustrations.
 
-# 7. Three Phase Cards
+### **`product-card`**
 
-Below the hero heading, create three cards in one horizontal row.
+Warm stone card used for product/model summaries. Typically 3-column on desktop, with 8px radius, generous padding, a small pill button, a divider line, and checkmark bullet rows.
 
-They are:
+### **`blog-filter-chip`**
 
-### Card 1 — Pre-Landslide
+Large coral taxonomy chip used on the blog index. Active chips invert to coral fill with dark text; inactive chips use coral outline and pale fill. Typography is oversized relative to typical filters, making the taxonomy a hero-level control.
 
-Background:
-Green, semi-transparent/solid green.
+### **`research-table`**
 
-Text:
-**Pre-Landslide**
+Rule-separated publication list with title left, topic pills centered, and date right. Rows are tall, white, and border-driven; filters above use many compact outlined pills.
 
-Subtext:
-**Risk map monitoring**
+### **`contact-form-card`**
 
-Icon:
-White map/location icon.
+Rounded white form panel set against dark green or warm stone sections. Inputs are rectangular with thin gray borders, 12px-16px padding, and compact labels/placeholders. Submit uses the same near-black pill style as primary CTAs.
 
-### Card 2 — During-Landslide
+### **`footer-newsletter`**
 
-Background:
-Orange/amber.
+Dark footer subscription block with coral "AI moves fast" label, white headline, muted legal microcopy, a single-line email field, and arrow submit marker. Footer columns use white section labels and muted links.
 
-Text:
-**During-Landslide**
+## Do's and Don'ts
 
-Subtext:
-**Alarm Activated**
+### Do
 
-Icon:
-Bell/alarm icon.
+- Use white canvas as the default surface; introduce dark green or navy as full-width product bands.
+- Keep primary CTAs pill-shaped and near-black on light surfaces.
+- Use 22px radius on major media cards and placeholders.
+- Use coral for editorial taxonomy and small warm accents, not as the main CTA system.
+- Use monochrome trust logos with wide spacing.
+- Use thin-line geometric illustrations for research and capability icons.
+- Let photography and product mockups carry color, while the UI shell stays restrained.
 
-### Card 3 — Post-Landslide
+### Don't
 
-Background:
-Purple.
+- Do not turn coral or blue into broad decorative surface colors.
+- Do not add heavy drop shadows to cards.
+- Do not make every section card-based; Cohere often uses unframed rows, rules, and open space.
+- Do not use rounded cards below 8px for major media.
+- Do not replace the display/body type split with one generic sans-serif voice.
+- Do not render undocumented interaction variants in documentation or previews.
+- Do not use saturated gradients as normal UI backgrounds; keep gradients media-led.
 
-Text:
-**Post-Landslide**
+## Responsive Behavior
 
-Subtext:
-**Recovery & Support**
+### Breakpoints
 
-Icon:
-Heart/recovery-style icon with red accent.
+| Name          |       Width | Key Changes                                                      |
+| ------------- | ----------: | ---------------------------------------------------------------- |
+| Small Mobile  |      <425px | Single-column cards, compact nav, reduced hero headline scale    |
+| Mobile        |   425-640px | Hero media stacks, card grids become one column, form rows stack |
+| Large Mobile  |   640-768px | Wider one-column layouts with larger media cards                 |
+| Tablet        |  768-1024px | Two-column cards begin, nav spacing tightens                     |
+| Desktop       | 1024-1440px | Full nav, 3-column card grids, split hero compositions           |
+| Large Desktop | 1440-2560px | Wide containers and large empty vertical intervals               |
 
-Card properties:
-- Rounded corners
-- Equal visual height
-- Similar width
-- White text
-- Comfortable internal padding
-- Horizontal row
-- Small gap between cards
+### Touch Targets
 
-Do not convert them into large feature sections. They are compact dashboard-style cards exactly as shown.
+Primary CTAs and pills meet comfortable touch sizing through 12px-24px padding and pill radii. Research filter chips and blog category chips are larger than standard tags, making dense taxonomy surfaces usable on touch devices.
 
----
+### Collapsing Strategy
 
-# 8. Risk Search Card
+- Nav collapses from full horizontal links to a compact mobile menu.
+- Hero media moves from split cards to stacked cards.
+- Product and capability grids collapse from 3 columns to 2 and then 1.
+- Form fields collapse from paired rows to a single column.
+- Research rows preserve their rule-separated structure but stack metadata below titles on smaller widths.
 
-Below the three phase cards, on the lower-left:
+## Iteration Guide
 
-White rounded rectangular card.
+1. Start from a white canvas or a full-width dark green/navy band; avoid mid-tone page backgrounds unless the screenshot shows a specific CTA/form section.
+2. Use `button-primary` for the single highest-priority action and `button-secondary` for the companion action.
+3. Use `hero-photo-card` or `agent-console-card` when a page needs visual energy; avoid invented dashboard data.
+4. For editorial pages, combine `blog-filter-chip`, `button-pill-outline`, and `research-table` instead of generic marketing cards.
+5. Keep component examples structurally honest: placeholder product frames are better than invented product content.
 
-Approximate:
-- Width: ~550 px at reference scale
-- Height: ~160 px
-- Strong white background
-- Large rounded corners
-- No excessive shadow
+## Known Gaps
 
-Heading:
-
-**Check Risk in Your Area**
-
-Large black/dark text.
-
-Below it:
-A horizontal search row.
-
-Search input:
-- Light gray background
-- Rounded/pill shape
-- Search icon at left
-- Placeholder:
-
-**Search Location (e.g. Dibrugarh, Kahima...)**
-
-Keep this wording as shown in the reference.
-
-Button:
-**Get Details**
-
-Appearance:
-- Green background
-- White text
-- Rectangular with slightly rounded corners
-- Positioned immediately to the right of the search field
-
-The input and button should fit on one row on desktop.
-
----
-
-# 9. Report an Incident
-
-Near the lower-middle area, beneath/near the phase/search area:
-
-Camera icon followed by:
-
-**Report an incident**
-
-Appearance:
-- Small white/light icon
-- White/light text
-- Subtle dark/translucent backing if required for readability
-- Compact
-- Looks like a quick action rather than a large CTA
-
-Keep it visually separate from the white search card.
-
----
-
-# 10. Right Emergency Help Panel
-
-This is one of the most prominent elements.
-
-Position:
-Upper-right side below the navigation.
-
-Large translucent glass panel.
-
-Approximate:
-- Width: ~36–38% of viewport
-- Height: ~640 px at reference scale
-- Rounded corners
-- Transparent/glass background
-- Thin subtle border
-- Dark translucent body
-
-## 10.1 Red emergency header
-
-At the top of the panel:
-
-Bright red rounded rectangle.
-
-Text:
-
-**Emergency Help**
-
-Second line:
-
-**(In case of immediate danger,call now)**
-
-Keep the wording and comma placement visually close to the reference.
-
-Typography:
-- White
-- Emergency Help: very bold
-- Supporting line: smaller white
-
-## 10.2 Main 112 area
-
-Large red phone handset icon on left/near center.
-
-Large red number:
-
-**112**
-
-Supporting text:
-
-**Emergency Number  
-(India)**
-
-The number must be visually dominant.
-
-The phone icon should be large.
-
-The exact layout should visually resemble:
-
-```text
-[ large phone icon ]    112
-                        Emergency Number
-                        (India)
-```
-
-The emergency number section should occupy a substantial portion of the upper panel.
-
----
-
-# 11. Emergency Service Buttons
-
-Under the 112 area, three horizontal service cards/buttons:
-
-### Police
-Blue
-
-Text:
-**Police**
-**100**
-
-Include police/emergency icon.
-
-### Ambulance
-Green
-
-Text:
-**Ambulance**
-**108**
-
-Include ambulance icon.
-
-### Disaster Mgmt.
-Orange
-
-Text:
-**Disaster Mgmt.**
-**1070**
-
-Include bell/disaster icon.
-
-Properties:
-- Three equal/similar width cards
-- Rounded corners
-- White text
-- Compact
-- Distinct background colors
-
-Order must remain:
-`Police | Ambulance | Disaster Mgmt.`
-
----
-
-# 12. Quick Access Section
-
-Below the emergency buttons, add a divider.
-
-Heading:
-
-**Quick Access:**
-
-Black/dark text in the reference.
-
-Then three translucent/light cards in one row.
-
-### Hospitals
-
-Icon:
-Hospital icon.
-
-Text:
-**Hospitals**
-
-Link-style text:
-**List**
-
-### Police Stations
-
-Icon:
-Police station icon.
-
-Text:
-**Police  
-Stations**
-
-Link:
-**List**
-
-### Emergency Shelters
-
-Icon:
-Green shelter/house icon.
-
-Text:
-**Emergency  
-Shelters**
-
-Link:
-**List**
-
-The `List` text appears blue in the reference.
-
-Do not turn these into large cards.
-
----
-
-# 13. Safety Footer Strip Inside Emergency Panel
-
-At the bottom of the emergency panel:
-
-Dark gray rounded pill/strip.
-
-Text:
-
-**Your safety our priority**
-
-White, bold, centered.
-
-Keep this phrase exactly.
-
----
-
-# 14. NER State Names
-
-At the bottom of the visible page, place the eight North Eastern states as white text over the mountain image.
-
-States:
-
-1. Arunachal Pradesh
-2. Assam
-3. Manipur
-4. Meghalaya
-5. Mizoram
-6. Nagaland
-7. Sikkim
-8. Tripura
-
-The reference distributes them spatially across the bottom rather than putting them into a conventional list.
-
-Approximate visual arrangement:
-
-```text
-Arunachal Pradesh       Assam          Manipur
-
-                         Meghalaya      Mizoram
-
-                              Sikkim        Nagaland     Tripura
-```
-
-The exact horizontal positions should follow the screenshot as closely as practical.
-
-Typography:
-- White
-- Medium/large
-- No cards behind them
-- No bullets
-- No numbered list
-- No underline
-
----
-
-# 15. Exact Color Direction
-
-Use the following palette as the implementation baseline.
-
-Primary navy:
-`#123E57`
-
-Deep dark green:
-`#0C1F1B`
-
-Primary safe green:
-`#0A7D4C`
-
-Warning orange:
-`#E58925`
-
-Critical red:
-`#D02127`
-
-Purple:
-`#7139AF`
-
-Blue:
-`#0A72D0`
-
-White:
-`#F8F8F8`
-
-Light gray:
-`#C6C7C4`
-
-Muted gray/teal:
-`#53676C`
-
-These colors are approximate visual matches and should be adjusted only when necessary to reproduce the screenshot.
-
----
-
-# 16. Transparency / Glassmorphism
-
-The reference depends heavily on transparency.
-
-Use:
-- Semi-transparent dark blue/green panels
-- Semi-transparent emergency body
-- White/light translucent elements
-- Background image visible through panels
-
-Suggested implementation approach:
-- `backdrop-filter: blur(...)`
-- Semi-transparent backgrounds using rgba/alpha
-- Subtle border
-- Moderate shadow
-
-Do not overuse blur.
-
-The mountains should remain recognizable behind the panels.
-
----
-
-# 17. Typography
-
-Use a clean modern sans-serif.
-
-Preferred:
-- Inter
-- Poppins
-- or another visually close geometric sans-serif
-
-Hierarchy:
-
-H1:
-Very large, bold, white.
-
-Navigation:
-Large, bold, white.
-
-Emergency heading:
-Bold white.
-
-Cards:
-Bold title + normal/light supporting text.
-
-State names:
-Medium weight white.
-
-Search heading:
-Large dark text.
-
-Avoid:
-- Serif fonts
-- Decorative fonts
-- Handwritten fonts
-- Excessive letter spacing
-
----
-
-# 18. Icons
-
-Use a consistent icon library such as Lucide React or another clean outline icon library.
-
-Required visual categories:
-
-- Search
-- Map/location
-- Bell/alarm
-- Recovery/heart
-- Camera
-- Phone
-- Police
-- Ambulance
-- Disaster alert
-- Hospital
-- Police station
-- Emergency shelter
-
-Important:
-Icons should visually resemble the reference.
-Do not use random emoji unless the implementation specifically needs to match the reference's emoji-like appearance.
-
-If using Lucide:
-- `Search`
-- `MapPinned` / `Map`
-- `Bell`
-- `HeartPulse` / appropriate recovery icon
-- `Camera`
-- `Phone`
-- `Hospital`
-- `Shield`
-- `House`
-etc.
-
----
-
-# 19. Spacing and Proportions
-
-The page should feel dense like the reference.
-
-Do NOT:
-- Make huge empty gaps
-- Push the emergency card too far down
-- Move the hero to the center
-- Make cards full width
-- Turn the page into a scrolling marketing website
-
-The reference is essentially a **full-screen operational landing dashboard**.
-
-Maintain:
-- Header at top
-- Hero left
-- Emergency panel right
-- Phase cards below hero
-- Search card below phase cards
-- State names near bottom
-
----
-
-# 20. Desktop Layout
-
-Target desktop design:
-**1440–1536 px wide**
-
-At desktop:
-- Header full width
-- Hero left approximately 55%
-- Emergency panel right approximately 37%
-- Small center gap
-- Background covers entire viewport
-- All major content visible without requiring scrolling at 980–1024 px height
-
-The target screenshot is approximately:
-**1513 × 980 px**
-
-The design should visually fit within a 980–1024 px height desktop viewport.
-
----
-
-# 21. Responsive Behavior
-
-The screenshot is desktop-first, but the actual website must remain usable on smaller screens.
-
-Do NOT change the desktop appearance.
-
-For smaller widths only:
-
-- Navigation may collapse into a hamburger menu.
-- Hero and emergency panel may stack vertically.
-- Three phase cards may become a 1-column or 2-column layout.
-- Search controls may wrap.
-- State names may become a grid/list.
-- Emergency service buttons may wrap.
-
-The responsive version should preserve the same visual language and colors.
-
----
-
-# 22. Interactions
-
-The screenshot represents the visual state, but these elements should be functional:
-
-### HOME
-Navigate to landing page.
-
-### ALERTS
-Navigate to alerts page.
-
-### RISK MAP
-Navigate to live risk map.
-
-### REPORTS
-Navigate to reports page.
-
-### ABOUT
-Navigate to about page.
-
-### Login
-Open login page/modal.
-
-### Sign Up
-Open registration page/modal.
-
-### Get Details
-Use the entered location to navigate to a location-risk page.
-
-### Search Location
-Allow typing a location.
-
-### Report an incident
-Navigate to citizen incident-reporting page.
-
-### Hospitals / Police Stations / Emergency Shelters
-Open the corresponding list/map view.
-
-### Emergency service buttons
-Use appropriate phone-link behavior on supported devices.
-
-Do not invent additional functionality on the landing page.
-
----
-
-# 23. Component Structure
-
-Suggested React component structure:
-
-```text
-LandingPage
-├── Header
-│   ├── BrandLogo
-│   ├── Navigation
-│   └── AuthButtons
-│
-├── HeroSection
-│   ├── HeroPanel
-│   │   ├── MottoPill
-│   │   ├── MainHeading
-│   │   └── PhaseCards
-│   │       ├── PreLandslideCard
-│   │       ├── DuringLandslideCard
-│   │       └── PostLandslideCard
-│   │
-│   ├── RiskSearchCard
-│   └── ReportIncidentAction
-│
-├── EmergencyPanel
-│   ├── EmergencyHeader
-│   ├── Emergency112
-│   ├── EmergencyServiceButtons
-│   ├── QuickAccess
-│   │   ├── Hospitals
-│   │   ├── PoliceStations
-│   │   └── EmergencyShelters
-│   └── SafetyStrip
-│
-└── NERStates
-```
-
----
-
-# 24. Important Content — Do Not Change
-
-Use exactly these primary strings:
-
-### Brand
-`NER Safe`
-
-### Tagline
-`Smarter Alerts. Safer Tomorrow.`
-
-### Motto
-`Predict . Monitor . Protect`
-
-### Hero
-`AI-Powered Early Warning & Landslide Risk Monitoring System For North Eastern Region`
-
-### Phase 1
-`Pre-Landslide`
-`Risk map monitoring`
-
-### Phase 2
-`During-Landslide`
-`Alarm Activated`
-
-### Phase 3
-`Post-Landslide`
-`Recovery & Support`
-
-### Search
-`Check Risk in Your Area`
-
-Placeholder:
-`Search Location (e.g. Dibrugarh, Kahima...)`
-
-Button:
-`Get Details`
-
-### Emergency
-`Emergency Help`
-`(In case of immediate danger,call now)`
-
-`112`
-
-`Emergency Number`
-`(India)`
-
-`Police`
-`100`
-
-`Ambulance`
-`108`
-
-`Disaster Mgmt.`
-`1070`
-
-### Quick Access
-`Quick Access:`
-
-`Hospitals`
-`List`
-
-`Police Stations`
-`List`
-
-`Emergency Shelters`
-`List`
-
-### Safety
-`Your safety our priority`
-
-### Incident
-`Report an incident`
-
-### Navigation
-`HOME`
-`ALERTS`
-`RISK MAP`
-`REPORTS`
-`ABOUT`
-
-### Authentication
-`Login`
-`Sign Up`
-
-### States
-`Arunachal Pradesh`
-`Assam`
-`Manipur`
-`Meghalaya`
-`Mizoram`
-`Nagaland`
-`Sikkim`
-`Tripura`
-
----
-
-# 25. What NOT to Add
-
-Do NOT add:
-
-- Pricing
-- Testimonials
-- Blog
-- Extra statistics
-- Fake AI accuracy
-- Fake weather values
-- Fake soil moisture values
-- Fake live alerts
-- Fake landslide predictions
-- Extra navigation items
-- Footer sections not visible in the reference
-- Large "Get Started" CTA
-- Extra illustrations
-- Stock cards
-- Generic SaaS sections
-- Chatbot widget
-- Cookie banner
-- Floating social-media buttons
-
-The landing page should stay visually faithful to the reference.
-
----
-
-# 26. Data / AI Integration Rule
-
-The landing page is primarily a visual/navigation page.
-
-Do not hard-code fake live disaster data into the landing page.
-
-When real backend data becomes available:
-- Risk map should consume the real risk API.
-- Alerts should consume real alert data.
-- Location details should consume the actual risk-analysis API.
-- Soil moisture should come from the actual satellite/data pipeline.
-- Rainfall should come from the actual data source.
-- AI predictions should only display model-generated values.
-
-Never label mock/replay data as live.
-
----
-
-# 27. Image Handling
-
-If the exact background image is available in the project assets, use it.
-
-If not, create an asset placeholder:
-
-```text
-frontend/public/assets/ner-mountain-background.jpg
-```
-
-The background should be high resolution.
-
-Do not crop the image in a way that removes the major mountain/road/valley composition visible in the reference.
-
-Use CSS:
-
-```css
-background-size: cover;
-background-position: center;
-```
-
-Adjust `background-position` if necessary to visually match the screenshot.
-
----
-
-# 28. Browser / Device Frame Clarification
-
-The supplied screenshot includes a black rounded outer frame and a top-center notch.
-
-For the actual website:
-
-**Do not add a fake browser/device frame around the webpage.**
-
-The website should render directly in the browser viewport.
-
-The frame is treated as the presentation context of the supplied screenshot, not the web application itself.
-
-The internal page content — header, mountain background, hero panel, emergency panel, cards, search, report action, and state names — is what must be reproduced.
-
----
-
-# 29. Final Visual Acceptance Checklist
-
-Before considering the landing page complete, compare the browser render against the reference screenshot.
-
-Check:
-
-- [ ] Same overall composition
-- [ ] Same mountain background feel
-- [ ] Header at same height/proportion
-- [ ] NER Safe logo in same location
-- [ ] Navigation order identical
-- [ ] HOME active/underlined
-- [ ] Login and Sign Up in same position
-- [ ] Hero panel on left
-- [ ] Motto pill at top of hero
-- [ ] H1 wraps into approximately 3 lines
-- [ ] Three phase cards in one row
-- [ ] Correct green/orange/purple card colors
-- [ ] Search card below phase cards
-- [ ] Report incident near lower center
-- [ ] Emergency panel on right
-- [ ] Red Emergency Help header
-- [ ] Large 112 section
-- [ ] Police / Ambulance / Disaster Mgmt. row
-- [ ] Quick Access section
-- [ ] Hospitals / Police Stations / Emergency Shelters
-- [ ] Blue List links
-- [ ] Safety strip at bottom of emergency panel
-- [ ] Eight NER state names at bottom
-- [ ] Correct white/blue/green/orange/red/purple palette
-- [ ] Correct transparency/glass effect
-- [ ] No unnecessary additional sections
-- [ ] No fake data
-- [ ] No visual redesign
-
----
-
-# 30. Developer Instruction
-
-When implementing this page:
-
-1. First reproduce the desktop screenshot as closely as possible.
-2. Do not build the entire rest of the application at the same time.
-3. Create reusable React components.
-4. Keep styling organized.
-5. Use the supplied background asset.
-6. Use real text, not text baked into an image.
-7. Make buttons and navigation functional.
-8. Make the page responsive only after the desktop version matches the reference.
-9. Compare the rendered result with the reference screenshot and adjust spacing, sizing, transparency, and positioning.
-10. Do not replace the reference design with a different "better" design.
-
-**Priority order:**
-
-```text
-1. Visual similarity
-2. Layout/proportions
-3. Typography
-4. Colors
-5. Transparency
-6. Icons
-7. Responsive behavior
-8. Functionality
-```
-
-The goal is:
-
-**REFERENCE SCREENSHOT → AS CLOSE AS POSSIBLE IN A REAL REACT WEBSITE**
+- Exact proprietary font files are not bundled; use the documented fallbacks when implementing externally.
+- Mobile screenshots were not regenerated in this public update, so mobile behavior is documented from the desktop system and existing responsive patterns.
+- Some live pages lazy-load content blocks late; blank testimonial placeholders are documented as placeholder skeleton surfaces rather than filled testimonial cards.

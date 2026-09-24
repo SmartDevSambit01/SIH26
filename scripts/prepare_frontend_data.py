@@ -39,6 +39,16 @@ RISK_CLASS_MAP = {
     "NODATA_BORDER": {"name": "UNAVAILABLE", "color": "#4B5563", "badge": "Risk Unavailable"},
 }
 
+# Blue-toned palette for flood susceptibility, deliberately distinct from the
+# red/purple landslide risk palette so the two hazard layers are never confused.
+FLOOD_CLASS_COLOR_MAP = {
+    "VERY_HIGH": "#1E3A8A",
+    "HIGH": "#2563EB",
+    "MODERATE": "#60A5FA",
+    "LOW": "#93C5FD",
+    "VERY_LOW": "#DBEAFE",
+}
+
 
 def load_baseline_susceptibility():
     """Load baseline_susceptibility.csv indexed by cell_id."""
@@ -72,6 +82,22 @@ def load_terrain_features():
     return data
 
 
+def load_flood_susceptibility():
+    """Load flood_susceptibility.csv (static FFSI) indexed by cell_id."""
+    csv_path = ML_DIR / "flood_susceptibility.csv"
+    data = {}
+    if not csv_path.exists():
+        print(f"WARNING: {csv_path} not found")
+        return data
+
+    with open(csv_path, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            data[row["cell_id"]] = row
+    print(f"Loaded {len(data)} flood susceptibility records.")
+    return data
+
+
 def load_verified_historical_events():
     """Load verified historical landslide events indexed by cell_id."""
     csv_path = HISTORICAL_DIR / "landslide_events_cleaned.csv"
@@ -88,7 +114,7 @@ def load_verified_historical_events():
     return data
 
 
-def enrich_and_write_grid(district_name, input_geojson, output_geojson, baseline_data, terrain_data, verified_events):
+def enrich_and_write_grid(district_name, input_geojson, output_geojson, baseline_data, terrain_data, verified_events, flood_data):
     """Enrich 500m grid GeoJSON with terrain and susceptibility properties."""
     print(f"\nProcessing {district_name} grid: {input_geojson.name} -> {output_geojson.name}...")
     if not input_geojson.exists():
@@ -108,6 +134,7 @@ def enrich_and_write_grid(district_name, input_geojson, output_geojson, baseline
         base = baseline_data.get(cid, {})
         terr = terrain_data.get(cid, {})
         event = verified_events.get(cid)
+        flood = flood_data.get(cid, {})
 
         tsi_class = base.get("terrain_susceptibility_class", "NODATA_BORDER")
         risk_info = RISK_CLASS_MAP.get(tsi_class, RISK_CLASS_MAP["NODATA_BORDER"])
@@ -144,6 +171,22 @@ def enrich_and_write_grid(district_name, input_geojson, output_geojson, baseline
         props["pu_similarity"] = round(float(base.get("pu_terrain_similarity", 0)), 3) if base.get("pu_terrain_similarity") else None
         props["primary_contributors"] = base.get("primary_terrain_contributors", "")
 
+        # Static flash-flood susceptibility (FFSI) — DEM hydrology derived, not live flood data
+        flood_status = flood.get("status", "INSUFFICIENT_DATA")
+        props["flood_status"] = flood_status
+        if flood_status == "AVAILABLE":
+            ffsi_score = flood.get("ffsi_score")
+            ffsi_class = flood.get("ffsi_class")
+            props["ffsi_score"] = round(float(ffsi_score), 2) if ffsi_score else None
+            props["ffsi_class"] = ffsi_class
+            props["ffsi_color"] = FLOOD_CLASS_COLOR_MAP.get(ffsi_class, "#4B5563")
+            props["flood_primary_contributor"] = flood.get("primary_contributor", "")
+        else:
+            props["ffsi_score"] = None
+            props["ffsi_class"] = None
+            props["ffsi_color"] = "#4B5563"
+            props["flood_primary_contributor"] = ""
+
         # Historical event link
         if event:
             props["has_verified_event"] = True
@@ -173,6 +216,7 @@ def main():
     baseline_data = load_baseline_susceptibility()
     terrain_data = load_terrain_features()
     verified_events = load_verified_historical_events()
+    flood_data = load_flood_susceptibility()
 
     # 1. Kohima Grid
     k_count = enrich_and_write_grid(
@@ -182,6 +226,7 @@ def main():
         baseline_data,
         terrain_data,
         verified_events,
+        flood_data,
     )
 
     # 2. Aizawl Grid
@@ -192,6 +237,7 @@ def main():
         baseline_data,
         terrain_data,
         verified_events,
+        flood_data,
     )
 
     # 3. Copy District Boundaries

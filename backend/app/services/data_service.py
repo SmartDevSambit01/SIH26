@@ -21,6 +21,9 @@ from ..config import (
     SMAP_OBSERVATIONS_CSV,
     SENTINEL_SAR_OBSERVATIONS_CSV,
     HISTORICAL_LANDSLIDES_CSV,
+    FLOOD_SUSCEPTIBILITY_CSV,
+    GRID_HYDROLOGY_CSV,
+    GRID_EXPOSURE_CSV,
 )
 
 logger = logging.getLogger("ner_safe.data_service")
@@ -48,12 +51,17 @@ class DataService:
         self._gpm_df: Optional[pd.DataFrame] = None
         self._smap_df: Optional[pd.DataFrame] = None
         self._sentinel_df: Optional[pd.DataFrame] = None
-        
+        self._flood_df: Optional[pd.DataFrame] = None
+        self._hydrology_df: Optional[pd.DataFrame] = None
+        self._exposure_df: Optional[pd.DataFrame] = None
+
         self._grid_cache: Dict[str, dict] = {}
         self._cell_index: Dict[str, dict] = {}
         self._historical_index: Dict[str, dict] = {}
         self._smap_index: Dict[str, dict] = {}
         self._gpm_index: Dict[str, dict] = {}
+        self._flood_index: Dict[str, dict] = {}
+        self._exposure_index: Dict[str, dict] = {}
         self._initialized = False
 
     def ensure_loaded(self):
@@ -121,6 +129,26 @@ class DataService:
                 self._sentinel_df = pd.read_csv(SENTINEL_SAR_OBSERVATIONS_CSV, low_memory=False)
             except Exception as e:
                 logger.error(f"Failed to load Sentinel-1 observations CSV: {e}")
+
+        # 6b. Static flash-flood susceptibility (FFSI) + DEM hydrology CSVs
+        if FLOOD_SUSCEPTIBILITY_CSV.exists():
+            try:
+                self._flood_df = pd.read_csv(FLOOD_SUSCEPTIBILITY_CSV, low_memory=False)
+            except Exception as e:
+                logger.error(f"Failed to load flood susceptibility CSV: {e}")
+
+        if GRID_HYDROLOGY_CSV.exists():
+            try:
+                self._hydrology_df = pd.read_csv(GRID_HYDROLOGY_CSV, low_memory=False)
+            except Exception as e:
+                logger.error(f"Failed to load grid hydrology CSV: {e}")
+
+        # 6c. Real OSM-derived exposure (roads/hospitals/schools) CSV
+        if GRID_EXPOSURE_CSV.exists():
+            try:
+                self._exposure_df = pd.read_csv(GRID_EXPOSURE_CSV, low_memory=False)
+            except Exception as e:
+                logger.error(f"Failed to load grid exposure CSV: {e}")
 
         # 7. GeoJSON 500m Grids for Kohima and Aizawl
         for dist_name, meta in DISTRICTS_META.items():
@@ -238,6 +266,45 @@ class DataService:
                     "quality_flag": str(row.get("quality_flag", "PASSED_VERIFICATION")),
                 }
 
+        # Index static flash-flood susceptibility (FFSI), joined with hydrology zonal stats
+        hydrology_by_cell: Dict[str, Any] = {}
+        if self._hydrology_df is not None:
+            for _, row in self._hydrology_df.iterrows():
+                hydrology_by_cell[str(row["cell_id"])] = row
+
+        if self._flood_df is not None:
+            for _, row in self._flood_df.iterrows():
+                cid = str(row["cell_id"])
+                status = str(row.get("status", "INSUFFICIENT_DATA"))
+                hydro_row = hydrology_by_cell.get(cid)
+                self._flood_index[cid] = {
+                    "status": status,
+                    "ffsi_score": clean_val(row.get("ffsi_score")) if status == "AVAILABLE" else None,
+                    "ffsi_class": clean_val(row.get("ffsi_class")) if status == "AVAILABLE" else None,
+                    "primary_contributor": clean_val(row.get("primary_contributor")) if status == "AVAILABLE" else None,
+                    "hand_mean": clean_val(hydro_row.get("hand_mean")) if hydro_row is not None else None,
+                    "hand_min": clean_val(hydro_row.get("hand_min")) if hydro_row is not None else None,
+                    "flow_accumulation_max": clean_val(hydro_row.get("flow_accumulation_max")) if hydro_row is not None else None,
+                    "drainage_density": clean_val(hydro_row.get("drainage_density")) if hydro_row is not None else None,
+                    "distance_to_drainage_m": clean_val(hydro_row.get("distance_to_drainage_m")) if hydro_row is not None else None,
+                }
+
+        # Index real OSM-derived exposure (roads/hospitals/schools)
+        if self._exposure_df is not None:
+            for _, row in self._exposure_df.iterrows():
+                cid = str(row["cell_id"])
+                status = str(row.get("exposure_status", "UNAVAILABLE"))
+                self._exposure_index[cid] = {
+                    "status": status,
+                    "nearest_road_distance_m": clean_val(row.get("nearest_road_distance_m")) if status == "AVAILABLE" else None,
+                    "nearest_road_class": clean_val(row.get("nearest_road_class")) if status == "AVAILABLE" else None,
+                    "road_length_in_cell_m": clean_val(row.get("road_length_in_cell_m")) if status == "AVAILABLE" else None,
+                    "nearest_hospital_distance_m": clean_val(row.get("nearest_hospital_distance_m")) if status == "AVAILABLE" else None,
+                    "nearest_hospital_name": clean_val(row.get("nearest_hospital_name")) if status == "AVAILABLE" else None,
+                    "nearest_school_distance_m": clean_val(row.get("nearest_school_distance_m")) if status == "AVAILABLE" else None,
+                    "nearest_school_name": clean_val(row.get("nearest_school_name")) if status == "AVAILABLE" else None,
+                }
+
     def get_districts(self) -> List[dict]:
         """Returns the list of pilot districts with cell counts and centers."""
         self.ensure_loaded()
@@ -320,9 +387,8 @@ class DataService:
             "status": "AVAILABLE",
         })
 
-        gpm_status = self._gpm_index[cid]["data_status"] if cid in self._gpm_index else "REQUIRES_EXTERNAL_AUTH"
-        smap_status = self._smap_index[cid]["data_status"] if cid in self._smap_index else "REQUIRES_EXTERNAL_AUTH"
-        has_dynamic = (cid in self._gpm_index) or (cid in self._smap_index)
+        flood = self._flood_index.get(cid, {"status": "INSUFFICIENT_DATA"})
+        exposure = self._exposure_index.get(cid, {"status": "UNAVAILABLE"})
 
         return {
             "cell_id": cid,
@@ -350,19 +416,43 @@ class DataService:
                 "primary_terrain_contributors": raw.get("primary_terrain_contributors"),
                 "status": "AVAILABLE",
             },
-            "dynamic_risk_status": "ACTIVE" if has_dynamic else "NOT_AVAILABLE",
+            "flood_susceptibility": flood,
+            "exposure": exposure,
+            "dynamic_risk_status": "NOT_AVAILABLE",
             "data_availability": {
                 "terrain": "AVAILABLE",
                 "historical": "AVAILABLE",
                 "baseline_susceptibility": "AVAILABLE",
-                "rainfall": gpm_status,
-                "soil_moisture": smap_status,
+                "rainfall": "REQUIRES_EXTERNAL_AUTH",
+                "soil_moisture": "REQUIRES_EXTERNAL_AUTH",
                 "satellite_sar": "REQUIRES_EXTERNAL_AUTH",
-                "flood": "NOT_YET_IMPLEMENTED",
-                "exposure": "NOT_YET_IMPLEMENTED",
+                "flood_static_susceptibility": flood["status"],
+                "flood_dynamic_indicator": "NOT_YET_IMPLEMENTED",
+                "exposure": exposure["status"],
                 "citizen_reports": "NOT_CONNECTED",
                 "officer_verification": "NOT_CONNECTED",
             }
+        }
+
+    def _build_verification_block(self, cid: str, cell: dict) -> dict:
+        """Real field-report counts, not hardcoded. Deferred import avoids a
+        circular import (field_report_service.py imports DataService)."""
+        from . import field_report_service  # noqa: import deferred to call-time by design
+
+        summary = field_report_service.get_cell_verification_summary(cid)
+        has_verified_event = cell["historical"]["has_verified_event"]
+
+        return {
+            "source": "Field Inspections & Citizen Reports",
+            "status": "ACTIVE",
+            "has_verified_event": has_verified_event,
+            "event_id": cell["historical"]["historical_event_id"],
+            "citizen_reports_filed": summary["citizen_reports_filed"],
+            "verified_field_reports": summary["verified_reports"],
+            "pending_field_reports": summary["pending_reports"],
+            "officer_verification_status": (
+                "VERIFIED_INCIDENT" if has_verified_event else summary["officer_verification_status"]
+            ),
         }
 
     def get_cell_parameters(self, cell_id: str) -> Optional[dict]:
@@ -450,26 +540,43 @@ class DataService:
                 "notice": "SAR anomaly measurements require download credentials. Change evidence is corroborating anomaly only and never an automatic landslide label."
             },
             "flood": {
-                "source": "Hydrological Inundation Layer",
-                "status": "NOT_YET_IMPLEMENTED",
-                "flood_indicator": None,
-                "notice": "Riverine flood hazard layer integration pending."
+                "source": "SRTM/Copernicus 30m DEM Hydrology (D8 flow routing, HAND)",
+                "static_susceptibility_status": cell["flood_susceptibility"]["status"],
+                "ffsi_score": cell["flood_susceptibility"].get("ffsi_score"),
+                "ffsi_class": cell["flood_susceptibility"].get("ffsi_class"),
+                "primary_contributor": cell["flood_susceptibility"].get("primary_contributor"),
+                "hand_m": cell["flood_susceptibility"].get("hand_mean"),
+                "flow_accumulation_cells": cell["flood_susceptibility"].get("flow_accumulation_max"),
+                "drainage_density": cell["flood_susceptibility"].get("drainage_density"),
+                "distance_to_drainage_m": cell["flood_susceptibility"].get("distance_to_drainage_m"),
+                "dynamic_flood_indicator": None,
+                "dynamic_status": "NOT_YET_IMPLEMENTED",
+                "notice": (
+                    "Static flash-flood susceptibility (FFSI) is a DEM-derived heuristic index, "
+                    "not a calibrated flood-depth or inundation model. Dynamic real-time flood "
+                    "detection (rainfall-runoff / Sentinel-1 water classification) is not yet "
+                    "implemented and requires the same NASA/Copernicus authentication as rainfall/SAR."
+                )
             },
-            "verification": {
-                "source": "Field Inspections & Citizen Reports",
-                "status": "ACTIVE",
-                "has_verified_event": cell["historical"]["has_verified_event"],
-                "event_id": cell["historical"]["historical_event_id"],
-                "citizen_reports_filed": 0,
-                "officer_verification_status": "VERIFIED_INCIDENT" if cell["historical"]["has_verified_event"] else "UNVERIFIED"
-            },
+            "verification": self._build_verification_block(cid, cell),
             "exposure": {
-                "source": "OpenStreetMap / Regional GIS",
-                "status": "NOT_YET_IMPLEMENTED",
-                "road_proximity_m": None,
+                "source": "OpenStreetMap Overpass API (real roads/hospitals/schools)",
+                "status": cell["exposure"]["status"],
+                "road_proximity_m": cell["exposure"].get("nearest_road_distance_m"),
+                "road_class": cell["exposure"].get("nearest_road_class"),
+                "road_length_in_cell_m": cell["exposure"].get("road_length_in_cell_m"),
+                "nearest_hospital_distance_m": cell["exposure"].get("nearest_hospital_distance_m"),
+                "nearest_hospital_name": cell["exposure"].get("nearest_hospital_name"),
+                "nearest_school_distance_m": cell["exposure"].get("nearest_school_distance_m"),
+                "nearest_school_name": cell["exposure"].get("nearest_school_name"),
                 "population_density_est": None,
                 "critical_infrastructure_count": None,
-                "notice": "Infrastructure and vulnerability layers pending integration."
+                "notice": (
+                    "Roads/hospitals/schools are real OpenStreetMap data, not fabricated. OSM coverage "
+                    "is community-sourced and may be incomplete (e.g. not every school is tagged). "
+                    "Population density and a complete critical-infrastructure count require authoritative "
+                    "census/GIS data not yet integrated."
+                )
             },
             "baseline_susceptibility": cell["baseline_susceptibility"]
         }
@@ -552,11 +659,19 @@ class DataService:
                     "quality_flag": str(row.get("quality_flag", "UNAVAILABLE_PENDING_EARTHDATA_LOGIN")),
                 })
 
+        overall_status = obs[0]["data_status"] if obs else "REQUIRES_EXTERNAL_AUTH"
+        if overall_status == "AVAILABLE":
+            notice = "Near-real-time SMAP soil moisture observations (AVAILABLE)."
+        elif overall_status == "STALE":
+            notice = "Real SMAP observations present but latency exceeded the configured freshness threshold (STALE)."
+        else:
+            notice = "All numeric measurements are null because NASA Earthdata credentials are required for live ingestion."
+
         return {
             "layer": "SMAP_SOIL_MOISTURE",
             "total_cells": len(obs),
-            "data_status": "REQUIRES_EXTERNAL_AUTH",
-            "notice": "All numeric measurements are null because NASA Earthdata credentials are required for live ingestion.",
+            "data_status": overall_status,
+            "notice": notice,
             "observations": obs,
         }
 
@@ -601,6 +716,70 @@ class DataService:
             "total_cells": len(obs),
             "data_status": "REQUIRES_EXTERNAL_AUTH",
             "notice": "SAR scenes are catalogued but observations require download authentication. Values are empty to prevent fabricated change detection.",
+            "observations": obs,
+        }
+
+    def get_exposure(self, cell_id: str) -> Optional[dict]:
+        """Returns real OSM-derived exposure (roads/hospitals/schools) for a cell.
+        Population density and infrastructure counts remain None — no authoritative
+        census/GIS source is integrated yet, and OSM alone is not a substitute."""
+        cell = self.get_cell(cell_id)
+        if not cell:
+            return None
+        return {
+            "cell_id": cell["cell_id"],
+            "district": cell["district"],
+            **cell["exposure"],
+            "population_density_est": None,
+            "critical_infrastructure_count": None,
+            "notice": (
+                "Roads/hospitals/schools are real OpenStreetMap data. Population density and a complete "
+                "critical-infrastructure count require authoritative census/GIS data not yet integrated."
+            ),
+        }
+
+    def get_latest_flood(self, district: Optional[str] = None, limit: int = 100) -> dict:
+        """Returns static flash-flood susceptibility (FFSI) per cell.
+
+        This is DEM-derived static susceptibility, not a live/dynamic flood
+        observation — no rainfall-runoff or Sentinel-1 water-classification
+        pipeline is implemented yet, so there is no true "latest observation"
+        timestamp to report, unlike the rainfall/soil-moisture/satellite feeds.
+        """
+        self.ensure_loaded()
+        obs = []
+        if self._flood_df is not None:
+            df = self._flood_df
+            if district:
+                df = df[df["district"].str.lower() == district.strip().lower()]
+
+            sample_df = df.head(limit)
+            for _, row in sample_df.iterrows():
+                cid = str(row["cell_id"])
+                cell = self._cell_index.get(cid, {})
+                obs.append({
+                    "cell_id": cid,
+                    "district": str(row["district"]),
+                    "latitude": clean_val(cell.get("latitude")),
+                    "longitude": clean_val(cell.get("longitude")),
+                    "status": str(row.get("status", "INSUFFICIENT_DATA")),
+                    "ffsi_score": clean_val(row.get("ffsi_score")),
+                    "ffsi_class": clean_val(row.get("ffsi_class")),
+                    "primary_contributor": clean_val(row.get("primary_contributor")),
+                })
+
+        available_count = sum(1 for o in obs if o["status"] == "AVAILABLE")
+        overall_status = "AVAILABLE" if available_count > 0 else "INSUFFICIENT_DATA"
+
+        return {
+            "layer": "STATIC_FLASH_FLOOD_SUSCEPTIBILITY_FFSI",
+            "total_cells": len(obs),
+            "data_status": overall_status,
+            "notice": (
+                "Static, DEM-derived flash-flood susceptibility (HAND + flow accumulation + TWI + "
+                "slope + drainage density). Not a live flood observation or calibrated inundation "
+                "model. Dynamic flood detection is NOT_YET_IMPLEMENTED."
+            ),
             "observations": obs,
         }
 

@@ -56,13 +56,13 @@
     },
     "gpm_rainfall": {
       "name": "NASA GPM IMERG Precipitation (Early Run)",
-      "status": "AVAILABLE",
-      "notice": "Real NASA GPM IMERG Early Run data ingested (16,961 cells, native resolution ~10 km mapped to 500m analysis grid)."
+      "status": "REQUIRES_EXTERNAL_AUTH",
+      "notice": "External authentication required (NASA Earthdata Login). Dynamic rainfall values unpopulated."
     },
     "smap_soil_moisture": {
       "name": "NASA SMAP L3 Radiometer Soil Moisture (9 km)",
-      "status": "STALE",
-      "notice": "Real NASA SMAP SPL3SMP_E V006 soil moisture observations available (16,961 cells, native resolution ~9 km, latency exceeded freshness threshold)."
+      "status": "REQUIRES_EXTERNAL_AUTH",
+      "notice": "External authentication required (NASA Earthdata Login). Dynamic soil moisture unpopulated."
     },
     "sentinel1_sar": {
       "name": "Copernicus Sentinel-1 SAR C-Band (10 m)",
@@ -80,5 +80,5 @@
       "notice": "Exposure layers planned in subsequent phase."
     }
   },
-  "scientific_disclaimer": "Dynamic risk evaluation combines static terrain baseline (TSI) with real NASA GPM precipitation and SMAP soil moisture observations. SAR change is corroborating anomaly evidence only."
+  "scientific_disclaimer": "Risk classification currently uses the available terrain baseline only. Dynamic multi-source ML risk scores will be generated once live meteorological and SAR feeds are authenticated. SAR change is corroborating anomaly evidence only."
 }
