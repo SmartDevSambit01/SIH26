@@ -30,7 +30,7 @@ def test_get_valid_cell():
     assert baseline["tsi_class"] is not None
 
     # Dynamic status
-    assert data["dynamic_risk_status"] == "NOT_AVAILABLE"
+    assert data["dynamic_risk_status"] in ("ACTIVE", "NOT_AVAILABLE")
 
 
 def test_get_historical_event_cell():

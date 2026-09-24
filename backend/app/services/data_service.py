@@ -320,6 +320,10 @@ class DataService:
             "status": "AVAILABLE",
         })
 
+        gpm_status = self._gpm_index[cid]["data_status"] if cid in self._gpm_index else "REQUIRES_EXTERNAL_AUTH"
+        smap_status = self._smap_index[cid]["data_status"] if cid in self._smap_index else "REQUIRES_EXTERNAL_AUTH"
+        has_dynamic = (cid in self._gpm_index) or (cid in self._smap_index)
+
         return {
             "cell_id": cid,
             "district": raw["district"],
@@ -346,13 +350,13 @@ class DataService:
                 "primary_terrain_contributors": raw.get("primary_terrain_contributors"),
                 "status": "AVAILABLE",
             },
-            "dynamic_risk_status": "NOT_AVAILABLE",
+            "dynamic_risk_status": "ACTIVE" if has_dynamic else "NOT_AVAILABLE",
             "data_availability": {
                 "terrain": "AVAILABLE",
                 "historical": "AVAILABLE",
                 "baseline_susceptibility": "AVAILABLE",
-                "rainfall": "REQUIRES_EXTERNAL_AUTH",
-                "soil_moisture": "REQUIRES_EXTERNAL_AUTH",
+                "rainfall": gpm_status,
+                "soil_moisture": smap_status,
                 "satellite_sar": "REQUIRES_EXTERNAL_AUTH",
                 "flood": "NOT_YET_IMPLEMENTED",
                 "exposure": "NOT_YET_IMPLEMENTED",

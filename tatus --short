@@ -1,0 +1,15 @@
+warning: in the working copy of 'backend/app/services/data_service.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'backend/tests/test_cells.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'frontend/src/components/RiskMap/CellDetailsModal.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'frontend/src/components/RiskMap/RiskMap.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'frontend/src/components/RiskMap/RiskMapPage.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'frontend/src/components/RiskMap/SystemStatusPill.jsx', LF will be replaced by CRLF the next time Git touches it
+ backend/app/services/data_service.py               | 10 [32m+++[m[31m--[m
+ backend/tests/test_cells.py                        |  2 [32m+[m[31m-[m
+ data/ml/dynamic_risk_readiness_audit.json          |  2 [32m+[m[31m-[m
+ data/ml/ml_readiness_audit.json                    |  2 [32m+[m[31m-[m
+ .../src/components/RiskMap/CellDetailsModal.jsx    | 30 [32m+++++++[m[31m------[m
+ frontend/src/components/RiskMap/RiskMap.css        | 49 [32m+++++++++++++++++++[m[31m---[m
+ frontend/src/components/RiskMap/RiskMapPage.jsx    | 14 [32m+++++[m[31m--[m
+ .../src/components/RiskMap/SystemStatusPill.jsx    |  5 [32m++[m[31m-[m
+ 8 files changed, 85 insertions(+), 29 deletions(-)

@@ -397,22 +397,28 @@ export default function CellDetailsModal({ cell, onClose }) {
               <Droplets size={15} color="#60A5FA" />
               Soil Moisture (NASA SMAP 9km)
             </span>
-            {smapData?.status === 'STALE' ? (
+            {smapData?.status === 'AVAILABLE' ? (
+              <span className="section-status-tag" style={{ background: 'rgba(52, 211, 153, 0.2)', color: '#34D399', border: '1px solid rgba(52, 211, 153, 0.4)' }}>
+                AVAILABLE
+              </span>
+            ) : smapData?.status === 'STALE' ? (
               <span className="section-status-tag" style={{ background: 'rgba(234, 179, 8, 0.2)', color: '#FDE047', border: '1px solid rgba(234, 179, 8, 0.4)' }}>
                 STALE
               </span>
             ) : (
-              <span className="section-status-tag unavailable">Pending Auth</span>
+              <span className="section-status-tag unavailable">UNAVAILABLE</span>
             )}
           </h3>
 
           <div className="metrics-grid">
             <div className="metric-box full-width-metric">
               <div className="metric-label">Data Status & Source</div>
-              <div className="metric-value" style={{ fontSize: 11.5, color: smapData?.status === 'STALE' ? '#FDE047' : '#94A3B8' }}>
-                {smapData?.status === 'STALE'
-                  ? `STALE — Observation latency exceeded threshold (${smapData.source_product || 'SPL3SMP_E_V006'})`
-                  : unavailableNotice}
+              <div className="metric-value" style={{ fontSize: 11.5, color: smapData?.status === 'AVAILABLE' ? '#34D399' : smapData?.status === 'STALE' ? '#FDE047' : '#94A3B8' }}>
+                {smapData?.status === 'AVAILABLE'
+                  ? `AVAILABLE — Real NASA SMAP (${smapData.source_product || 'SPL3SMP_E_V006'})`
+                  : smapData?.status === 'STALE'
+                  ? `STALE — Observation latency exceeded threshold. Displaying last-known-good observation.`
+                  : "UNAVAILABLE / NO CURRENT VALID OBSERVATION"}
               </div>
             </div>
 
@@ -429,7 +435,7 @@ export default function CellDetailsModal({ cell, onClose }) {
               <div className="metric-label">Moisture Differential</div>
               <div className="metric-value" style={{ fontSize: 12, color: smapData?.moisture_change_percent > 0 ? '#34D399' : '#E2E8F0' }}>
                 {smapData?.moisture_change_percent !== null && smapData?.moisture_change_percent !== undefined
-                  ? `+${smapData.moisture_change_percent}% (${smapData.moisture_change_m3_m3} m³/m³)`
+                  ? `${smapData.moisture_change_percent > 0 ? '+' : ''}${smapData.moisture_change_percent}% (${smapData.moisture_change_m3_m3} m³/m³)`
                   : <span className="unavailable-text">Unavailable</span>}
               </div>
             </div>
@@ -439,7 +445,7 @@ export default function CellDetailsModal({ cell, onClose }) {
               <div className="metric-value" style={{ fontSize: 11, color: '#CBD5E1' }}>
                 {smapData?.observation_timestamp
                   ? `${smapData.observation_timestamp} (${smapData.smap_ease2_grid_cell || 'EASE2_M09'})`
-                  : 'N/A — pending NASA Earthdata login'}
+                  : 'N/A — NO CURRENT VALID OBSERVATION'}
               </div>
             </div>
 
@@ -460,13 +466,13 @@ export default function CellDetailsModal({ cell, onClose }) {
               <Radio size={15} color="#A78BFA" />
               Satellite SAR Change (Sentinel-1)
             </span>
-            <span className="section-status-tag unavailable">Pending Auth</span>
+            <span className="section-status-tag unavailable">UNAVAILABLE</span>
           </h3>
 
           <div className="metrics-grid">
             <div className="metric-box full-width-metric">
               <div className="metric-label">Status</div>
-              <div className="metric-value unavailable-text">{unavailableNotice}</div>
+              <div className="metric-value unavailable-text">UNAVAILABLE / NO CURRENT VALID OBSERVATION</div>
             </div>
             <div className="metric-box">
               <div className="metric-label">VV Change (dB)</div>
@@ -500,11 +506,11 @@ export default function CellDetailsModal({ cell, onClose }) {
               <AlertCircle size={15} color="#F59E0B" />
               Hydrological Flood Hazard
             </span>
-            <span className="section-status-tag unavailable">Not Connected</span>
+            <span className="section-status-tag unavailable">UNAVAILABLE</span>
           </h3>
           <div className="metric-box">
             <div className="metric-label">Status</div>
-            <div className="metric-value unavailable-text">{unavailableNotice}</div>
+            <div className="metric-value unavailable-text">UNAVAILABLE / NO CURRENT VALID OBSERVATION</div>
           </div>
         </div>
 

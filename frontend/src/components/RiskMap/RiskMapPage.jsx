@@ -9,6 +9,7 @@ import SystemStatusPill from './SystemStatusPill';
 import AlertPanel from './AlertPanel';
 import AreaSearchPanel from './AreaSearchPanel';
 import AreaRiskDashboard from './AreaRiskDashboard';
+import AiRiskEngineCard from './AiRiskEngineCard';
 import './RiskMap.css';
 
 const DISTRICT_CONFIG = {
@@ -423,9 +424,13 @@ export default function RiskMapPage({ initialDistrict = 'Kohima', onNavigate }) 
           visibility: showGrid ? 'visible' : 'none',
         },
         paint: {
-          'line-color': '#FFFFFF',
-          'line-width': 0.8,
-          'line-opacity': 0.45,
+          'line-color': [
+            'case',
+            ['has', 'risk_color'], ['get', 'risk_color'],
+            '#00E599'
+          ],
+          'line-width': basemapType === 'satellite' ? 1.2 : 0.9,
+          'line-opacity': 0.75,
         },
       });
 
@@ -833,6 +838,9 @@ export default function RiskMapPage({ initialDistrict = 'Kohima', onNavigate }) 
           basemapType={basemapType}
           onChangeBasemap={setBasemapType}
         />
+
+        {/* AI-Assisted Risk Engine Card */}
+        <AiRiskEngineCard />
 
         {/* Risk Legend */}
         <MapLegend />

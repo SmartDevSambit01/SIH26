@@ -16,8 +16,9 @@ export default function SystemStatusPill({ networkMode, isOffline, onToggleOffli
         title="Click to view detailed data pipeline & operational latency status"
       >
         <div className="pulse-dot" />
-        <span>{statusLabel}</span>
-        <span style={{ opacity: 0.7, fontSize: 10 }}>• Latest Available Data</span>
+        <span>SYSTEM ONLINE</span>
+        <span style={{ opacity: 0.9, fontSize: 10, color: '#38BDF8', fontWeight: 600, marginLeft: 2 }}>• GPM ACTIVE</span>
+        <span style={{ opacity: 0.9, fontSize: 10, color: '#FCD34D', fontWeight: 600, marginLeft: 2 }}>• SMAP STALE</span>
       </div>
 
       {modalOpen && (

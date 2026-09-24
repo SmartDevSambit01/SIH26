@@ -586,11 +586,48 @@
     max-width: 280px;
   }
 
-  .map-legend-card {
-    bottom: 12px;
-    left: 10px;
-    width: calc(100% - 20px);
-    max-width: 270px;
-    padding: 10px;
+/* AI-Assisted Risk Engine Card */
+.ai-risk-engine-card {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(11, 19, 30, 0.92);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 12px;
+  padding: 12px 14px;
+  z-index: 10;
+  width: 280px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+}
+
+.flow-step-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 11px;
+  text-align: center;
+}
+
+.ai-disclosure-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 10.5px;
+  color: #FCD34D;
+  margin-top: 6px;
+  line-height: 1.35;
+}
+
+@media (max-width: 900px) {
+  .ai-risk-engine-card {
+    top: 70px;
+    right: 10px;
+    width: 240px;
   }
 }
